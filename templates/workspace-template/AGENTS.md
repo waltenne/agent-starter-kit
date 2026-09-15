@@ -4,7 +4,7 @@ This file is generated for `<workspace>`. Replace every placeholder before using
 
 ## Format and sources
 
-- Kit format version: `<kit-format-version>`
+- Kit format version: 1.1.0
 - Primary blueprint: `<primary-blueprint>`
 - Secondary blueprints: `<secondary-blueprints-or-none>`
 - Central rules file: `<central-rules-file>`

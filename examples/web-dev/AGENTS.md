@@ -1,26 +1,26 @@
-# Example Workspace Instructions
+# Web Development Example Workspace Instructions
 
-This is a documentation-only example generated from the kit.
+This file defines the operating instructions for the web-dev reference workspace.
 
 ## Format and sources
 
-- Kit format version: `1.0.0`
-- Primary blueprint: `technical/web-dev`
-- Central rules file: `AGENTS.md` (generated workspace source)
-- Artifact index: `.agents/memory/index.md`
-
-The central rules are applied through this workspace instruction file. The primary blueprint covers the confirmed web-development pathway; secondary blueprints are not loaded by default.
+- Kit format version: 1.1.0
+- Primary blueprint: technical/web-dev
+- Central rules file: AGENTS.md
+- Artifact index: .agents/memory/index.md
 
 ## Workspace profile
 
-- Objective: build and validate a web deliverable
-- Path policy: project paths are authorized only after confirmation
-- Autonomy: `N2`
+- Objective: Canonical web development reference workspace.
+- Conversation language: pt-BR
+- Artifact language: en
+- Autonomy: N2
 
-## Artifacts
+## Operating procedure
 
-- Skill: `.agents/skills/review-api.md`
-- Subagent: `.agents/subagents/test-analyzer.md`
-- Memory index: `.agents/memory/index.md`
+1. Read `AGENTS.md` before acting.
+2. Follow `blueprints/technical/web-dev.md` for domain guidance.
+3. Validate API contract changes using `.agents/skills/review-api-contract.md`.
+4. Delegate complex API contract audits to `.agents/subagents/api-contract-reviewer.md`.
+5. Maintain durable decision records in `.agents/memory/index.md`.
 
-No application code, credentials, real project data, or external integrations are included in this example.

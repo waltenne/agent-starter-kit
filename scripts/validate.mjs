@@ -30,16 +30,15 @@ const expectedFiles = [
   "templates/workspace-template/src/shared/config.ts", "templates/workspace-template/src/shared/logger.ts", "templates/workspace-template/src/shared/errors.ts",
   "templates/workspace-template/src/domain/index.ts", "templates/workspace-template/src/domain/domain.service.ts",
   "templates/workspace-template/src/domain/domain.types.ts", "templates/workspace-template/src/domain/domain.service.test.ts",
-  "examples/web-dev/AGENTS.md", "examples/web-dev/.agents/skills/review-api.md", "examples/web-dev/.agents/subagents/test-analyzer.md", "examples/web-dev/.agents/memory/index.md",
+  "examples/web-dev/AGENTS.md", "examples/web-dev/README.md", "examples/web-dev/ARCHITECTURE.md",
+  "examples/web-dev/docs/adr/0001-initial-stack.md", "examples/web-dev/.agents/skills/review-api-contract.md",
+  "examples/web-dev/.agents/subagents/api-contract-reviewer.md", "examples/web-dev/.agents/memory/index.md",
   "examples/generic-agent/AGENTS.md", "examples/generic-agent/README.md", "examples/generic-agent/config.yml",
   "examples/generic-agent/.agents/skills/generic-task.md", "examples/generic-agent/.agents/subagents/generic-worker.md",
   "examples/generic-agent/.agents/memory/index.md", "examples/generic-agent/docs/architecture.md",
   "examples/multi-agent/AGENTS.md", "examples/multi-agent/README.md", "examples/multi-agent/config.yml",
   "examples/multi-agent/.agents/skills/coordinate-agents.md", "examples/multi-agent/.agents/subagents/backend-agent.md",
-  "examples/multi-agent/.agents/subagents/qa-agent.md", "examples/multi-agent/.agents/memory/index.md", "examples/multi-agent/docs/multi-agent-setup.md",
-  "examples/web-dev-example/AGENTS.md", "examples/web-dev-example/README.md", "examples/web-dev-example/ARCHITECTURE.md",
-  "examples/web-dev-example/docs/adr/0001-initial-stack.md", "examples/web-dev-example/.agents/skills/review-api-contract.md",
-  "examples/web-dev-example/.agents/subagents/api-contract-reviewer.md", "examples/web-dev-example/.agents/memory/index.md"
+  "examples/multi-agent/.agents/subagents/qa-agent.md", "examples/multi-agent/.agents/memory/index.md", "examples/multi-agent/docs/multi-agent-setup.md"
 ];
 
 for (const file of expectedFiles) {
@@ -106,7 +105,7 @@ for (const bp of blueprints) {
   const bpPath = path.join(rootDir, "blueprints", bp);
   const bpContent = fs.readFileSync(bpPath, "utf-8");
 
-  // 4. Residual <...> placeholder check in blueprints
+  // 4. Residual <...> placeholder check STRICTLY in blueprints
   if (/<[A-Z0-9_-]+>/i.test(bpContent)) {
     error(`Residual placeholder <...> found in blueprint: ${bp}`);
   }
@@ -167,4 +166,3 @@ for (const section of requiredRulesSections) {
 }
 
 log("All validation checks passed successfully!");
-

@@ -1,11 +1,6 @@
-# Example Artifact Index
+# Memory Index
 
-This index contains only references to the artifacts generated for this documentation example.
+## Durable Decisions
 
-| Artifact | Location | Purpose |
-| --- | --- | --- |
-| Central instructions | `AGENTS.md` | Workspace operating profile and sources |
-| Skill | `.agents/skills/review-api.md` | Bounded API review |
-| Subagent | `.agents/subagents/test-analyzer.md` | Bounded test-failure analysis |
+- 2026-09-15: Initialized web-dev reference workspace.
 
-No secrets, personal data, or temporary investigation content belongs in this index.
