@@ -80,6 +80,18 @@ Follow the complete conversational wizard, starting with the conversation langua
 Generate only the approved artifacts in the current workspace.
 ```
 
+---
+
+## 🧩 Using as an Executable Skill
+
+The recommended pathway for beginners is using the executable skill included in the kit:
+
+```text
+skills/starter-kit/SKILL.md
+```
+
+When loading the `starter-kit` skill, the AI conducts the interactive diagnostic and launches the automatic bootstrap and workspace validation sequence.
+
 > [!TIP]
 > By pasting this instruction into your AI agent (e.g., Antigravity, Claude Code, Cursor, Copilot Workspace, etc.), it will read the rules and launch the conversational wizard automatically.
 

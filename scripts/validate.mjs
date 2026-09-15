@@ -38,7 +38,11 @@ const expectedFiles = [
   "examples/generic-agent/.agents/memory/index.md", "examples/generic-agent/docs/architecture.md",
   "examples/multi-agent/AGENTS.md", "examples/multi-agent/README.md", "examples/multi-agent/config.yml",
   "examples/multi-agent/.agents/skills/coordinate-agents.md", "examples/multi-agent/.agents/subagents/backend-agent.md",
-  "examples/multi-agent/.agents/subagents/qa-agent.md", "examples/multi-agent/.agents/memory/index.md", "examples/multi-agent/docs/multi-agent-setup.md"
+  "examples/multi-agent/.agents/subagents/qa-agent.md", "examples/multi-agent/.agents/memory/index.md", "examples/multi-agent/docs/multi-agent-setup.md",
+  "skills/starter-kit/SKILL.md", "skills/starter-kit/references/principles.md", "skills/starter-kit/references/commit-policy.md",
+  "skills/starter-kit/references/security.md", "skills/starter-kit/references/code-separation.md", "skills/starter-kit/references/documentation.md",
+  "skills/starter-kit/templates/domain/index.ts", "skills/starter-kit/templates/domain/service.ts",
+  "skills/starter-kit/templates/domain/types.ts", "skills/starter-kit/templates/domain/service.test.ts"
 ];
 
 for (const file of expectedFiles) {

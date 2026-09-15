@@ -80,6 +80,18 @@ Siga o wizard conversacional completo, começando pelo idioma da conversa.
 Gere somente os artefatos aprovados no workspace atual.
 ```
 
+---
+
+## 🧩 Uso como Skill Executável
+
+O caminho recomendado para iniciantes é utilizar a skill executável inclusa no kit:
+
+```text
+skills/starter-kit/SKILL.md
+```
+
+Ao carregar a skill `starter-kit`, a IA executará o diagnóstico interativo e iniciará a sequência automática de bootstrap e validação do workspace.
+
 > [!TIP]
 > Ao colar essa instrução no seu agente de IA (como Antigravity, Claude Code, Cursor, Copilot Workspace, etc.), ele lerá as regras e iniciará a entrevista do wizard automaticamente.
 
