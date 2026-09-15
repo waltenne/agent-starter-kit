@@ -44,7 +44,7 @@ Serve para pessoas e equipes que precisam iniciar ou padronizar workspaces agên
 8. Revise o plano de arquivos proposto.
 9. Gere o workspace genérico agnóstico.
 10. Aplique o adaptador do agente de IA selecionado.
-11. Execute `bash scripts/validate.sh` para validar o resultado.
+11. Execute o script de validação correspondente ao seu sistema operacional (`bash scripts/validate.sh` no Linux/macOS ou `.\scripts\validate.ps1` / `scripts\validate.cmd` no Windows).
 
 ---
 

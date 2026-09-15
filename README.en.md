@@ -44,7 +44,7 @@ It is intended for individuals and teams needing to standardize agentic workspac
 8. Review the proposed file plan.
 9. Generate the generic agnostic workspace.
 10. Apply the selected AI agent adapter.
-11. Run `bash scripts/validate.sh` to validate the outcome.
+11. Run the validation script corresponding to your operating system (`bash scripts/validate.sh` on Linux/macOS or `.\scripts\validate.ps1` / `scripts\validate.cmd` on Windows).
 
 ---
 
