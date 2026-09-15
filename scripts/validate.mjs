@@ -43,7 +43,8 @@ const expectedFiles = [
   "skills/starter-kit/SKILL.md", "skills/starter-kit/references/principles.md", "skills/starter-kit/references/commit-policy.md",
   "skills/starter-kit/references/security.md", "skills/starter-kit/references/code-separation.md", "skills/starter-kit/references/documentation.md",
   "skills/starter-kit/templates/domain/index.ts", "skills/starter-kit/templates/domain/service.ts",
-  "skills/starter-kit/templates/domain/types.ts", "skills/starter-kit/templates/domain/service.test.ts"
+  "skills/starter-kit/templates/domain/types.ts", "skills/starter-kit/templates/domain/service.test.ts",
+  "docs/getting-started.md", "docs/glossary.md", "docs/faq.md", "docs/troubleshooting.md", "docs/walkthrough.md"
 ];
 
 for (const file of expectedFiles) {

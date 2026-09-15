@@ -200,6 +200,16 @@ Use [`templates/subagent-template.md`](templates/subagent-template.md) quando is
 
 ---
 
+## 📚 Documentação para Iniciantes
+
+- [`docs/getting-started.md`](docs/getting-started.md) - Guia de início rápido e conceitos fundamentais.
+- [`docs/glossary.md`](docs/glossary.md) - Glossário de termos do kit em ordem alfabética.
+- [`docs/faq.md`](docs/faq.md) - Perguntas frequentes e respostas rápidas.
+- [`docs/troubleshooting.md`](docs/troubleshooting.md) - Diagnóstico e resolução de problemas.
+- [`docs/walkthrough.md`](docs/walkthrough.md) - Exemplo de sessão real de configuração.
+
+---
+
 ## 💡 Exemplos
 
 - [`examples/generic-agent/`](examples/generic-agent/) - Exemplo de workspace agnóstico genérico.

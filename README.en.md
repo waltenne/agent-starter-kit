@@ -200,6 +200,16 @@ Use [`templates/subagent-template.md`](templates/subagent-template.md) when isol
 
 ---
 
+## 📚 Documentation for Beginners
+
+- [`docs/getting-started.md`](docs/getting-started.md) - Quick start guide and core concepts.
+- [`docs/glossary.md`](docs/glossary.md) - Kit terms glossary in alphabetical order.
+- [`docs/faq.md`](docs/faq.md) - Frequently asked questions and quick answers.
+- [`docs/troubleshooting.md`](docs/troubleshooting.md) - Diagnostics and problem resolution.
+- [`docs/walkthrough.md`](docs/walkthrough.md) - Step-by-step example of a real setup session.
+
+---
+
 ## 💡 Examples
 
 - [`examples/generic-agent/`](examples/generic-agent/) - Generic agnostic workspace example.
