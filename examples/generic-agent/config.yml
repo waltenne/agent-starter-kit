@@ -1,0 +1,20 @@
+workspace_name: "generic-agent-example"
+agent:
+  type: "generic"
+  compatibility: "verified"
+language:
+  conversation: "pt-BR"
+  artifacts: "en"
+blueprints:
+  primary: "technical/web-dev"
+  secondary: []
+autonomy: "N2"
+memory:
+  enabled: true
+  path: ".agents/memory"
+paths:
+  central_rules: "AGENTS.md"
+  skills: ".agents/skills"
+  subagents: ".agents/subagents"
+  documentation: "docs"
+

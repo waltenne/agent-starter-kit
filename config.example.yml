@@ -1,12 +1,20 @@
 # Copy this example to a user-controlled configuration location and replace
 # placeholders only after confirming the workspace settings.
-kit_format_version: "1.0.0"
-workspace_name: "<workspace>"
-primary_blueprint: "technical/web-dev"
-secondary_blueprints: []
+kit_format_version: "1.1.0"
+workspace_name: "<workspace-name>"
+
+agent:
+  type: "generic"
+  compatibility: "conceptual"
+
 language:
   conversation: "pt-BR"
-  artifacts: "en"
+  artifacts: "pt-BR"
+
+blueprints:
+  primary: "technical/web-dev"
+  secondary: []
+
 autonomy: "N2"
 confirmation_required:
   - write
@@ -14,12 +22,21 @@ confirmation_required:
   - delete
   - execute
   - network
+
 memory:
   enabled: true
+  path: ".agents/memory"
   index_file: ".agents/memory/index.md"
+
 paths:
-  rules: "AGENTS.md"
+  central_rules: "AGENTS.md"
   skills: ".agents/skills"
   subagents: ".agents/subagents"
-  memory: ".agents/memory"
-  docs: "docs"
+  documentation: "docs"
+
+bootstrap:
+  create_source_layout: true
+  create_initial_domain: true
+  create_initial_test: true
+  initialize_git: false
+  create_commit: false

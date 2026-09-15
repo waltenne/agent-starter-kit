@@ -1,0 +1,21 @@
+workspace_name: "multi-agent-example"
+agent:
+  type: "generic"
+  compatibility: "verified"
+language:
+  conversation: "pt-BR"
+  artifacts: "en"
+blueprints:
+  primary: "technical/web-dev"
+  secondary:
+    - "organizational/qa"
+autonomy: "N2"
+memory:
+  enabled: true
+  path: ".agents/memory"
+paths:
+  central_rules: "AGENTS.md"
+  skills: ".agents/skills"
+  subagents: ".agents/subagents"
+  documentation: "docs"
+

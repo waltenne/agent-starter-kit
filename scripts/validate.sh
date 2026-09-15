@@ -5,7 +5,7 @@ repo_root="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
 cd "$repo_root"
 
 expected_files=(
-  LICENSE README.md README.en.md CONTRIBUTING.md CHANGELOG.md VERSION config.example.yml wizard.md rules.md
+  LICENSE README.md README.en.md CONTRIBUTING.md CHANGELOG.md VERSION config.example.yml wizard.md rules.md compatibility.md
   scripts/validate.sh
   images/workspace-start-prompt.png
   images/worspace-llm-comunucation.png
@@ -20,11 +20,45 @@ expected_files=(
   blueprints/organizational/tpo.md
   blueprints/organizational/sm.md
   blueprints/organizational/manager.md
-  templates/skill-template.md templates/subagent-template.md templates/workspace-template/AGENTS.md
+  adapters/generic/README.md
+  adapters/claude-code/README.md
+  adapters/codex/README.md
+  adapters/cursor/README.md
+  adapters/windsurf/README.md
+  adapters/github-copilot/README.md
+  adapters/local-agent/README.md
+  templates/skill-template.md templates/subagent-template.md
+  templates/workspace-template/AGENTS.md
+  templates/workspace-template/README.md
+  templates/workspace-template/ARCHITECTURE.md
+  templates/workspace-template/ADR.md
+  templates/workspace-template/docs/adr/0001-initial-stack.md
+  templates/workspace-template/src/shared/config.ts
+  templates/workspace-template/src/shared/logger.ts
+  templates/workspace-template/src/shared/errors.ts
+  templates/workspace-template/src/domain/index.ts
+  templates/workspace-template/src/domain/domain.service.ts
+  templates/workspace-template/src/domain/domain.types.ts
+  templates/workspace-template/src/domain/domain.service.test.ts
   examples/web-dev/AGENTS.md
   examples/web-dev/.agents/skills/review-api.md
   examples/web-dev/.agents/subagents/test-analyzer.md
   examples/web-dev/.agents/memory/index.md
+  examples/generic-agent/AGENTS.md
+  examples/generic-agent/README.md
+  examples/generic-agent/config.yml
+  examples/generic-agent/.agents/skills/generic-task.md
+  examples/generic-agent/.agents/subagents/generic-worker.md
+  examples/generic-agent/.agents/memory/index.md
+  examples/generic-agent/docs/architecture.md
+  examples/multi-agent/AGENTS.md
+  examples/multi-agent/README.md
+  examples/multi-agent/config.yml
+  examples/multi-agent/.agents/skills/coordinate-agents.md
+  examples/multi-agent/.agents/subagents/backend-agent.md
+  examples/multi-agent/.agents/subagents/qa-agent.md
+  examples/multi-agent/.agents/memory/index.md
+  examples/multi-agent/docs/multi-agent-setup.md
 )
 
 for file in "${expected_files[@]}"; do
@@ -81,6 +115,11 @@ for blueprint in \
   grep -q '../../rules.md' "blueprints/${blueprint}" || { echo "Blueprint missing central-rules reference: $blueprint" >&2; exit 1; }
 done
 
+for adapter in generic claude-code codex cursor windsurf github-copilot local-agent; do
+  grep -q "adapters/${adapter}/README.md" README.md || { echo "Adapter missing from README: $adapter" >&2; exit 1; }
+  grep -q "adapters/${adapter}/README.md" wizard.md || { echo "Adapter missing from wizard: $adapter" >&2; exit 1; }
+done
+
 if grep -rE -n '\]\(\.\./rules\.md\)' blueprints >/dev/null 2>&1; then
   echo "Stale blueprint rules link found" >&2
   exit 1
@@ -92,4 +131,6 @@ if grep -rn '^# Central Rules$' --include="*.md" . | grep -v '^\./rules.md:' | g
   exit 1
 fi
 
-echo "Artifact indexes, central rules, placeholders, and sensitive-value checks: PASS"
+grep -q "Qual idioma você deseja que eu use para me me comunicar com você durante todo este processo?" wizard.md || grep -q "Qual idioma você deseja que eu use para me comunicar com você durante todo este processo?" wizard.md || { echo "wizard.md missing first mandatory language question" >&2; exit 1; }
+
+echo "Artifact indexes, central rules, placeholders, adapters, compatibility, and sensitive-value checks: PASS"
