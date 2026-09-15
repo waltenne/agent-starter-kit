@@ -1,0 +1,11 @@
+{
+  "name": "agent-starter-kit",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "validate:watch": "node --watch scripts/validate.mjs",
+    "test": "node --test scripts/"
+  }
+}

@@ -17,6 +17,7 @@ function error(msg) {
 // 1. Check required files
 const expectedFiles = [
   "LICENSE", "README.md", "README.en.md", "CONTRIBUTING.md", "CHANGELOG.md", "VERSION", "config.example.yml", "wizard.md", "rules.md", "compatibility.md",
+  ".gitignore", ".env.example", "package.json",
   "scripts/validate.sh", "scripts/validate.ps1", "scripts/validate.cmd", "scripts/validate.mjs",
   "images/workspace-start-prompt.png", "images/worspace-llm-comunucation.png", "images/workspace-langague-files.png", "images/workspace-objective.png",
   "blueprints/technical/web-dev.md", "blueprints/technical/data-science.md", "blueprints/technical/devops.md",
