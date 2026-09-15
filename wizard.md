@@ -105,9 +105,19 @@ Após a resposta da Rodada 3, consulte o repositório em `adapters/` para carreg
 
 ---
 
-## Seleção do Blueprint
+## Seleção de blueprint
 
-Consulte [`config.example.yml`](config.example.yml) como referência e selecione um blueprint primário para o domínio principal:
+1. Leia [`rules.md`](rules.md).
+2. Faça as perguntas gerais.
+3. Escolha um blueprint primário pelo objetivo principal.
+4. Carregue somente o blueprint primário.
+5. Carregue blueprints secundários apenas quando justificado.
+6. Use as skills candidatas do blueprint como sugestões.
+7. Não crie skills nem subagentes automaticamente.
+8. Peça confirmação antes de criar qualquer skill ou subagente.
+9. Informe por que cada artefato foi proposto.
+
+O blueprint define possibilidades do domínio. Ele não obriga a criação de qualquer skill, subagente ou artefato. Proponha somente o que for justificado pelas respostas do usuário.
 
 | Trabalho Principal | Blueprint Primário |
 | --- | --- |
