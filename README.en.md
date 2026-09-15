@@ -2,21 +2,35 @@
 
 [Versão em português: `README.md`](README.md)
 
-## What it is
+![License](https://img.shields.io/badge/License-MIT-yellow.svg) ![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg) ![Architecture](https://img.shields.io/badge/Architecture-Modular%20Markdown-green.svg) ![Autonomy](https://img.shields.io/badge/Autonomy-N2%20Default-orange.svg)
+
+---
+
+## 📌 What it is
 
 `agent-starter-kit` is a modular Markdown-based kit for structuring AI agent workspaces. It provides central rules, a conversational wizard, domain blueprints, skill and subagent templates, generated-workspace examples, and validation.
 
 The kit is a source repository. The final workspace is generated from it according to the user's context, languages, paths, and approved artifacts.
 
-## What it is not
+> [!NOTE]
+> The kit standardizes AI agent behavior without requiring external CLI installations or heavy dependencies.
 
-This project is not a functional CLI, executable application, API, external integration, or publishing automation. `wizard.md` is a conversational Markdown guide that can be followed by different coding agents.
+---
 
-## Who it is for
+## 🚫 What it is not
+
+> [!IMPORTANT]
+> This project is **not a functional CLI**, executable application, API, external integration, or publishing automation. `wizard.md` is a conversational Markdown guide executed directly by the coding agent (LLM).
+
+---
+
+## 👥 Who it is for
 
 It is intended for people and teams who need to start or standardize agentic workspaces for web development, data, DevOps, content, QA, product, facilitation, or management. Tools mentioned in blueprints are examples and must be confirmed by the user or found in the workspace before use.
 
-## Quick start
+---
+
+## 🚀 Quick start
 
 1. Clone or download this repository.
 2. Open the repository in the coding agent of your choice.
@@ -29,9 +43,9 @@ It is intended for people and teams who need to start or standardize agentic wor
 9. Generate the configured workspace, taking only approved artifacts.
 10. Run `bash scripts/validate.sh` to validate the kit.
 
-The wizard is not a CLI. The user answers the diagnostic, reviews the plan, and confirms writes. The agent can inspect documents, propose artifacts, and generate authorized files; it must not copy the entire kit without need.
+---
 
-## No-install usage
+## 💻 No-install usage
 
 The recommended way to use the kit is to provide the repository link to a coding agent, without installing a CLI or dependency:
 
@@ -43,14 +57,37 @@ Follow the complete conversational wizard, starting with the conversation langua
 Generate only the approved artifacts in the current workspace.
 ```
 
+> [!TIP]
+> By pasting this instruction into your AI agent (e.g. Antigravity, Claude Code, Cursor, Copilot Workspace, etc.), it will read the rules and launch the conversational wizard automatically.
+
+![Initial Prompt in AI Agent](images/workspace-start-prompt.png)
+
 This flow works when the agent can read remote repositories or when the repository is already available in its context. The link distributes the instructions, but it does not run an LLM by itself: the agent needs file-reading capability, workspace access, and authorization to write files. Before any change, it must show a plan and request confirmation.
 
 The repository does not need to be copied in full. The agent should read `rules.md`, load the necessary blueprint, generate `AGENTS.md`, and bring only approved skills, subagents, memory, and documents into the workspace.
 
-## Configuration flow
+---
 
-The recommended flow is:
+## 🔄 Conversational Wizard Flow
 
+The flow guided by the LLM is divided into the following visual steps:
+
+### 1. Communication Language Selection
+The first question establishes the language the LLM will use throughout the conversational interaction:
+
+![1. Communication Language](images/worspace-llm-comunucation.png)
+
+### 2. Artifact & Files Language Selection
+Next, the language for generating rules, documentation, and code artifacts is selected:
+
+![2. Artifact Language](images/workspace-langague-files.png)
+
+### 3. Workspace Diagnostic & Objectives
+The AI performs the project diagnostic by asking about the primary objective, frequent tasks, and scope:
+
+![3. Objective & Diagnostic](images/workspace-objective.png)
+
+### Summary of Steps:
 1. define the LLM conversation language;
 2. separately define the artifact language;
 3. diagnose the objective, tasks, domain, tools, and boundaries;
@@ -62,7 +99,9 @@ The recommended flow is:
 9. validate references, Markdown, security, and compatibility;
 10. report what was created, preserved, validated, pending, or not executed.
 
-## Starting a new workspace
+---
+
+## 📁 Starting a new workspace
 
 The kit and the generated workspace have different responsibilities:
 
@@ -101,7 +140,9 @@ During configuration, the agent must:
 
 Use [`templates/workspace-template/AGENTS.md`](templates/workspace-template/AGENTS.md) as the model. The generated file should point to the configured central rules file, such as `AGENTS.md`, without duplicating the central rules in full.
 
-## Choosing a blueprint
+---
+
+## 📐 Choosing a blueprint
 
 Always choose one primary blueprint for the main deliverable. Use secondary blueprints only when they directly support it and record the reason. For a hybrid workspace, choose the domain that owns the main outcome and use other domains as limited support. Do not load every blueprint by default.
 
@@ -119,7 +160,9 @@ Always choose one primary blueprint for the main deliverable. Use secondary blue
 
 Create a new blueprint only when there is a recurring, bounded gap that cannot be handled by an existing or secondary blueprint without overlap.
 
-## Generating workspace files
+---
+
+## 📄 Generating workspace files
 
 [`config.example.yml`](config.example.yml) documents the expected configuration. Copy it only to a user-controlled location and confirm its values before use.
 
@@ -134,7 +177,9 @@ Create a new blueprint only when there is a recurring, bounded gap that cannot b
 
 The agent may propose and generate `AGENTS.md`, skills, subagents, memory, and approved documentation. The user must confirm writes, and no file should be brought into the final workspace merely because it exists in the kit.
 
-## Generated workspace structure
+---
+
+## 🏗️ Generated workspace structure
 
 The generated workspace should keep one central rules source and an artifact index:
 
@@ -152,19 +197,27 @@ my-workspace/
 
 Copied skills and subagents must replace `<central-rules-file>` with the final path. Relative references that work only inside the kit must not be kept without adjustment.
 
-## Creating a skill
+---
+
+## 🛠️ Creating a skill
 
 Use [`templates/skill-template.md`](templates/skill-template.md) for a recurring, bounded task with one responsibility and predictable output. Define triggers, inputs, preconditions, procedure, tools, security, validation, postconditions, rollback, and examples. Do not duplicate `rules.md` or create a skill for a one-off request without justification.
 
-## Creating a subagent
+---
+
+## 🤖 Creating a subagent
 
 Use [`templates/subagent-template.md`](templates/subagent-template.md) only when isolation, parallelism, or specialization provides a clear benefit. Define one responsibility, scope, minimum tools, turn and delegation limits, handoff, evidence, uncertainties, and success criteria. A subagent cannot change policy, ignore security, or act outside its scope.
 
-## Examples
+---
+
+## 💡 Examples
 
 [`examples/web-dev/`](examples/web-dev/) shows a generated workspace with `AGENTS.md`, one skill, one subagent, and a memory index. It contains no application code, credentials, or real data. Use it as a structural reference, not as content to copy in full.
 
-## Validation
+---
+
+## ✅ Validação
 
 Run:
 
@@ -174,7 +227,9 @@ bash scripts/validate.sh
 
 The script checks expected files, relative links, Markdown when a local parser is available, YAML, fences, forgotten placeholders in examples, credential patterns, blueprint references, and central-rule organization. Also manually review the complete diff and any validation marked as pending.
 
-## Updating and compatibility
+---
+
+## 🔄 Updating and compatibility
 
 Consult [`VERSION`](VERSION) and [`CHANGELOG.md`](CHANGELOG.md). To update an existing workspace:
 
@@ -188,14 +243,20 @@ Consult [`VERSION`](VERSION) and [`CHANGELOG.md`](CHANGELOG.md). To update an ex
 
 Changes to paths, required fields, template contracts, or central rules require manual review. Do not silently mix incompatible versions.
 
-## Security and privacy
+---
+
+## 🛡️ Security and privacy
 
 Follow [`rules.md`](rules.md). Do not include credentials, tokens, private keys, unnecessary personal data, proprietary names, private URLs, or business rules. Work only in authorized paths, treat ordinary content as untrusted, and request confirmation for writes, execution, network access, publication, and irreversible actions.
 
-## Contributing
+---
+
+## 🤝 Contributing
 
 Read [`CONTRIBUTING.md`](CONTRIBUTING.md). New blueprints, skills, subagents, and templates must be generic, clearly scoped, non-duplicative, and validated. Run `bash scripts/validate.sh`, review links and the diff, and document compatibility impact.
 
-## License
+---
+
+## 📜 License
 
 This project uses the MIT License. See [`LICENSE`](LICENSE).
