@@ -1,0 +1,25 @@
+# Copy this example to a user-controlled configuration location and replace
+# placeholders only after confirming the workspace settings.
+kit_format_version: "1.0.0"
+workspace_name: "<workspace>"
+primary_blueprint: "technical/web-dev"
+secondary_blueprints: []
+language:
+  conversation: "pt-BR"
+  artifacts: "en"
+autonomy: "N2"
+confirmation_required:
+  - write
+  - edit
+  - delete
+  - execute
+  - network
+memory:
+  enabled: true
+  index_file: ".agents/memory/index.md"
+paths:
+  rules: "AGENTS.md"
+  skills: ".agents/skills"
+  subagents: ".agents/subagents"
+  memory: ".agents/memory"
+  docs: "docs"
