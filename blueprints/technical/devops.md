@@ -20,6 +20,7 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
 ### Revisão de Pipeline de Integração Contínua
 - Gatilho: Criação ou atualização de etapas de CI/CD.
+- Esforço estimado: 10 a 20 minutos.
 - Entradas: Arquivo de definição de pipeline, scripts de build e segredos configurados.
 - Processo: Inspecionar etapas de build, cache, permissões e tratamento de falhas.
 - Saída: Configuração de pipeline otimizada e sem segredos expostos.
@@ -27,6 +28,7 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
 ### Elaboração de Plano de Infraestrutura e Rollback
 - Gatilho: Alterações de infraestrutura como código ou processo de release.
+- Esforço estimado: 15 a 30 minutos.
 - Entradas: Especificações de ambiente, ferramentas IaC e requisitos de alta disponibilidade.
 - Processo: Mapear recursos, validar reversibilidade de mudanças e estruturar rollback.
 - Saída: Especificação IaC acompanhada de documento de rollback.
@@ -38,6 +40,48 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 |---|---|---|
 | `docs/rollback-plan.md` | Procedimento de reversão de emergência | Antes de alterar infraestrutura ou release |
 | `docs/observability.md` | Mapeamento de métricas e alertas | Ao configurar novos ambientes |
+
+## Exemplos preenchidos de artefatos
+
+### Exemplo: `docs/rollback-plan.md`
+
+```markdown
+# Plano de Rollback - Versao 1.2.0
+
+## Gatilhos de Acionamento
+- Latencia p99 de API superior a 2000ms por 5 minutos consecutivos.
+- Taxa de erros HTTP 5xx acima de 2% apos a implantacao.
+
+## Passos de Reversao
+1. Reverter trafego do balancer para o grupo de destino anterior.
+2. Executar script de rollback de migracao: `npm run db:rollback`.
+3. Notificar equipe de operacoes no canal `#incidents`.
+
+## Verificacao Pos-Rollback
+- Confirmar estabilizacao das metricas no dashboard Grafana.
+- Validar conectividade do endpoint `/healthcheck`.
+```
+
+### Exemplo: `docs/observability.md`
+
+```markdown
+# Estrategia de Observabilidade
+
+## Metricas Principais (Golden Signals)
+- Latencia: Tempo de resposta por endpoint HTTP.
+- Trafego: Requisicoes por segundo (RPS).
+- Erros: Taxa de falhas HTTP 4xx/5xx.
+- Saturacao: Uso de CPU e Memoria do container.
+
+## Regras de Alerta
+- Alerta Critico: CPU > 90% por 10 minutos (PagerDuty).
+- Alerta Aviso: Disco > 80% (Canal Slack).
+```
+
+## Quando abortar
+- Execucao de comandos destrutivos em ambiente de producao sem backup verificado.
+- Ausencia de mecanismo de rollback automatizado ou manual testado em staging.
+- Deteccao de segredos ou credenciais em arquivos de IaC ou pipelines CI/CD.
 
 ## Skills candidatas
 

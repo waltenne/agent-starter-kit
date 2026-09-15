@@ -20,6 +20,7 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
 ### Implementação de Endpoint de API
 - Gatilho: Necessidade de novo contrato de serviço ou funcionalidade backend.
+- Esforço estimado: 15 a 30 minutos.
 - Entradas: Requisitos de negócio, esquema de tipos e especificações de banco de dados.
 - Processo: Criar rotas, validar entrada/saída no service, tratar exceções e conectar à persistência.
 - Saída: Endpoint implementado em `src/domain/service.ts` com testes unitários.
@@ -27,6 +28,7 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
 ### Refatoração de Interface Web
 - Gatilho: Alteração de layout, correção de acessibilidade ou melhoria de performance no frontend.
+- Esforço estimado: 10 a 20 minutos.
 - Entradas: Protótipo de interface, árvore de componentes existentes e diretrizes de acessibilidade.
 - Processo: Atualizar estrutura HTML/DOM, aplicar regras de acessibilidade (ARIA) e ajustar estado local.
 - Saída: Componente web atualizado sem alterar contratos externos.
@@ -38,6 +40,50 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 |---|---|---|
 | `src/domain/index.ts` | API pública exportada do domínio | Ao criar novo módulo de web/API |
 | `src/domain/domain.service.ts` | Lógica de negócio e integração de serviços | Ao implementar regras de endpoints ou UI |
+
+## Exemplos preenchidos de artefatos
+
+### Exemplo: `src/domain/index.ts`
+
+```typescript
+export interface UserProfile {
+  id: string;
+  email: string;
+  role: 'admin' | 'user';
+  createdAt: Date;
+}
+
+export interface UserService {
+  getUserById(id: string): Promise<UserProfile | null>;
+  createUser(data: Omit<UserProfile, 'id' | 'createdAt'>): Promise<UserProfile | null>;
+}
+
+export * from './domain.service';
+```
+
+### Exemplo: `src/domain/domain.service.ts`
+
+```typescript
+import { UserProfile, UserService } from './index';
+
+export class UserDomainService implements UserService {
+  async getUserById(id: string): Promise<UserProfile | null> {
+    if (!id || id.trim() === '') {
+      throw new Error('ID invalido fornecido');
+    }
+    return { id, email: 'user@example.com', role: 'user', createdAt: new Date() };
+  }
+
+  async createUser(data: Omit<UserProfile, 'id' | 'createdAt'>): Promise<UserProfile | null> {
+    return { id: 'usr_123', ...data, createdAt: new Date() };
+  }
+}
+```
+
+## quando abortar
+- Requisitos de contrato de API incompatíveis com sistemas dependentes sem estrategia de deprecation.
+- Identificacao de credenciais ou segredos expostos no codigo-fonte ou bundles de frontend.
+- Falha critica em testes de regressao de acessibilidade que impeca a navegacao basica.
 
 ## Skills candidatas
 

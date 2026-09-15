@@ -20,6 +20,7 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
 ### Refinamento Técnico e Critérios de Aceite
 - Gatilho: Entrada de novos requisitos de produto para ciclo de desenvolvimento.
+- Esforço estimado: 15 a 30 minutos.
 - Entradas: Visão da funcionalidade, restrições de arquitetura e contratos de API.
 - Processo: Especificar regras de borda, contratos de dados, falhas esperadas e critérios de aceite.
 - Saída: Histórias refinadas em `docs/technical-backlog.md`.
@@ -27,6 +28,7 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
 ### Análise de Dependências e Trade-Offs
 - Gatilho: Identificação de conflito ou dependência técnica entre módulos.
+- Esforço estimado: 15 a 30 minutos.
 - Entradas: Arquitetura atual, estimativas de esforço e limitações de componentes.
 - Processo: Analisar alternativas técnicas, listar prós/contras e mapear dependências.
 - Saída: Relatório de trade-offs em `docs/technical-tradeoffs.md`.
@@ -38,6 +40,38 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 |---|---|---|
 | `docs/technical-backlog.md` | Especificação técnica de histórias e aceite | Antes da sprint de implementação |
 | `docs/technical-tradeoffs.md` | Análise comparativa de alternativas técnicas | Em decisões complexas de engenharia |
+
+## Exemplos preenchidos de artefatos
+
+### Exemplo: `docs/technical-backlog.md`
+
+```markdown
+# Backlog Tecnico - Historia US-104
+
+## Titulo
+Implementacao de Rate Limiting na API Publica.
+
+## Critarios de Aceite Tecnicos
+- Retornar status HTTP `429 Too Many Requests` quando limite excedido (100 req/min por IP).
+- Cabecalho `X-RateLimit-Remaining` deve ser enviado em todas as respostas HTTP.
+- Armazenar contadores de requisicoes em cache Redis com TTL de 60 segundos.
+```
+
+### Exemplo: `docs/technical-tradeoffs.md`
+
+```markdown
+# Matriz de Trade-offs Tecnicos: Armazenamento de Sessao
+
+| Opcao | Pros | Contras | Recomendacao |
+|---|---|---|---|
+| JWT Stateless | Sem consumo de memoria no servidor | Impossibilidade de revogacao imediata | Nao recomendada |
+| Redis Centralizado | Revogacao instantanea e alta velocidade | Dependencia de servico externo | Recomendada |
+```
+
+## Quando abortar
+- Requisitos de historia com criterios de aceite ambiguos ou incompletos.
+- Dependencias tecnicas nao resolvidas que bloqueiem a arquitetura principal.
+- Divergencia critica de arquitetura sem consenso entre os lideres tecnicos.
 
 ## Skills candidatas
 

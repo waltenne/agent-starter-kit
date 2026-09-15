@@ -20,6 +20,7 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
 ### Elaboração de Briefing Editorial
 - Gatilho: Necessidade de nova publicação ou documento técnico.
+- Esforço estimado: 10 a 20 minutos.
 - Entradas: Público-alvo, objetivo de comunicação, tom de voz e diretrizes.
 - Processo: Definir tese principal, tópicos chave, fontes de pesquisa e estrutura.
 - Saída: Documento de briefing em `docs/editorial-brief.md`.
@@ -27,6 +28,7 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
 ### Revisão e Adaptação de Tom
 - Gatilho: Finalização da primeira versão de rascunho de conteúdo.
+- Esforço estimado: 10 a 20 minutos.
 - Entradas: Rascunho do texto, guia de estilo e fontes citadas.
 - Processo: Inspecionar clareza, tom de voz, veracidade das fontes e formatação.
 - Saída: Conteúdo revisado e pronto para publicação.
@@ -38,6 +40,46 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 |---|---|---|
 | `docs/editorial-brief.md` | Diretrizes e estrutura de conteúdo | Antes de iniciar a redação |
 | `docs/style-guide.md` | Guia de estilo e tom de voz | Na configuração do projeto editorial |
+
+## Exemplos preenchidos de artefatos
+
+### Exemplo: `docs/editorial-brief.md`
+
+```markdown
+# Briefing Editorial - Guia de Agentes de IA
+
+## Publico-Alvo
+Desenvolvedores de software e arquitetos de sistemas de nivel pleno/senior.
+
+## Objetivo
+Explicar a diferenca entre arquiteturas mono-agente e multi-agente com exemplos praticos.
+
+## Estrutura do Artigo
+1. Introducao: A evolucao dos assistentes para agentes autonomos.
+2. Conceito de Mono-agente vs Multi-agente.
+3. Casos de Uso Praticos e padroes de projeto.
+4. Conclusao e proximos passos.
+```
+
+### Exemplo: `docs/style-guide.md`
+
+```markdown
+# Guia de Estilo de Conteudo
+
+## Tom de Voz
+- Tecnico, objetivo, pragmatico e acessivel.
+- Evitar linguagem bajuladora, exagero de adjetivos e travessoes (em dashes).
+
+## Formatacao
+- Utilizar GitHub Flavored Markdown padrao.
+- Titulos curtos e hierarquia clara (H1 para titulo, H2 para secoes, H3 para subsecoes).
+- Codigos em blocos cercados com especificacao da linguagem (`ts`, `bash`, `python`).
+```
+
+## Quando abortar
+- Identificacao de plagio ou trechos copiados de fontes nao autorizadas.
+- Presenca de afirmacoes faticas sem comprovacao ou fontes confiaveis.
+- Incompatibilidade direta com o guia de tom de voz ou valores institucionais.
 
 ## Skills candidatas
 

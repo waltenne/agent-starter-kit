@@ -20,6 +20,7 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
 ### Análise Exploratória e Perfilamento
 - Gatilho: Recebimento de novo conjunto de dados ou problema analítico.
+- Esforço estimado: 15 a 30 minutos.
 - Entradas: Dataset bruto, dicionário de dados e perguntas de negócio.
 - Processo: Inspecionar tipos de dados, valores ausentes, distribuições e inconsistências.
 - Saída: Relatório estatístico de qualidade do dataset.
@@ -27,6 +28,7 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
 ### Validação de Experimento e Modelo
 - Gatilho: Conclusão de treinamento ou ajuste de modelo estatístico.
+- Esforço estimado: 20 a 40 minutos.
 - Entradas: Código de treinamento, conjunto de teste e métricas alvo.
 - Processo: Executar avaliação de baseline, verificar vazamento de dados (data leakage) e validar sementes aleatórias.
 - Saída: Relatório de métricas de desempenho e reprodutibilidade.
@@ -38,6 +40,52 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 |---|---|---|
 | `docs/data-profile.md` | Diagnóstico de integridade do dataset | Ao receber novos dados |
 | `reports/experiment-summary.md` | Resultados estatísticos do modelo | Ao finalizar validação de hipótese |
+
+## Exemplos preenchidos de artefatos
+
+### Exemplo: `docs/data-profile.md`
+
+```markdown
+# Relatorio de Perfilamento de Dados
+
+## Resumo do Dataset
+- Total de registros: 50.000 linhas
+- Total de colunas: 12 variaveis (8 numericas, 4 categoricas)
+- Data da amostragem: 2026-09-15
+
+## Diagnostico de Qualidade
+- Valores nulos: 1.2% na coluna `user_age` (imputacao mediana recomendada).
+- Duplicadas: 0 registros duplicados encontrados.
+- Inconsistencias: Coluna `signup_date` possui 5 datas com formato invalido.
+
+## Recomendacoes
+- Remover registros com datas invalidas antes do treino.
+```
+
+### Exemplo: `reports/experiment-summary.md`
+
+```markdown
+# Resumo de Experimento de Modelo
+
+## Configuracao do Modelo
+- Algoritmo: Random Forest Classifier
+- Semente Aleatoria: `42`
+- Split Treino/Teste: 80% / 20%
+
+## Metricas de Desempenho
+- Acuracia: 0.89
+- Precisao: 0.86
+- Revocacao (Recall): 0.84
+- ROC-AUC: 0.92
+
+## Conclusao
+O modelo supera a baseline de regras em +12% de F1-Score sem evidencias de overfitting.
+```
+
+## Quando abortar
+- Deteccao de data leakage entre os conjuntos de treino e validacao/teste.
+- Presenca de dados pessoais identificaveis (PII) sem anonimizacao no dataset.
+- Resultados nao reprodutiveis apos fixacao de sementes aleatorias e dependencias.
 
 ## Skills candidatas
 

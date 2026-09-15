@@ -20,6 +20,7 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
 ### Elaboração de Plano de Testes
 - Gatilho: Início de ciclo de teste para nova funcionalidade ou release.
+- Esforço estimado: 15 a 30 minutos.
 - Entradas: Especificação de requisitos, arquitetura e histórias de usuário.
 - Processo: Mapear cenários de teste, dados de teste, riscos e tipos de testes (unitário, integração, e2e).
 - Saída: Plano de testes em `docs/test-plan.md`.
@@ -27,6 +28,7 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
 ### Triagem e Reprodução de Defeito
 - Gatilho: Reporte de bug ou falha detectada durante a execução.
+- Esforço estimado: 10 a 25 minutos.
 - Entradas: Descrição da falha, passos para reprodução e logs de sistema.
 - Processo: Isolar ambiente, executar passos mínimos de reprodução e identificar causa provável.
 - Saída: Relatório de defeito com passos determinísticos e logs anexados.
@@ -38,6 +40,45 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 |---|---|---|
 | `docs/test-plan.md` | Estratégia e escopo de testes do projeto | No início de cada versão |
 | `docs/bug-triage-report.md` | Registro de reprodução de defeitos | Ao identificar bugs críticos |
+
+## Exemplos preenchidos de artefatos
+
+### Exemplo: `docs/test-plan.md`
+
+```markdown
+# Plano de Testes - Release 1.5.0
+
+## Escopo de Testes
+- Testes Unitarios: Regras de calculo de frete e desconto.
+- Testes de Integracao: Integracao com gateway de pagamento mockado.
+- Testes E2E: Fluxo completo de compra desde o carrinho ate a confirmacao.
+
+## Ambientes e Dados
+- Ambiente: Staging (`https://staging.app.example.com`).
+- Dados: Usuarios de teste sinteticos previamente cadastrados.
+```
+
+### Exemplo: `docs/bug-triage-report.md`
+
+```markdown
+# Relatorio de Triagem de Bug - BUG-402
+
+## Descricao da Falha
+Erro 500 ao tentar aplicar cupom de desconto expirado durante o checkout.
+
+## Passos para Reprodução Deterministicos
+1. Adicionar item ao carrinho.
+2. Inserir cupom `EXPIRED2025` na etapa de pagamento.
+3. Clicar em "Aplicar".
+
+## Evidencia / Logs
+`TypeError: Cannot read property 'discount' of null at CheckoutService.applyCoupon`
+```
+
+## Quando abortar
+- Falhas criticas intermitentes (flaky tests) na suite de testes de bloqueio de release.
+- Impossibilidade de isolar ambiente de testes sem impactar dados de producao.
+- Falta de cenarios de teste deterministicos para validacao de defeitos showstoppers.
 
 ## Skills candidatas
 

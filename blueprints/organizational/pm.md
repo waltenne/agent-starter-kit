@@ -20,6 +20,7 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
 ### Mapeamento de Oportunidade e Descoberta
 - Gatilho: Identificação de novo problema ou necessidade de usuário.
+- Esforço estimado: 15 a 30 minutos.
 - Entradas: Entrevistas com clientes, métricas de engajamento e feedback.
 - Processo: Sintetizar evidências, definir a proposta de valor e avaliar viabilidade.
 - Saída: Briefing em `docs/opportunity-brief.md`.
@@ -27,6 +28,7 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
 ### Definição de Métricas de Sucesso
 - Gatilho: Início do planejamento de novo recurso ou iniciativa.
+- Esforço estimado: 10 a 20 minutos.
 - Entradas: Objetivos de negócio e hipóteses de comportamento dos usuários.
 - Processo: Definir métricas principais, métricas de guarda-corpo e plano de mensuração.
 - Saída: Documento de métricas em `docs/product-metrics.md`.
@@ -38,6 +40,44 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 |---|---|---|
 | `docs/opportunity-brief.md` | Detalhamento do problema e valor | Na fase de descoberta |
 | `docs/product-metrics.md` | Definição de KPIs e métricas de guarda-corpo | Ao planejar iniciativas |
+
+## Exemplos preenchidos de artefatos
+
+### Exemplo: `docs/opportunity-brief.md`
+
+```markdown
+# Briefing de Oportunidade - Otimizacao do Checkout
+
+## Problema
+35% dos usuarios abandonam o fluxo no momento de insercao de endereco devido ao excesso de campos obrigatorios.
+
+## Evidencias
+- Analise de Funil (Mixpanel): Queda acentuada na Etapa 3.
+- Entrevistas com Clientes: 8 em 10 participantes relataram frustracao com validacao de CEP.
+
+## Proposta de Valor
+Autocompletar endereco via CEP para reduzir o tempo de finalizacao da compra em 40%.
+```
+
+### Exemplo: `docs/product-metrics.md`
+
+```markdown
+# Metricas de Produto - Redesign de Checkout
+
+## Metrica Norte (Primary KPI)
+- Taxa de conversao de checkout: Aumentar de 65% para 75% em 30 dias.
+
+## Metricas Secundarias
+- Tempo medio de conclusao de pedido: Reduzir de 120s para 70s.
+
+## Metrica de Guarda-corpo (Guardrail)
+- Erros de entrega por endereco incorreto: Nao exceder 0.5% dos pedidos.
+```
+
+## Quando abortar
+- Ausencia de evidencias qualitativas ou quantitativas que sustentem a oportunidade.
+- Proposta de solucao que viole diretrizes de privacidade de dados dos usuarios.
+- Falta de alinhamento com os objetivos estrategicos prioritarios da organizacao.
 
 ## Skills candidatas
 

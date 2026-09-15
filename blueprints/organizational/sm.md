@@ -20,6 +20,7 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
 ### Preparação e Facilitação de Retrospectiva
 - Gatilho: Final de sprint ou ciclo de entrega.
+- Esforço estimado: 10 a 20 minutos.
 - Entradas: Histórico do ciclo, métricas anônimas de processo e feedback da equipe.
 - Processo: Definir formato da dinâmica, estruturar perguntas e mapear ações de melhoria.
 - Saída: Plano de facilitação em `docs/retrospective-plan.md`.
@@ -27,6 +28,7 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
 ### Gestão e Remoção de Impedimentos
 - Gatilho: Sinalização de bloqueio ou gargalo no fluxo de trabalho.
+- Esforço estimado: 10 a 20 minutos.
 - Entradas: Descrição do impedimento, impacto no fluxo e responsáveis.
 - Processo: Categorizar a causa raiz, definir plano de ação e acompanhar a resolução.
 - Saída: Registro de impedimentos em `docs/impediment-log.md`.
@@ -38,6 +40,39 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 |---|---|---|
 | `docs/retrospective-plan.md` | Estrutura de dinâmicas de retrospectiva | Ao final de cada ciclo |
 | `docs/impediment-log.md` | Mapeamento e status de bloqueios | Ao detectar impedimentos |
+
+## Exemplos preenchidos de artefatos
+
+### Exemplo: `docs/retrospective-plan.md`
+
+```markdown
+# Plano de Retrospectiva - Sprint 14
+
+## Formato da Dinâmica: Starfish (Continuar, Parar, Começar, Mais, Menos)
+1. Abertura (5 min): Alinhamento do objetivo e seguranca psicologica.
+2. Coleta de Notas (15 min): Escrita individual de pontos anonimos.
+3. Agrupamento e Votacao (15 min): Priorizacao dos 3 temas principais.
+4. Plano de Acao (20 min): Definicao de 2 acoes praticas com responsaveis.
+
+## Acoes Prioritarias Alvo
+- Melhorar a documentacao de contratos de API antes da sprint.
+```
+
+### Exemplo: `docs/impediment-log.md`
+
+```markdown
+# Registro de Impedimentos
+
+| ID | Descricao do Bloqueio | Causa Raiz | Responsavel | Status |
+|---|---|---|---|---|
+| IMP-01 | Falta de acesso ao banco de homologacao | Permissao pendente no IAM | SM / DevOps | Em andamento |
+| IMP-02 | Indefinicao no layout da tela de login | Design nao finalizado | SM / PO | Resolvido |
+```
+
+## Quando abortar
+- Uso de metricas de processo para punicao ou ranqueamento individual de membros da equipe.
+- Quebra de acordos de confidencialidade e seguranca psicologica nas retrospectivas.
+- Impedimentos criticos sem responsavel nomeado ou sem prazo limite de acompanhamento.
 
 ## Skills candidatas
 

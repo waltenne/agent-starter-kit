@@ -20,6 +20,7 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
 ### Consolidação de Status Executivo e Riscos
 - Gatilho: Necessidade de reporte para diretoria ou stakeholders.
+- Esforço estimado: 10 a 20 minutos.
 - Entradas: Entregáveis do ciclo, métricas agregadas e matriz de riscos.
 - Processo: Sintetizar progressos, identificar desvios e destacar planos de mitigação.
 - Saída: Relatório em `docs/executive-status.md`.
@@ -27,6 +28,7 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
 ### Planejamento de Capacidade e Riscos de Equipe
 - Gatilho: Início de novo trimestre ou projeto de grande porte.
+- Esforço estimado: 15 a 30 minutos.
 - Entradas: Escopo previsto, disponibilidade da equipe e dependências externas.
 - Processo: Avaliar gargalos de capacidade, mapear riscos de execução e plano de contingência.
 - Saída: Matriz de riscos em `docs/team-risk-matrix.md`.
@@ -38,6 +40,38 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 |---|---|---|
 | `docs/executive-status.md` | Atualização concisa para stakeholders | Periodicamente (quinzenal/mensal) |
 | `docs/team-risk-matrix.md` | Mapeamento e mitigação de riscos | No início de projetos complexos |
+
+## Exemplos preenchidos de artefatos
+
+### Exemplo: `docs/executive-status.md`
+
+```markdown
+# Relatorio de Status Executivo - Q3
+
+## Destaques do Periodo
+- Migracao para nova infraestrutura concluida com zero tempo de inatividade.
+- Entregues 85% dos itens previstos para a Sprint 12.
+
+## Principais Riscos e Mitigacoes
+- Risco: Atraso na API de terceiros para pagamentos.
+- Mitigacao: Criacao de ambiente mock para nao bloquear o desenvolvimento do frontend.
+```
+
+### Exemplo: `docs/team-risk-matrix.md`
+
+```markdown
+# Matriz de Riscos da Equipe
+
+| Risco Mapeado | Impacto | Probabilidade | Plano de Mitigacao |
+|---|---|---|---|
+| Gargalo na revisao de arquitetura | Alto | Media | Alocar 2 tech leads dedicados nas terças |
+| Indisponibilidade de ambiente de homologacao | Medio | Alta | Automaçao de provisionamento via Terraform |
+```
+
+## Quando abortar
+- Tentativa de automatizar decisoes de RH (contratacao, demissao, promocao, avaliacao individual).
+- Presenca de dados pessoais ou confidenciais de membros da equipe em relatorios.
+- Indisponibilidade de metricas agregadas confiaveis sobre a capacidade da equipe.
 
 ## Skills candidatas
 
