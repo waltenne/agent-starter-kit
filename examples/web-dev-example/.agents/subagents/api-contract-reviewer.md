@@ -8,3 +8,4 @@ Audit API schemas for backward compatibility.
 
 - Follow `AGENTS.md`.
 - Read-only schema inspection.
+

@@ -14,3 +14,4 @@ Adopt the domain-driven layout under `src/` with `shared/` for cross-cutting hel
 ## Consequences
 
 Clear boundary enforcement and easy testing.
+
