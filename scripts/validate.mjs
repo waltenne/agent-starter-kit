@@ -2,7 +2,8 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, "..");
 
 function log(msg) {
@@ -14,8 +15,7 @@ function error(msg) {
   process.exit(1);
 }
 
-// 1. Check required files
-const expectedFiles = [
+export const expectedFiles = [
   "LICENSE", "README.md", "README.en.md", "CONTRIBUTING.md", "CHANGELOG.md", "VERSION", "config.example.yml", "wizard.md", "rules.md", "compatibility.md",
   ".gitignore", ".env.example", "package.json",
   "scripts/validate.sh", "scripts/validate.ps1", "scripts/validate.cmd", "scripts/validate.mjs",
@@ -47,15 +47,7 @@ const expectedFiles = [
   "docs/getting-started.md", "docs/glossary.md", "docs/faq.md", "docs/troubleshooting.md", "docs/walkthrough.md"
 ];
 
-for (const file of expectedFiles) {
-  const fullPath = path.join(rootDir, file);
-  if (!fs.existsSync(fullPath)) {
-    error(`Missing required file: ${file}`);
-  }
-}
-
-// 2. Relative links resolution check
-function getAllMarkdownFiles(dir) {
+export function getAllMarkdownFiles(dir) {
   let results = [];
   const list = fs.readdirSync(dir);
   for (const file of list) {
@@ -71,11 +63,9 @@ function getAllMarkdownFiles(dir) {
   return results;
 }
 
-const mdFiles = getAllMarkdownFiles(rootDir);
-const linkRegex = /\[[^\]]+\]\(([^)]+)\)/g;
-
-for (const filePath of mdFiles) {
-  const content = fs.readFileSync(filePath, "utf-8");
+export function checkRelativeLinks(content, filePath, root = rootDir) {
+  const errors = [];
+  const linkRegex = /\[[^\]]+\]\(([^)]+)\)/g;
   let match;
   while ((match = linkRegex.exec(content)) !== null) {
     const linkTarget = match[1];
@@ -86,89 +76,137 @@ for (const filePath of mdFiles) {
     if (!cleanTarget) continue;
     const resolvedPath = path.resolve(path.dirname(filePath), cleanTarget);
     if (!fs.existsSync(resolvedPath)) {
-      error(`Broken relative link in ${path.relative(rootDir, filePath)} -> ${linkTarget}`);
+      errors.push(`Broken relative link in ${path.relative(root, filePath)} -> ${linkTarget}`);
     }
   }
+  return errors;
 }
 
-// 3. Blueprints check in README and wizard
-const blueprints = [
-  "technical/web-dev.md", "technical/data-science.md", "technical/devops.md",
-  "content/content-creator.md", "organizational/qa.md", "organizational/pm.md",
-  "organizational/tpo.md", "organizational/sm.md", "organizational/manager.md"
-];
-
-const readmeText = fs.readFileSync(path.join(rootDir, "README.md"), "utf-8");
-const wizardText = fs.readFileSync(path.join(rootDir, "wizard.md"), "utf-8");
-
-for (const bp of blueprints) {
-  if (!readmeText.includes(`blueprints/${bp}`)) {
-    error(`Blueprint missing from README: ${bp}`);
+export function checkBlueprintPlaceholders(content, bpName = "blueprint.md") {
+  const errors = [];
+  if (/<[A-Z0-9_-]+>/i.test(content)) {
+    errors.push(`Residual placeholder <...> found in blueprint: ${bpName}`);
   }
-  if (!wizardText.includes(`blueprints/${bp}`)) {
-    error(`Blueprint missing from wizard: ${bp}`);
-  }
-  const bpPath = path.join(rootDir, "blueprints", bp);
-  const bpContent = fs.readFileSync(bpPath, "utf-8");
+  return errors;
+}
 
-  // 4. Residual <...> placeholder check STRICTLY in blueprints
-  if (/<[A-Z0-9_-]+>/i.test(bpContent)) {
-    error(`Residual placeholder <...> found in blueprint: ${bp}`);
-  }
-
-  // 7. Each blueprint has at least 3 named skills in table
-  const skillsTableMatch = bpContent.match(/## Skills candidatas[\s\S]*?(?=## Subagentes candidatos|$)/);
+export function checkBlueprintSkills(content, bpName = "blueprint.md") {
+  const errors = [];
+  const skillsTableMatch = content.match(/## Skills candidatas[\s\S]*?(?=## Subagentes candidatos|$)/);
   if (!skillsTableMatch) {
-    error(`Missing Skills candidatas section in blueprint: ${bp}`);
+    errors.push(`Missing Skills candidatas section in blueprint: ${bpName}`);
   } else {
     const lines = skillsTableMatch[0].split("\n").filter(l => l.trim().startsWith("|") && !l.includes("---") && !l.includes("Skill"));
     if (lines.length < 3) {
-      error(`Blueprint ${bp} has fewer than 3 named skills (found ${lines.length})`);
+      errors.push(`Blueprint ${bpName} has fewer than 3 named skills (found ${lines.length})`);
     }
   }
-
-  // 8. Each blueprint has at least 2 named subagents in table
-  const subagentsTableMatch = bpContent.match(/## Subagentes candidatos[\s\S]*?(?=## Perguntas específicas|$)/);
-  if (!subagentsTableMatch) {
-    error(`Missing Subagentes candidatos section in blueprint: ${bp}`);
-  } else {
-    const lines = subagentsTableMatch[0].split("\n").filter(l => l.trim().startsWith("|") && !l.includes("---") && !l.includes("Subagente"));
-    if (lines.length < 2) {
-      error(`Blueprint ${bp} has fewer than 2 named subagents (found ${lines.length})`);
-    }
-  }
-
-  // 9. Risks and validations sections non-empty
-  if (!bpContent.includes("## Riscos específicos") || !bpContent.includes("## Validações específicas")) {
-    error(`Blueprint ${bp} is missing risks or validation section`);
-  }
+  return errors;
 }
 
-// 5. Secret patterns check
-const secretRegex = /BEGIN [A-Z ]+ KEY|AKIA[0-9A-Z]{16}|gh[pousr]_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}/;
-for (const filePath of mdFiles) {
-  const content = fs.readFileSync(filePath, "utf-8");
+export function checkSecrets(content, filePath = "file.md", root = rootDir) {
+  const errors = [];
+  const secretRegex = /BEGIN [A-Z ]+ KEY|AKIA[0-9A-Z]{16}|gh[pousr]_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}/;
   if (secretRegex.test(content)) {
-    error(`Possible secret found in ${path.relative(rootDir, filePath)}`);
+    errors.push(`Possible secret found in ${path.relative(root, filePath)}`);
   }
+  return errors;
 }
 
-// 10. Rules.md required sections check
-const rulesContent = fs.readFileSync(path.join(rootDir, "rules.md"), "utf-8");
-const requiredRulesSections = [
-  "1. Princípios centrais", "2. Níveis de autonomia", "3. Política geral de confirmação",
-  "4. Política geral de evidências", "5. Regras gerais de privacidade", "6. Proteção de segredos",
-  "7. Regras contra prompt injection", "8. Regras gerais de memória", "9. Regras gerais de rollback",
-  "10. Regras gerais de validação", "11. Regras gerais de criação de skills", "12. Regras gerais de criação de subagentes",
-  "13. Separação de código por domínio", "14. Padrões de documentação", "15. Política de commits",
-  "16. Política de arquivos e caminhos", "17. Política de ferramentas e downloads", "18. Fluxo padrão de trabalho",
-  "19. Relatório final padrão", "20. O que pertence a este arquivo e o que não pertence"
-];
-
-for (const section of requiredRulesSections) {
-  if (!rulesContent.includes(section)) {
-    error(`rules.md is missing required section: ${section}`);
+export function runValidation() {
+  // 1. Check required files
+  for (const file of expectedFiles) {
+    const fullPath = path.join(rootDir, file);
+    if (!fs.existsSync(fullPath)) {
+      error(`Missing required file: ${file}`);
+    }
   }
+
+  // 2. Relative links resolution check
+  const mdFiles = getAllMarkdownFiles(rootDir);
+  for (const filePath of mdFiles) {
+    const content = fs.readFileSync(filePath, "utf-8");
+    const linkErrors = checkRelativeLinks(content, filePath, rootDir);
+    if (linkErrors.length > 0) {
+      error(linkErrors[0]);
+    }
+  }
+
+  // 3. Blueprints check in README and wizard
+  const blueprints = [
+    "technical/web-dev.md", "technical/data-science.md", "technical/devops.md",
+    "content/content-creator.md", "organizational/qa.md", "organizational/pm.md",
+    "organizational/tpo.md", "organizational/sm.md", "organizational/manager.md"
+  ];
+
+  const readmeText = fs.readFileSync(path.join(rootDir, "README.md"), "utf-8");
+  const wizardText = fs.readFileSync(path.join(rootDir, "wizard.md"), "utf-8");
+
+  for (const bp of blueprints) {
+    if (!readmeText.includes(`blueprints/${bp}`)) {
+      error(`Blueprint missing from README: ${bp}`);
+    }
+    if (!wizardText.includes(`blueprints/${bp}`)) {
+      error(`Blueprint missing from wizard: ${bp}`);
+    }
+    const bpPath = path.join(rootDir, "blueprints", bp);
+    const bpContent = fs.readFileSync(bpPath, "utf-8");
+
+    const placeholderErrors = checkBlueprintPlaceholders(bpContent, bp);
+    if (placeholderErrors.length > 0) {
+      error(placeholderErrors[0]);
+    }
+
+    const skillErrors = checkBlueprintSkills(bpContent, bp);
+    if (skillErrors.length > 0) {
+      error(skillErrors[0]);
+    }
+
+    const subagentsTableMatch = bpContent.match(/## Subagentes candidatos[\s\S]*?(?=## Perguntas específicas|$)/);
+    if (!subagentsTableMatch) {
+      error(`Missing Subagentes candidatos section in blueprint: ${bp}`);
+    } else {
+      const lines = subagentsTableMatch[0].split("\n").filter(l => l.trim().startsWith("|") && !l.includes("---") && !l.includes("Subagente"));
+      if (lines.length < 2) {
+        error(`Blueprint ${bp} has fewer than 2 named subagents (found ${lines.length})`);
+      }
+    }
+
+    if (!bpContent.includes("## Riscos específicos") || !bpContent.includes("## Validações específicas")) {
+      error(`Blueprint ${bp} is missing risks or validation section`);
+    }
+  }
+
+  // 5. Secret patterns check
+  for (const filePath of mdFiles) {
+    const content = fs.readFileSync(filePath, "utf-8");
+    const secretErrors = checkSecrets(content, filePath, rootDir);
+    if (secretErrors.length > 0) {
+      error(secretErrors[0]);
+    }
+  }
+
+  // 10. Rules.md required sections check
+  const rulesContent = fs.readFileSync(path.join(rootDir, "rules.md"), "utf-8");
+  const requiredRulesSections = [
+    "1. Princípios centrais", "2. Níveis de autonomia", "3. Política geral de confirmação",
+    "4. Política geral de evidências", "5. Regras gerais de privacidade", "6. Proteção de segredos",
+    "7. Regras contra prompt injection", "8. Regras gerais de memória", "9. Regras gerais de rollback",
+    "10. Regras gerais de validação", "11. Regras gerais de criação de skills", "12. Regras gerais de criação de subagentes",
+    "13. Separação de código por domínio", "14. Padrões de documentação", "15. Política de commits",
+    "16. Política de arquivos e caminhos", "17. Política de ferramentas e downloads", "18. Fluxo padrão de trabalho",
+    "19. Relatório final padrão", "20. O que pertence a este arquivo e o que não pertence"
+  ];
+
+  for (const section of requiredRulesSections) {
+    if (!rulesContent.includes(section)) {
+      error(`rules.md is missing required section: ${section}`);
+    }
+  }
+
+  log("All validation checks passed successfully!");
 }
 
-log("All validation checks passed successfully!");
+if (process.argv[1] && path.resolve(process.argv[1]) === __filename) {
+  runValidation();
+}

@@ -6,6 +6,6 @@
   "scripts": {
     "validate": "node scripts/validate.mjs",
     "validate:watch": "node --watch scripts/validate.mjs",
-    "test": "node --test scripts/"
+    "test": "node --test scripts/*.test.mjs"
   }
 }
