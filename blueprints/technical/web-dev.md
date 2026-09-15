@@ -22,7 +22,7 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 - Gatilho: Necessidade de novo contrato de serviço ou funcionalidade backend.
 - Entradas: Requisitos de negócio, esquema de tipos e especificações de banco de dados.
 - Processo: Criar rotas, validar entrada/saída no service, tratar exceções e conectar à persistência.
-- Saída: Endpoint implementado em `src/<dominio>/service.ts` com testes unitários.
+- Saída: Endpoint implementado em `src/domain/service.ts` com testes unitários.
 - Validação: Teste de integração de API e verificação de contratos HTTP.
 
 ### Refatoração de Interface Web
@@ -36,8 +36,8 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
 | Artefato | Finalidade | Quando criar |
 |---|---|---|
-| `src/<dominio>/index.ts` | API pública exportada do domínio | Ao criar novo módulo de web/API |
-| `src/<dominio>/<dominio>.service.ts` | Lógica de negócio e integração de serviços | Ao implementar regras de endpoints ou UI |
+| `src/domain/index.ts` | API pública exportada do domínio | Ao criar novo módulo de web/API |
+| `src/domain/domain.service.ts` | Lógica de negócio e integração de serviços | Ao implementar regras de endpoints ou UI |
 
 ## Skills candidatas
 
