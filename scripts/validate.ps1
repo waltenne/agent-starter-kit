@@ -108,3 +108,4 @@ foreach ($ad in $adapters) {
 }
 
 Write-Host "Artifact indexes, central rules, placeholders, adapters, compatibility, and sensitive-value checks: PASS"
+

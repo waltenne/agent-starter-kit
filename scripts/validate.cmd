@@ -4,3 +4,4 @@ if %ERRORLEVEL% NEQ 0 (
   echo Validation failed.
   exit /b %ERRORLEVEL%
 )
+
