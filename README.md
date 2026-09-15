@@ -19,6 +19,26 @@ O kit utiliza uma **arquitetura de duas camadas**:
 
 ---
 
+## ⚙️ Fluxo e Responsabilidades dos Componentes
+
+O fluxo de funcionamento do kit é orientado pelo encadeamento: `rules.md` → `wizard.md` → `blueprints/` → `templates/`.
+
+- [`rules.md`](rules.md): Regras gerais e segurança centralizadas. Fonte única de verdade.
+- [`wizard.md`](wizard.md): Conduz o diagnóstico, idioma, escolha do agente e seleção de blueprint.
+- [`blueprints/`](blueprints/): Decisões de arquitetura específicas por domínio. Não duplicam regras centrais. Apenas um blueprint primário é escolhido; secundários são opcionais.
+- [`templates/`](templates/): Modelos de código, skills e subagentes. Skills e subagentes são propostos conforme a necessidade do projeto, nunca criados automaticamente.
+
+| Componente | Responsabilidade |
+| --- | --- |
+| `rules.md` | Regras gerais e segurança |
+| `wizard.md` | Perguntas e seleção de contexto |
+| `blueprints/` | Orientações específicas por domínio |
+| `templates/` | Modelos reutilizáveis |
+| `examples/` | Workspaces de referência |
+| `scripts/` | Validação do kit |
+
+---
+
 ## 🚫 O que ele não é
 
 > [!IMPORTANT]

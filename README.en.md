@@ -19,6 +19,26 @@ The kit uses a **two-layer architecture**:
 
 ---
 
+## ⚙️ Component Flow and Responsibilities
+
+The kit workflow follows the sequence: `rules.md` → `wizard.md` → `blueprints/` → `templates/`.
+
+- [`rules.md`](rules.md): Centralized general and security rules. Single source of truth.
+- [`wizard.md`](wizard.md): Guides diagnostic questions, language, agent choice, and blueprint selection.
+- [`blueprints/`](blueprints/): Domain-specific architectural guidance. Does not duplicate central rules. Only one primary blueprint is chosen; secondary blueprints are optional.
+- [`templates/`](templates/): Reusable templates for code, skills, and subagents. Skills and subagents are proposed as needed, never created automatically.
+
+| Component | Responsibility |
+| --- | --- |
+| `rules.md` | General rules and security |
+| `wizard.md` | Questions and context selection |
+| `blueprints/` | Domain-specific guidance |
+| `templates/` | Reusable templates |
+| `examples/` | Reference workspaces |
+| `scripts/` | Kit validation |
+
+---
+
 ## 🚫 What it is not
 
 > [!IMPORTANT]
