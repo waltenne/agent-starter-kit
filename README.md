@@ -176,21 +176,49 @@ Use [`templates/subagent-template.md`](templates/subagent-template.md) quando is
 
 ---
 
-## ✅ Validação
+## ✅ Validação e Orientações por Sistema Operacional
 
-Execute o script correspondente ao seu sistema operacional:
+O kit e os scripts de validação funcionam nativamente em Linux, macOS e Windows:
 
-- **Linux / macOS (Bash / Zsh)**:
+### 🐧 Linux
+- **Shell**: Bash (`bash`) ou Zsh (`zsh`).
+- **Comando de Validação**:
   ```sh
   bash scripts/validate.sh
   ```
-- **Windows (PowerShell)**:
+- **Permissão (opcional)**:
+  ```sh
+  chmod +x scripts/validate.sh
+  ./scripts/validate.sh
+  ```
+
+---
+
+### 🍏 macOS
+- **Shell**: Terminal nativo, iTerm2 ou VS Code Terminal (`zsh` / `bash`).
+- **Comando de Validação**:
+  ```sh
+  bash scripts/validate.sh
+  ```
+- **Compatibilidade**: O script usa sintaxe POSIX compatível com os utilitários `find` e `sed` nativos do macOS (BSD).
+
+---
+
+### 🪟 Windows
+- **PowerShell (Recomendado)**:
   ```powershell
   .\scripts\validate.ps1
   ```
-- **Windows (Prompt de Comando - CMD)**:
+  *(Caso ocorra erro de política de execução: `powershell -ExecutionPolicy Bypass -File scripts/validate.ps1`)*
+
+- **Prompt de Comando (CMD)**:
   ```cmd
   scripts\validate.cmd
+  ```
+
+- **WSL (Windows Subsystem for Linux)**:
+  ```sh
+  bash scripts/validate.sh
   ```
 
 ---
