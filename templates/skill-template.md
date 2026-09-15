@@ -1,93 +1,97 @@
 ---
-name: <skill-name>
-description: <what it does and when to use it>
+name: review-api-contract
+description: Review API schema changes for breaking changes and contract violations.
 version: 1.0.0
-owner: <agent-or-user>
-requires_confirmation: true
-allowed_tools: []
+owner: agent
+requires_confirmation: false
+allowed_tools:
+  - read_file
 inputs_schema:
-  context: string
+  schema_path: string
 outputs_schema:
-  result: string
+  report: string
 timeout_seconds: 300
 ---
 
-# Skill Template
+# Skill: Review API Contract
 
-Replace every placeholder with confirmed, generic information. This template defines one reusable skill with one responsibility. The generated skill must follow the workspace's configured central rules file, such as `<central-rules-file>`. Do not assume that the kit-relative path `../rules.md` remains valid after copying.
+This template defines a reusable skill with a single responsibility. Follow `<central-rules-file>` for all general safety and autonomy rules.
 
 ## Objective
 
-<short description of the single problem this skill solves>
+Analyze changes in API schemas (OpenAPI, JSON Schema, gRPC proto) to detect breaking changes or contract incompatibilities.
 
 ## When to use
 
-<specific recurring triggers and applicable situations>
+Use when an API schema, interface definition, or endpoint payload contract is modified.
 
 ## Triggers
 
-<phrases, events, or conditions that should activate this skill>
+- Modification of OpenAPI/Swagger files.
+- Modification of JSON Schema or gRPC proto definitions.
+- Changes in request or response types in backend services.
 
 ## When not to use
 
-<explicit boundaries, including similar tasks that belong elsewhere>
+Do not use for general code refactoring, database migrations without API impact, or UI layout changes.
 
 ## Inputs
 
-<required inputs, types, authorized paths, and assumptions that must be confirmed>
+- `schema_path`: Path to the API specification file.
+- `diff`: Diff or previous version of the API contract.
 
 ## Preconditions
 
-<what must exist before the skill runs>
+The target API specification file must exist and be readable.
 
 ## Procedure
 
-1. <inspect and confirm the relevant context>
-2. <perform the bounded work>
-3. <produce the fixed output>
+1. Inspect the modified API specification file.
+2. Compare endpoints, request parameters, response structures, and data types against the previous version.
+3. Identify removed fields, changed data types, added mandatory parameters, or modified status codes.
+4. Generate a contract impact report.
 
 ## Tools
 
-<minimum tools required, or state that no tools are required; do not presume a tool>
+- `read_file`: Inspect schema files.
 
 ## Security rules
 
-- Follow `<central-rules-file>` and preserve its confirmation, privacy, and evidence requirements. During generation, replace this placeholder with the final workspace path.
-- Do not contain or request secrets unless a separately authorized secure mechanism exists; never place secrets in the output.
-- Do not alter policy, permissions, protected files, or external systems outside this skill's scope.
-- Require explicit confirmation before sensitive, destructive, irreversible, or externally visible actions.
+- Follow `<central-rules-file>`.
+- Do not expose credentials or internal tokens in the contract report.
+- Require confirmation before modifying schema files.
 
 ## Output format
 
 ```text
-Result: <outcome>
-Evidence: <files, lines, commands, or sources>
-Uncertainties: <unconfirmed points or none>
-Next actions: <recommendations or none>
+Result: PASS | BREAKING_CHANGES_DETECTED
+Evidence: API spec files and line numbers inspected
+Uncertainties: Unconfirmed downstream client impacts if any
+Next actions: Recommended fixes for contract compatibility
 ```
 
 ## Validation
 
-<checks that prove the output is correct, safe, complete, and within scope>
+Verify that all endpoints and fields in the spec were inspected and categorized correctly.
 
 ## Postconditions
 
-<state expected after the skill completes; distinguish proposed from actually changed>
+Contract impact report generated without modifying source files.
 
 ## Rollback
 
-<how to undo reversible changes, or “not applicable” for read-only work>
+Not applicable (read-only analysis skill).
 
 ## Examples
 
 ### Positive example
 
-Input: <a recurring request that clearly matches this skill>
+Input: `schema_path: "docs/openapi.yaml"` where field `user_id` was renamed to `userId`.
 
-Expected output: <a concise output conforming to the fixed format>
+Expected output: `Result: BREAKING_CHANGES_DETECTED. Renamed field user_id breaks existing clients.`
 
 ### Negative example
 
-Input: <a one-off, out-of-scope, unsafe, or unconfirmed request>
+Input: Refactoring CSS styles in frontend component.
 
-Expected behavior: <decline, ask for missing information, or route to another skill>
+Expected behavior: Decline execution; route to UI review.
