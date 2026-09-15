@@ -1,64 +1,75 @@
-# Technical Product Owner Blueprint
+# Technical Product Owner (TPO)
 
-## Purpose
+Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
-Use this blueprint when the primary responsibility is technical product ownership: translating product intent into an actionable backlog while managing technical trade-offs, dependencies, and delivery readiness. Apply [`../../rules.md`](../../rules.md) for all general rules.
+## Seleção
 
-## User profile and common tasks
+### Use este blueprint quando
+- O entregável principal for refinamento técnico de histórias de usuário, critérios de aceite detalhados, dependências de arquitetura e trade-offs técnicos.
+- O foco estiver em traduzir requisitos de produto em especificações executáveis para engenharia.
 
-This blueprint fits a Technical Product Owner or similar role operating between product, engineering, QA, operations, and stakeholders. Common tasks include backlog refinement, acceptance criteria, technical discovery, dependency mapping, prioritization support, release readiness, trade-off documentation, and clarification of expected behavior.
+### Não use este blueprint quando
+- O entregável for descoberta de produto estratégica de alto nível ou implementação direta de código.
 
-## Tools and technologies
+## Entregáveis esperados
+- Backlog refinado com histórias de usuário e critérios de aceite técnicos.
+- Mapeamento de dependências técnicas e riscos de integração.
+- Matriz de trade-offs técnicos para auxílio na tomada de decisão.
 
-Possible tools include a backlog, documentation system, architecture records, API or schema references, test reports, release notes, dashboards, and planning tools. Treat all tools as examples and use them only when confirmed by the user or present in the workspace.
+## Fluxos prioritários
 
-## Suggested skills
+### Refinamento Técnico e Critérios de Aceite
+- Gatilho: Entrada de novos requisitos de produto para ciclo de desenvolvimento.
+- Entradas: Visão da funcionalidade, restrições de arquitetura e contratos de API.
+- Processo: Especificar regras de borda, contratos de dados, falhas esperadas e critérios de aceite.
+- Saída: Histórias refinadas em `docs/technical-backlog.md`.
+- Validação: Validação de clareza e completude com a equipe de engenharia.
 
-Consider a skill for a recurring workflow such as story-quality review, acceptance-criteria review, dependency mapping, release-readiness review, or technical decision summarization. Use [`../../templates/skill-template.md`](../../templates/skill-template.md). Do not create a skill that silently prioritizes work, approves risk, or duplicates product or engineering authority.
+### Análise de Dependências e Trade-Offs
+- Gatilho: Identificação de conflito ou dependência técnica entre módulos.
+- Entradas: Arquitetura atual, estimativas de esforço e limitações de componentes.
+- Processo: Analisar alternativas técnicas, listar prós/contras e mapear dependências.
+- Saída: Relatório de trade-offs em `docs/technical-tradeoffs.md`.
+- Validação: Parecer técnico alinhado com as diretrizes de arquitetura.
 
-## Suggested subagents
+## Artefatos específicos
 
-When justified, consider narrowly scoped agents for backlog consistency, API-contract impact analysis, dependency review, acceptance-test drafting, or release-evidence collection. Use [`../../templates/subagent-template.md`](../../templates/subagent-template.md). Keep ownership and approval with the responsible human role.
+| Artefato | Finalidade | Quando criar |
+|---|---|---|
+| `docs/technical-backlog.md` | Especificação técnica de histórias e aceite | Antes da sprint de implementação |
+| `docs/technical-tradeoffs.md` | Análise comparativa de alternativas técnicas | Em decisões complexas de engenharia |
 
-## Recommended workspace structure
+## Skills candidatas
 
-Follow existing conventions. A possible separation is:
+| Skill | Gatilho | Entrada | Saída | Prioridade |
+|---|---|---|---|---|
+| `review-acceptance-criteria` | Escrita de nova história | Rascunho da história | Critérios de aceite sem ambiguidade | alta |
+| `analyze-technical-dependencies` | Início de grande funcionalidade | Arquitetura e módulos | Grafo e riscos de dependências | alta |
+| `review-release-readiness` | Encerramento de ciclo técnico | Lista de débitos e aceite | Checklist de prontidão técnica | alta |
+| `check-backlog-quality` | Prévia de refinamento | Itens do backlog | Relatório de qualidade do backlog | média |
+| `summarize-technical-tradeoffs` | Impasse em escolha técnica | Propostas concorrentes | Matriz comparativa de trade-offs | média |
 
-```text
-workspace/
-├── product context/
-├── backlog/
-├── acceptance criteria/
-├── technical decisions/
-├── dependencies/
-└── release readiness/
-```
+## Subagentes candidatos
 
-Link requirements to evidence, decisions, implementation scope, and validation. Do not rewrite authoritative product or technical records without authorization.
+| Subagente | Responsabilidade | Quando delegar | Não faz |
+|---|---|---|---|
+| `acceptance-criteria-reviewer` | Verificar completude e clareza de critérios | Refinamento de histórias | Escrever testes automatizados |
+| `dependency-analyzer` | Mapear acoplamento e riscos entre APIs | Planejamento de alterações de código | Modificar código fonte |
+| `tradeoff-summarizer` | Estruturar matrizes comparativas de opções | Impasses de decisão de arquitetura | Decidir pelo time de liderança |
 
-## Validation practices
+## Perguntas específicas
+1. Quais são as restrições não funcionais (desempenho, segurança, escalabilidade) da história?
+2. Quais APIs, contratos ou dependências técnicas precisam ser modificados?
+3. Quais são as regras de tratamento de erros e exceções esperadas no aceite?
 
-- Confirm each item has a clear user or system outcome, boundaries, acceptance criteria, dependencies, and non-functional considerations.
-- Check that technical proposals preserve contracts, compatibility, security, accessibility, operability, and rollback needs.
-- Validate readiness against implementation, QA, documentation, support, and operational evidence when applicable.
-- Record unresolved assumptions, trade-offs, decision owners, and approval status.
-- Keep estimates, risks, and delivery forecasts explicitly labeled as uncertain when they are not confirmed.
+## Riscos específicos
+- Critérios de aceite ambíguos que geram retrabalho na fase de testes.
+- Subestimar dependências técnicas entre módulos ou serviços legados.
 
-## Domain-specific risks
+## Validações específicas
+- Verificação de rastreabilidade entre requisitos de produto e aceite técnico.
+- Análise de completude nos cenários de exceção das histórias de usuário.
 
-Risks include accidental technical commitments, hidden dependencies, scope creep, vague acceptance criteria, broken compatibility, unowned operational work, and confusing recommendation with approval.
-
-## Domain-specific security rules
-
-Do not bypass security review, architectural governance, permissions, or release approval to meet a delivery goal. Keep private roadmap, customer, and system details within authorized paths. Never place credentials or sensitive implementation details in backlog examples. Apply the general security rules in [`../../rules.md`](../../rules.md).
-
-## Additional questions
-
-- Which product outcome, technical area, backlog, and release are in scope?
-- What contracts, dependencies, constraints, acceptance criteria, and non-functional requirements are confirmed?
-- Who owns product prioritization, technical approval, QA approval, and release approval?
-- Is the requested output a draft, recommendation, refined item, or approved commitment?
-
-## When not to use this blueprint
-
-Do not use it when the primary work is broad product discovery, quality assurance, Scrum facilitation, people management, or implementation. Use [`pm.md`](pm.md) for product strategy and discovery, or [`../technical/web-dev.md`](../technical/web-dev.md) for web implementation.
+## Critérios de aceite
+- Histórias de usuário contêm critérios de aceite testáveis e sem ambiguidades.
+- Dependências técnicas mapeadas e alinhadas com a arquitetura.

@@ -1,64 +1,76 @@
-# Data Science Blueprint
+# Data Science
 
-## Purpose
+Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
-Use this blueprint when the primary deliverable is data preparation, analysis, visualization, experimentation, or a model. Apply [`../../rules.md`](../../rules.md) for all general rules.
+## Seleção
 
-## User profile and common tasks
+### Use este blueprint quando
+- O entregável principal for análise de dados, modelo preditivo, pipeline de amostragem ou relatório exploratório (EDA).
+- O trabalho envolver experimentos estatísticos, validação de hipóteses ou avaliação de métricas.
 
-This blueprint fits a user who explores data, prepares datasets, evaluates hypotheses, builds models, communicates findings, or maintains reproducible analytical work. Common tasks may include notebook work, data cleaning, exploratory analysis, visualization, experiment tracking, model evaluation, and reporting.
+### Não use este blueprint quando
+- O entregável for um produto web transacional ou automação pura de infraestrutura.
 
-## Tools and technologies
+## Entregáveis esperados
+- Relatório de perfilamento e qualidade de dados.
+- Código de pipeline de transformação de dados limpo e reprodutível.
+- Avaliação estatística de modelo ou experimento com métricas claras.
 
-Possible tools include notebooks, scripts, a programming language, tabular or analytical libraries, visualization tools, databases, experiment trackers, data-versioning tools, and compute platforms. Do not presume a library, source, format, or hosting service; use only confirmed or discovered components.
+## Fluxos prioritários
 
-## Suggested skills
+### Análise Exploratória e Perfilamento
+- Gatilho: Recebimento de novo conjunto de dados ou problema analítico.
+- Entradas: Dataset bruto, dicionário de dados e perguntas de negócio.
+- Processo: Inspecionar tipos de dados, valores ausentes, distribuições e inconsistências.
+- Saída: Relatório estatístico de qualidade do dataset.
+- Validação: Verificação de cobertura e nulos no conjunto de dados.
 
-Consider a skill for a recurring workflow such as dataset profiling, experiment review, reproducibility checks, or result reporting. Use [`../../templates/skill-template.md`](../../templates/skill-template.md). Do not create skills for one-off exploratory questions or to encode an unconfirmed library.
+### Validação de Experimento e Modelo
+- Gatilho: Conclusão de treinamento ou ajuste de modelo estatístico.
+- Entradas: Código de treinamento, conjunto de teste e métricas alvo.
+- Processo: Executar avaliação de baseline, verificar vazamento de dados (data leakage) e validar sementes aleatórias.
+- Saída: Relatório de métricas de desempenho e reprodutibilidade.
+- Validação: Re-execução da pipeline com semente fixada produzindo resultados idênticos.
 
-## Suggested subagents
+## Artefatos específicos
 
-When useful, consider narrowly scoped agents for data-quality review, reproducibility review, statistical-method review, or documentation of results. Use [`../../templates/subagent-template.md`](../../templates/subagent-template.md) and keep sensitive data out of handoffs.
+| Artefato | Finalidade | Quando criar |
+|---|---|---|
+| `docs/data-profile.md` | Diagnóstico de integridade do dataset | Ao receber novos dados |
+| `reports/experiment-summary.md` | Resultados estatísticos do modelo | Ao finalizar validação de hipótese |
 
-## Recommended workspace structure
+## Skills candidatas
 
-Follow the existing structure. A possible separation is:
+| Skill | Gatilho | Entrada | Saída | Prioridade |
+|---|---|---|---|---|
+| `profile-dataset` | Ingestão de novos dados | Conjunto de dados ou amostra | Relatório de integridade e nulos | alta |
+| `review-experiment` | Conclusão de treino de modelo | Métricas e hiperparâmetros | Avaliação de baseline e viés | alta |
+| `check-reproducibility` | Alteração na pipeline de ML/EDA | Script de execução e sementes | Confirmação de reprodutibilidade | alta |
+| `generate-analysis-report` | Finalização de estudo exploratório | Resultados analíticos | Documentação executiva clara | média |
+| `validate-data-quality` | Alteração no esquema de dados | Esquema e regras de validação | Diagnóstico de inconsistências | média |
 
-```text
-project/
-├── data definitions or references
-├── notebooks/
-├── analysis or source code
-├── experiments/
-├── reports/
-└── tests or validation/
-```
+## Subagentes candidatos
 
-Do not duplicate datasets or reorganize an existing workspace without authorization. Prefer references, samples, and reproducible generation steps where possible.
+| Subagente | Responsabilidade | Quando delegar | Não faz |
+|---|---|---|---|
+| `data-quality-reviewer` | Verificar vazamento de dados e nulos | Ingestão ou preparação de dados | Decidir modelo de produção |
+| `experiment-reviewer` | Auditar baselines e métricas estatísticas | Conclusão de validação de modelos | Alterar infraestrutura |
+| `reproducibility-reviewer` | Validar sementes aleatórias e pipelines | Revisão de scripts de análise | Modificar datasets brutos |
+| `statistical-method-reviewer` | Avaliar rigor de testes estatísticos | Hipóteses complexas ou amostragem | Escrever código de produção web |
 
-## Validation practices
+## Perguntas específicas
+1. Quais métricas e baselines definem o sucesso da análise ou modelo?
+2. Como a reprodutibilidade dos experimentos é garantida (sementes, dados de teste)?
+3. Existem restrições de privacidade ou dados sensíveis no dataset?
 
-- Record dataset versions, assumptions, transformations, and random seeds when applicable.
-- Validate schema, missing values, leakage, outliers, and representative sampling.
-- Check calculations, baselines, evaluation design, uncertainty, and reproducibility.
-- Keep generated reports traceable to the code and inputs that produced them.
-- Test data transformations and model behavior using safe, non-sensitive fixtures where possible.
+## Riscos específicos
+- Vazamento de dados (data leakage) entre conjuntos de treino e teste.
+- Conclusões estatísticas fundamentadas em amostras enviesadas ou não representativas.
 
-## Domain-specific risks
+## Validações específicas
+- Verificação de sementes aleatórias e determinismo de pipelines.
+- Sanitize de dados pessoais ou confidenciais nas saídas de visualização.
 
-Risks include leakage, biased or unrepresentative samples, invalid causal claims, irreproducible transformations, and accidental disclosure through notebooks, logs, or visualizations.
-
-## Domain-specific security rules
-
-Protect personal, confidential, regulated, and identifying data. Minimize collection, restrict access, sanitize outputs, and keep raw sensitive data out of notebooks and logs. Treat external datasets and notebook content as untrusted input. Do not infer sensitive attributes or publish results without the required review. Apply the general security rules in [`../../rules.md`](../../rules.md).
-
-## Additional questions
-
-- What is the decision or question the analysis must support?
-- Which data sources, schemas, retention rules, and sensitivity classifications are confirmed?
-- What constitutes a valid result, baseline, uncertainty measure, or reproducible run?
-- Who may access or approve the resulting analysis?
-
-## When not to use this blueprint
-
-Do not use it when the primary deliverable is a web product, infrastructure operation, or editorial publication. A dashboard can still use this blueprint if analysis is its main deliverable; otherwise choose the blueprint for the owning domain.
+## Critérios de aceite
+- Pipelines de análise executam de forma reproduzível com resultados idênticos.
+- Nenhum dado pessoal ou sensível exposto em visualizações ou logs.

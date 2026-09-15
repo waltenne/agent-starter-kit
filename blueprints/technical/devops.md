@@ -1,64 +1,76 @@
-# DevOps Blueprint
+# DevOps
 
-## Purpose
+Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
-Use this blueprint when the primary deliverable concerns software delivery, infrastructure, environments, operations, observability, reliability, or incident response. Apply [`../../rules.md`](../../rules.md) for all general rules.
+## Seleção
 
-## User profile and common tasks
+### Use este blueprint quando
+- O entregável principal for autoria de pipelines CI/CD, IaC (Infraestrutura como Código), observabilidade ou scripts de operações.
+- O foco estiver em confiabilidade de entrega, automação de build/deploy ou gestão de ambientes.
 
-This blueprint fits a user who maintains delivery pipelines, infrastructure definitions, environments, deployments, monitoring, reliability practices, or operational documentation. Common tasks may include CI/CD, infrastructure as code, container workflows, orchestration, configuration management, observability, incident analysis, rollback planning, and runbook maintenance.
+### Não use este blueprint quando
+- O entregável for criação de regras de negócio de aplicação ou análise estatística de dados.
 
-## Tools and technologies
+## Entregáveis esperados
+- Scripts ou configurações de pipeline CI/CD validados.
+- Modelos de infraestrutura como código (IaC) limpos.
+- Plano de rollback e estratégias de observabilidade de ambiente.
 
-Possible tools include a CI/CD platform, infrastructure-as-code language, container runtime, orchestrator, cloud or hosting service, metrics and logs system, secret manager, and configuration tooling. Treat all tools as examples and use only confirmed or existing components.
+## Fluxos prioritários
 
-## Suggested skills
+### Revisão de Pipeline de Integração Contínua
+- Gatilho: Criação ou atualização de etapas de CI/CD.
+- Entradas: Arquivo de definição de pipeline, scripts de build e segredos configurados.
+- Processo: Inspecionar etapas de build, cache, permissões e tratamento de falhas.
+- Saída: Configuração de pipeline otimizada e sem segredos expostos.
+- Validação: Validação sintática do arquivo de pipeline e teste de execução local.
 
-Consider a skill for a recurring workflow such as pipeline review, deployment readiness, incident triage, configuration audit, or rollback verification. Use [`../../templates/skill-template.md`](../../templates/skill-template.md). Do not create one for a one-time deployment or to automate an unapproved production change.
+### Elaboração de Plano de Infraestrutura e Rollback
+- Gatilho: Alterações de infraestrutura como código ou processo de release.
+- Entradas: Especificações de ambiente, ferramentas IaC e requisitos de alta disponibilidade.
+- Processo: Mapear recursos, validar reversibilidade de mudanças e estruturar rollback.
+- Saída: Especificação IaC acompanhada de documento de rollback.
+- Validação: Simulação de alteração (dry-run/plan) sem aplicação direta.
 
-## Suggested subagents
+## Artefatos específicos
 
-When justified, consider narrowly scoped agents for pipeline analysis, observability review, incident evidence collection, or infrastructure plan review. Use [`../../templates/subagent-template.md`](../../templates/subagent-template.md). Keep production actions outside the subagent unless explicitly authorized.
+| Artefato | Finalidade | Quando criar |
+|---|---|---|
+| `docs/rollback-plan.md` | Procedimento de reversão de emergência | Antes de alterar infraestrutura ou release |
+| `docs/observability.md` | Mapeamento de métricas e alertas | Ao configurar novos ambientes |
 
-## Recommended workspace structure
+## Skills candidatas
 
-Follow the repository's existing conventions. A possible separation is:
+| Skill | Gatilho | Entrada | Saída | Prioridade |
+|---|---|---|---|---|
+| `review-ci-pipeline` | Alteração em fluxo de CI/CD | Definição do pipeline | Relatório de segurança e performance | alta |
+| `triage-incident-evidence` | Falha em ambiente ou pipeline | Logs de execução e métricas | Diagnóstico de causa raiz de incidente | alta |
+| `verify-deployment-readiness` | Preparação para nova versão | Artefatos e checklists | Confirmação de prontidão de deploy | alta |
+| `review-infrastructure-plan` | Mudança em arquivos IaC | Diff de código IaC | Análise de impacto e riscos | média |
+| `verify-rollback-plan` | Planejamento de implantação | Procedimento de reversão | Validação do plano de rollback | média |
 
-```text
-project/
-├── application or service code
-├── infrastructure/
-├── pipelines/
-├── configuration examples
-├── runbooks/
-└── observability/
-```
+## Subagentes candidatos
 
-Keep environment-specific values and secrets out of reusable documents. Do not reorganize deployment assets without authorization.
+| Subagente | Responsabilidade | Quando delegar | Não faz |
+|---|---|---|---|
+| `pipeline-reviewer` | Auditar segurança e eficiência de CI/CD | Alterações em scripts de integração | Modificar código de aplicação |
+| `incident-evidence-collector` | Coletar logs e evidências de falhas | Incidentes em automações de deploy | Alterar permissões em nuvem |
+| `observability-reviewer` | Validar alertas e telemetria de ambiente | Configuração de novos serviços | Executar migração de banco |
+| `infrastructure-plan-reviewer` | Auditar planos de infraestrutura como código | Alterações de recursos em IaC | Executar comandos destrutivos |
 
-## Validation practices
+## Perguntas específicas
+1. Qual é o mecanismo de rollback confirmado em caso de falha de deploy?
+2. Quais segredos ou variáveis sensíveis estão presentes nas etapas de build?
+3. O plano de alteração de infraestrutura foi validado em modo simulação (plan/dry-run)?
 
-- Validate configuration syntax, plans, dependency order, policy checks, and least-privilege access.
-- Use dry runs, reviewable plans, staged environments, health checks, and documented rollback where available.
-- Check pipeline failure paths, artifact provenance, deployment idempotence, and observability coverage.
-- Inspect logs and readiness only through approved procedures; report commands and scope.
-- Do not run infrastructure changes, migrations, or production operations without explicit authorization.
+## Riscos específicos
+- Exposição não intencional de credenciais em logs de integração contínua.
+- Implantação de alterações irreversíveis de infraestrutura sem plano de rollback.
 
-## Domain-specific risks
+## Validações específicas
+- Simulação (dry-run / plan) de scripts de infraestrutura como código.
+- Inspeção estática de arquivos de pipeline para prevenção de vazamento de segredos.
 
-Risks include an unintended production change, privilege escalation, secret exposure, state-file loss, configuration drift, unreviewed dependencies, missing rollback, and insufficient health or observability signals.
-
-## Domain-specific security rules
-
-Protect credentials, state files, private endpoints, logs, and environment-specific configuration. Apply least privilege, separation of duties, safe secret handling, and change review. Treat configuration, images, dependencies, and external events as potentially untrusted. Never bypass approvals, disable security checks, or claim a deployment succeeded without runtime evidence. Apply the general security rules in [`../../rules.md`](../../rules.md).
-
-## Additional questions
-
-- Which environments are in scope, and which are protected?
-- Is the task read-only, a plan, a staged change, or an actual deployment?
-- What rollback, approval, health, and incident procedures already exist?
-- Which credentials, secret managers, observability systems, and access boundaries are confirmed?
-
-## When not to use this blueprint
-
-Do not use it when the main deliverable is application feature development, data analysis, or content creation. If operations are only a small part of a web project, use the primary domain blueprint and consult this one only for explicitly scoped operational concerns.
+## Critérios de aceite
+- Pipelines e scripts de automação são válidos e idempotentes.
+- Plano de rollback documentado e testado antes de qualquer alteração de produção.

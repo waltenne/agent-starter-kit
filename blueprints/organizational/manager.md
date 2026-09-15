@@ -1,64 +1,75 @@
-# Manager Blueprint
+# Engineering Manager
 
-## Purpose
+Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
-Use this blueprint when the primary responsibility is team leadership, people management, capacity planning, feedback, risk ownership, or coordination across teams. Apply [`../../rules.md`](../../rules.md) for all general rules.
+## Seleção
 
-## User profile and common tasks
+### Use este blueprint quando
+- O entregável principal for planejamento estratégico de equipe, gestão de riscos operacionais, atualização de stakeholders ou coordenação de capacidade.
+- O foco estiver em alinhamento estratégico, comunicação institucional e mitigação de riscos de execução.
 
-This blueprint fits a people manager, engineering manager, delivery manager, or similar leader responsible for supporting people and coordinating outcomes. Common tasks include planning, prioritization alignment, staffing discussions, coaching, feedback preparation, risk management, stakeholder communication, dependency coordination, and operational follow-up.
+### Não use este blueprint quando
+- O trabalho envolver decisões de contratação, promoção, remuneração, desligamento ou avaliação individual de desempenho (processos estritamente humanos).
 
-## Tools and technologies
+## Entregáveis esperados
+- Relatório de status e capacidade da equipe.
+- Matriz de riscos operacionais e planejamento de mitigação.
+- Comunicação executiva para stakeholders.
 
-Possible tools include planning documents, staffing or capacity views, project reports, one-to-one notes, feedback templates, risk registers, decision records, and communication tools. Treat all tools as examples and use them only when confirmed by the user or present in the workspace.
+## Fluxos prioritários
 
-## Suggested skills
+### Consolidação de Status Executivo e Riscos
+- Gatilho: Necessidade de reporte para diretoria ou stakeholders.
+- Entradas: Entregáveis do ciclo, métricas agregadas e matriz de riscos.
+- Processo: Sintetizar progressos, identificar desvios e destacar planos de mitigação.
+- Saída: Relatório em `docs/executive-status.md`.
+- Validação: Validação de precisão dos dados e ausência de informações privadas.
 
-Consider a skill for a recurring workflow such as status synthesis, risk-register review, meeting preparation, decision-log maintenance, or feedback-structure drafting. Use [`../../templates/skill-template.md`](../../templates/skill-template.md). Do not create a skill that makes hiring, performance, compensation, promotion, or disciplinary decisions automatically.
+### Planejamento de Capacidade e Riscos de Equipe
+- Gatilho: Início de novo trimestre ou projeto de grande porte.
+- Entradas: Escopo previsto, disponibilidade da equipe e dependências externas.
+- Processo: Avaliar gargalos de capacidade, mapear riscos de execução e plano de contingência.
+- Saída: Matriz de riscos em `docs/team-risk-matrix.md`.
+- Validação: Alinhamento das premissas de capacidade com a liderança técnica.
 
-## Suggested subagents
+## Artefatos específicos
 
-When useful, consider narrowly scoped agents for anonymized status synthesis, dependency mapping, risk review, agenda drafting, or action-item tracking. Use [`../../templates/subagent-template.md`](../../templates/subagent-template.md). Keep people decisions, sensitive judgments, and approvals with authorized humans.
+| Artefato | Finalidade | Quando criar |
+|---|---|---|
+| `docs/executive-status.md` | Atualização concisa para stakeholders | Periodicamente (quinzenal/mensal) |
+| `docs/team-risk-matrix.md` | Mapeamento e mitigação de riscos | No início de projetos complexos |
 
-## Recommended workspace structure
+## Skills candidatas
 
-Follow existing conventions. A possible separation is:
+| Skill | Gatilho | Entrada | Saída | Prioridade |
+|---|---|---|---|---|
+| `summarize-team-status` | Reporte quinzenal de projeto | Dados agregados de entrega | Resumo executivo sintético | alta |
+| `review-team-risks` | Mudança de escopo ou prazos | Mapeamento de dependências | Matriz de riscos atualizada | alta |
+| `prepare-one-on-one` | Reunião periódica de alinhamento | Tópicos de carreira e contexto | Roteiro de escuta ativa | alta |
+| `track-team-actions` | Acordos em reuniões de liderança | Decisões registradas | Relatório de acompanhamento | média |
+| `draft-stakeholder-update` | Marco relevante atingido | Resultados do projeto | Rascunho de comunicação formal | média |
 
-```text
-workspace/
-├── goals and planning/
-├── risks and dependencies/
-├── decision records/
-├── team operating agreements/
-├── meeting outputs/
-└── feedback templates/
-```
+## Subagentes candidatos
 
-Separate team-level delivery information from private personnel records. Do not create shadow performance files or copy sensitive HR information into general project documents.
+| Subagente | Responsabilidade | Quando delegar | Não faz |
+|---|---|---|---|
+| `team-status-summarizer` | Sintetizar relatórios operacionais agregados | Preparação de reportes | Automatizar avaliação de desempenho |
+| `risk-reviewer` | Mapear dependências externas e gargalos | Início de projetos complexos | Tomar decisões de demissão/promoção |
+| `stakeholder-update-drafter` | Redigir comunicações executivas claras | Lançamentos relevantes | Expor dados pessoais de membros do time |
 
-## Validation practices
+## Perguntas específicas
+1. Quais são as principais dependências externas que podem impactar os prazos da equipe?
+2. Quais riscos operacionais foram identificados e quais os planos de mitigação propostos?
+3. O resumo executivo está isento de dados sensíveis ou avaliações pessoais individuais?
 
-- Separate observed facts, reported concerns, inferences, and decisions.
-- Confirm ownership, constraints, dependencies, risks, dates, and follow-up actions.
-- Check status reports for balanced context, material blockers, and uncertainty rather than unsupported certainty.
-- Review communications for clarity, audience, accessibility, and appropriate confidentiality.
-- Validate that automated summaries preserve nuance and receive human review before distribution.
+## Riscos específicos
+- Automatizar decisões de gestão de pessoas (contratação, promoção, demissão, remuneração).
+- Exposição não autorizada de informações confidenciais em reportes executivos.
 
-## Domain-specific risks
+## Validações específicas
+- Inspeção estrita de privacidade: nenhum dado pessoal ou avaliação de indivíduo.
+- Verificação da precisão e rastreabilidade das informações enviadas a stakeholders.
 
-Risks include privacy violations, biased evaluations, over-surveillance, unclear accountability, hidden delivery risks, communication gaps, and treating incomplete status data as a complete picture of team performance.
-
-## Domain-specific security rules
-
-Protect personnel, compensation, health, feedback, and employment information. Minimize access and retention, use anonymized examples, and never expose private one-to-one or HR content in general workspace artifacts. Do not automate or delegate employment decisions. Apply the general security rules in [`../../rules.md`](../../rules.md).
-
-## Additional questions
-
-- Which team, outcome, planning horizon, risk, or coordination issue is in scope?
-- Which information is public to the team, restricted to management, or confidential?
-- What decision rights, approval paths, constraints, and follow-up mechanisms exist?
-- Is the requested output a plan, status summary, risk review, communication draft, or personnel-related artifact?
-
-## When not to use this blueprint
-
-Do not use it for product discovery, technical product ownership, Scrum facilitation, QA execution, or direct software implementation. Use [`sm.md`](sm.md) for team-process facilitation and [`pm.md`](pm.md) for product strategy.
+## Critérios de aceite
+- Reportes executivos claros, focados em riscos de projeto e capacidade.
+- Nenhuma automação de decisão de RH ou gestão de pessoas.

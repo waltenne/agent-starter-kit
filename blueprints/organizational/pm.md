@@ -1,64 +1,75 @@
-# Product Manager Blueprint
+# Product Manager (PM)
 
-## Purpose
+Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
-Use this blueprint when the primary deliverable is product discovery, prioritization, roadmap planning, outcome definition, or alignment between user needs and product delivery. Apply [`../../rules.md`](../../rules.md) for all general rules.
+## Seleção
 
-## User profile and common tasks
+### Use este blueprint quando
+- O entregável principal for descoberta de produto, mapeamento de oportunidades, métricas de produto ou estruturação de roadmap.
+- O foco estiver em necessidades do usuário, validação de hipóteses e priorização de problemas.
 
-This blueprint fits a Product Manager or product practitioner who turns evidence and strategy into clear product decisions. Common tasks include problem discovery, user research synthesis, opportunity framing, goal definition, prioritization, roadmap communication, requirements, experiment planning, stakeholder alignment, and outcome review.
+### Não use este blueprint quando
+- O entregável for refinamento de backlog técnico de engenharia ou codificação.
 
-## Tools and technologies
+## Entregáveis esperados
+- Documento de Oportunidade (Opportunity Brief).
+- Matriz de evidências de pesquisas de usuários e dados de uso.
+- Definição de métricas de sucesso do produto (KPIs / OKRs).
 
-Possible tools include research notes, analytics, feedback repositories, roadmaps, planning boards, documents, prototypes, experiment trackers, and communication tools. Treat all tools as examples and use them only when confirmed by the user or present in the workspace.
+## Fluxos prioritários
 
-## Suggested skills
+### Mapeamento de Oportunidade e Descoberta
+- Gatilho: Identificação de novo problema ou necessidade de usuário.
+- Entradas: Entrevistas com clientes, métricas de engajamento e feedback.
+- Processo: Sintetizar evidências, definir a proposta de valor e avaliar viabilidade.
+- Saída: Briefing em `docs/opportunity-brief.md`.
+- Validação: Validação das premissas com evidências qualitativas e quantitativas.
 
-Consider a skill for a recurring workflow such as opportunity-brief creation, evidence synthesis, prioritization review, experiment design, or roadmap update. Use [`../../templates/skill-template.md`](../../templates/skill-template.md). Do not create a skill to make an unreviewed product decision automatically or to turn a one-off opinion into policy.
+### Definição de Métricas de Sucesso
+- Gatilho: Início do planejamento de novo recurso ou iniciativa.
+- Entradas: Objetivos de negócio e hipóteses de comportamento dos usuários.
+- Processo: Definir métricas principais, métricas de guarda-corpo e plano de mensuração.
+- Saída: Documento de métricas em `docs/product-metrics.md`.
+- Validação: Confirmação de que as métricas medem o valor entregue.
 
-## Suggested subagents
+## Artefatos específicos
 
-When useful, consider narrowly scoped agents for research synthesis, requirements consistency, opportunity comparison, metric-definition review, or stakeholder-update drafting. Use [`../../templates/subagent-template.md`](../../templates/subagent-template.md). The principal owner remains responsible for product decisions.
+| Artefato | Finalidade | Quando criar |
+|---|---|---|
+| `docs/opportunity-brief.md` | Detalhamento do problema e valor | Na fase de descoberta |
+| `docs/product-metrics.md` | Definição de KPIs e métricas de guarda-corpo | Ao planejar iniciativas |
 
-## Recommended workspace structure
+## Skills candidatas
 
-Follow existing conventions. A possible separation is:
+| Skill | Gatilho | Entrada | Saída | Prioridade |
+|---|---|---|---|---|
+| `create-opportunity-brief` | Nova oportunidade identificada | Pesquisa e objetivos | Briefing de oportunidade | alta |
+| `review-prioritization` | Planejamento de ciclo de produto | Lista de oportunidades | Análise comparativa de impacto | alta |
+| `define-product-metrics` | Lançamento de nova funcionalidade | Hipóteses de uso | Mapeamento de métricas e KPIs | alta |
+| `review-experiment` | Conclusão de teste A/B | Dados de experimento | Diagnóstico de resultado do teste | média |
+| `summarize-user-evidence` | Acúmulo de feedbacks de usuários | Pesquisas e entrevistas | Síntese executiva de evidências | média |
 
-```text
-workspace/
-├── strategy/
-├── research/
-├── opportunities/
-├── requirements/
-├── roadmap/
-└── decision records/
-```
+## Subagentes candidatos
 
-Keep assumptions, evidence, decisions, and open questions distinguishable. Do not overwrite an approved roadmap or requirement without authorization.
+| Subagente | Responsabilidade | Quando delegar | Não faz |
+|---|---|---|---|
+| `evidence-synthesizer` | Compilar e sintetizar pesquisas de usuários | Análise de grande volume de feedback | Automatizar decisão de prioridade |
+| `metric-reviewer` | Auditar consistência e viabilidade de KPIs | Planejamento de métricas | Alterar definições de código |
+| `experiment-reviewer` | Avaliar significância e hipóteses de testes | Conclusão de experimentos A/B | Modificar pipelines de analytics |
 
-## Validation practices
+## Perguntas específicas
+1. Qual é o problema principal do usuário que estamos tentando resolver?
+2. Quais evidências qualitativas e quantitativas sustentam esta oportunidade?
+3. Quais são as métricas de sucesso e as métricas de guarda-corpo para esta iniciativa?
 
-- Trace important decisions to user evidence, business goals, constraints, or an explicitly labeled hypothesis.
-- Define outcomes, measures, baselines, guardrails, and review dates before proposing experiments.
-- Check requirements for ambiguity, acceptance conditions, dependencies, non-functional needs, and accessibility.
-- Record alternatives considered, trade-offs, decision owners, and unresolved risks.
-- Validate that stakeholder summaries preserve important caveats and do not overstate certainty.
+## Riscos específicos
+- Priorização baseada em opiniões sem sustentação em evidências reais.
+- Automatizar decisões de priorização que cabem à liderança de produto.
 
-## Domain-specific risks
+## Validações específicas
+- Validação da consistência das evidências de usuários coletadas.
+- Verificação de alinhamento entre as métricas propostas e os objetivos estratégicos.
 
-Risks include building from unverified assumptions, optimizing a proxy metric, scope churn, unclear ownership, inaccessible requirements, stakeholder misalignment, and presenting forecasts or research as facts.
-
-## Domain-specific security rules
-
-Minimize personal and confidential research data, restrict access, and anonymize examples. Do not expose customer feedback, private strategy, or internal decisions in reusable artifacts. Do not make commitments, publish roadmaps, or contact stakeholders without confirmation. Apply the general security rules in [`../../rules.md`](../../rules.md).
-
-## Additional questions
-
-- Which user, problem, outcome, product area, and decision are in scope?
-- What evidence, constraints, goals, measures, and deadlines are confirmed?
-- Who owns the decision, who must review it, and what can be shared?
-- Is the requested output a discovery artifact, requirement, recommendation, roadmap, or approved decision?
-
-## When not to use this blueprint
-
-Do not use it when the main deliverable is technical implementation, test execution, Scrum facilitation, or people management. If the work is specifically technical product ownership, use [`tpo.md`](tpo.md) instead.
+## Critérios de aceite
+- Oportunidades fundamentadas em evidências claras e rastreáveis.
+- Métricas de sucesso definidas antes da fase de desenvolvimento.

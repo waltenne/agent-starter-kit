@@ -1,64 +1,76 @@
-# Quality Assurance Blueprint
+# Quality Assurance (QA)
 
-## Purpose
+Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
-Use this blueprint when the primary deliverable is quality assurance, test strategy, defect investigation, release confidence, or validation of a product. Apply [`../../rules.md`](../../rules.md) for all general rules.
+## Seleção
 
-## User profile and common tasks
+### Use este blueprint quando
+- O entregável principal for plano de testes, estratégia de garantia de qualidade, triagem de defeitos ou avaliação de release.
+- O foco estiver em confiabilidade, regressão, reprodutibilidade de falhas e cobertura de testes.
 
-This blueprint fits a QA professional, test engineer, quality analyst, or contributor responsible for finding risks before users encounter them. Common tasks include test planning, exploratory testing, regression analysis, automation design, defect reproduction, accessibility checks, compatibility checks, release readiness, and quality reporting.
+### Não use este blueprint quando
+- O entregável for o desenvolvimento inicial da aplicação ou gestão de pessoas.
 
-## Tools and technologies
+## Entregáveis esperados
+- Plano de testes cobrindo requisitos funcionais e não funcionais.
+- Relatório de triagem e reprodução de defeitos.
+- Parecer de prontidão de release (release readiness).
 
-Possible tools include a test framework, browser or device runner, API client, issue tracker, log viewer, accessibility checker, performance tool, CI system, and test-data generator. Treat all tools as examples and use them only when confirmed by the user or present in the workspace.
+## Fluxos prioritários
 
-## Suggested skills
+### Elaboração de Plano de Testes
+- Gatilho: Início de ciclo de teste para nova funcionalidade ou release.
+- Entradas: Especificação de requisitos, arquitetura e histórias de usuário.
+- Processo: Mapear cenários de teste, dados de teste, riscos e tipos de testes (unitário, integração, e2e).
+- Saída: Plano de testes em `docs/test-plan.md`.
+- Validação: Matriz de rastreabilidade entre requisitos e cenários de teste.
 
-Consider a skill for a recurring workflow such as test-plan generation, regression selection, defect triage, accessibility review, or release-readiness assessment. Use [`../../templates/skill-template.md`](../../templates/skill-template.md). Do not create a skill for a single defect or to replace human judgment about risk.
+### Triagem e Reprodução de Defeito
+- Gatilho: Reporte de bug ou falha detectada durante a execução.
+- Entradas: Descrição da falha, passos para reprodução e logs de sistema.
+- Processo: Isolar ambiente, executar passos mínimos de reprodução e identificar causa provável.
+- Saída: Relatório de defeito com passos determinísticos e logs anexados.
+- Validação: Confirmação de reprodução consistente da falha.
 
-## Suggested subagents
+## Artefatos específicos
 
-When justified, consider narrowly scoped agents for test-case analysis, reproducibility review, API contract checks, accessibility review, or failure-log triage. Use [`../../templates/subagent-template.md`](../../templates/subagent-template.md). Keep test data and handoffs within the authorized scope.
+| Artefato | Finalidade | Quando criar |
+|---|---|---|
+| `docs/test-plan.md` | Estratégia e escopo de testes do projeto | No início de cada versão |
+| `docs/bug-triage-report.md` | Registro de reprodução de defeitos | Ao identificar bugs críticos |
 
-## Recommended workspace structure
+## Skills candidatas
 
-Follow existing conventions. A possible separation is:
+| Skill | Gatilho | Entrada | Saída | Prioridade |
+|---|---|---|---|---|
+| `create-test-plan` | Início de novo ciclo de testes | Requisitos do projeto | Plano de testes estruturado | alta |
+| `triage-defect` | Reporte de erro não confirmado | Passos e logs de erro | Relatório de reprodução detalhado | alta |
+| `select-regression-scope` | Alteração em módulo existente | Diff de código | Escopo otimizado de teste regressivo | alta |
+| `review-accessibility` | Avaliação de conformidade UI | Telas e componentes | Diagnóstico de falhas de acessibilidade | média |
+| `assess-release-readiness` | Preparação para publicação | Resultados da suíte de teste | Parecer de prontidão de release | média |
 
-```text
-project/
-├── test plans or cases
-├── automated tests/
-├── fixtures or safe test data/
-├── defect evidence/
-├── reports/
-└── quality checklists/
-```
+## Subagentes candidatos
 
-Do not modify product code, test environments, or defect status without explicit scope and authorization.
+| Subagente | Responsabilidade | Quando delegar | Não faz |
+|---|---|---|---|
+| `test-strategy-reviewer` | Validar cobertura e matriz de testes | Planejamento de suítes de teste | Escrever código de produto |
+| `defect-reproducer` | Isolar e reproduzir falhas reportadas | Triagem de relatórios de bugs | Corrigir defeitos no fonte |
+| `regression-scope-reviewer` | Mapear escopo afetado por refatorações | Mudanças estruturais de código | Aprovar deploys em produção |
+| `release-readiness-reviewer` | Auditar critérios de aceite e bloqueadores | Avaliação de término de sprint | Alterar prioridade do backlog |
 
-## Validation practices
+## Perguntas específicas
+1. Quais são os cenários críticos e caminhos de exceção que precisam de testes automatizados?
+2. Como os dados de teste sintéticos serão gerados sem expor informações sensíveis?
+3. Quais são os critérios de bloqueio de release (showstoppers)?
 
-- Define the behavior, risk, environment, data, and expected result before testing.
-- Reproduce failures with minimal safe fixtures and record exact evidence.
-- Cover happy paths, boundary conditions, error paths, permissions, accessibility, compatibility, and relevant non-functional risks.
-- Distinguish tested scope, untested scope, flaky results, blocked checks, and defects.
-- Validate that automated checks are meaningful and do not pass only because assertions are weak.
+## Riscos específicos
+- Falsos positivos ou testes flaky que mascaram defeitos reais.
+- Ausência de testes de regressão em componentes compartilhados do sistema.
 
-## Domain-specific risks
+## Validações específicas
+- Execução determinística de testes em ambiente isolado.
+- Inspeção de evidências e logs de execução para validação dos resultados.
 
-Risks include false confidence from incomplete coverage, flaky tests, unsafe test data, unreported regressions, environment mismatch, non-reproducible defects, and treating a green pipeline as proof of overall quality.
-
-## Domain-specific security rules
-
-Never place production secrets or personal data in fixtures, screenshots, logs, or bug reports. Do not test against protected environments without authorization. Avoid destructive test data and isolate any state-changing checks. Apply the general security rules in [`../../rules.md`](../../rules.md).
-
-## Additional questions
-
-- What product behavior, release, environment, and risk area are in scope?
-- Which test levels, devices, browsers, data classifications, and accessibility requirements apply?
-- What evidence is required to close a defect or approve a release?
-- Which checks are automated, manual, flaky, blocked, or not yet available?
-
-## When not to use this blueprint
-
-Do not use it when the main deliverable is product strategy, technical product ownership, Scrum facilitation, people management, or implementation work. Use it as a supporting blueprint only when quality validation is the primary responsibility.
+## Critérios de aceite
+- Todos os testes funcionais críticos passam sem falhas ocultas.
+- Parecer de release emitido com evidências claras de execução.

@@ -1,64 +1,75 @@
-# Scrum Master Blueprint
+# Scrum Master (SM)
 
-## Purpose
+Referência de regras gerais: [`../../rules.md`](../../rules.md).
 
-Use this blueprint when the primary responsibility is Scrum facilitation, team flow improvement, impediment removal, or support for continuous improvement. Apply [`../../rules.md`](../../rules.md) for all general rules.
+## Seleção
 
-## User profile and common tasks
+### Use este blueprint quando
+- O entregável principal for facilitação de dinâmicas ágeis, remoção de impedimentos, análise de fluxo de trabalho ou melhoria contínua da equipe.
+- O foco estiver em saúde do processo, colaboração e acordos de trabalho.
 
-This blueprint fits a Scrum Master, agile facilitator, or delivery facilitator who helps a team inspect and adapt its way of working. Common tasks include facilitating events, clarifying working agreements, visualizing flow, removing impediments, improving collaboration, supporting retrospectives, and making process risks visible.
+### Não use este blueprint quando
+- O entregável for avaliação de desempenho individual ou gestão de backlog de produto.
 
-## Tools and technologies
+## Entregáveis esperados
+- Plano e dinâmica de retrospectiva de equipe.
+- Registro de impedimentos e plano de ação de remoção.
+- Acordos de trabalho da equipe (Working Agreements) e mapeamento de fluxo.
 
-Possible tools include a planning board, workflow metrics, meeting notes, decision records, retrospective formats, documentation, and communication tools. Treat all tools as examples and use them only when confirmed by the user or present in the workspace.
+## Fluxos prioritários
 
-## Suggested skills
+### Preparação e Facilitação de Retrospectiva
+- Gatilho: Final de sprint ou ciclo de entrega.
+- Entradas: Histórico do ciclo, métricas anônimas de processo e feedback da equipe.
+- Processo: Definir formato da dinâmica, estruturar perguntas e mapear ações de melhoria.
+- Saída: Plano de facilitação em `docs/retrospective-plan.md`.
+- Validação: Confirmação de que a dinâmica promove a colaboração segura.
 
-Consider a skill for a recurring workflow such as retrospective synthesis, impediment tracking, flow review, working-agreement review, or facilitation-plan preparation. Use [`../../templates/skill-template.md`](../../templates/skill-template.md). Do not create a skill to automate team judgment, rank individuals, or create meetings without need.
+### Gestão e Remoção de Impedimentos
+- Gatilho: Sinalização de bloqueio ou gargalo no fluxo de trabalho.
+- Entradas: Descrição do impedimento, impacto no fluxo e responsáveis.
+- Processo: Categorizar a causa raiz, definir plano de ação e acompanhar a resolução.
+- Saída: Registro de impedimentos em `docs/impediment-log.md`.
+- Validação: Acompanhamento da taxa de resolução de bloqueios.
 
-## Suggested subagents
+## Artefatos específicos
 
-When beneficial, consider narrowly scoped agents for anonymized trend synthesis, impediment categorization, action-item tracking, or agenda drafting. Use [`../../templates/subagent-template.md`](../../templates/subagent-template.md). Keep the team and accountable leaders responsible for decisions.
+| Artefato | Finalidade | Quando criar |
+|---|---|---|
+| `docs/retrospective-plan.md` | Estrutura de dinâmicas de retrospectiva | Ao final de cada ciclo |
+| `docs/impediment-log.md` | Mapeamento e status de bloqueios | Ao detectar impedimentos |
 
-## Recommended workspace structure
+## Skills candidatas
 
-Follow existing conventions. A possible separation is:
+| Skill | Gatilho | Entrada | Saída | Prioridade |
+|---|---|---|---|---|
+| `prepare-retrospective` | Fim de sprint ou entrega | Dados do ciclo e contexto | Roteiro de retrospectiva | alta |
+| `track-impediments` | Notificação de bloqueio | Descrição do problema | Plano de ação de desbloqueio | alta |
+| `review-team-flow` | Gargalos no fluxo de trabalho | Métricas de processo | Diagnóstico de gargalos | alta |
+| `prepare-facilitation-plan` | Necessidade de alinhamento | Objetivo da reunião | Roteiro de facilitação | média |
+| `track-improvement-actions` | Ações definidas em retro | Lista de ações | Relatório de acompanhamento | média |
 
-```text
-workspace/
-├── working agreements/
-├── event agendas/
-├── impediments/
-├── improvement actions/
-├── flow observations/
-└── decision records/
-```
+## Subagentes candidatos
 
-Keep observations, commitments, and outcomes separate. Do not turn process artifacts into individual surveillance records.
+| Subagente | Responsabilidade | Quando delegar | Não faz |
+|---|---|---|---|
+| `impediment-tracker` | Mapear e categorizar causa raiz de bloqueios | Identificação de impedimentos | Avaliar desempenho individual |
+| `flow-reviewer` | Analisar gargalos no fluxo de entrega do time | Revisão de métricas de fluxo | Usar métricas para ranquear pessoas |
+| `action-tracker` | Acompanhar a evolução das ações de melhoria | Pós-retrospectiva | Definir prioridades de produto |
 
-## Validation practices
+## Perguntas específicas
+1. Quais são os principais gargalos no fluxo de entrega atual da equipe?
+2. Quais ações de melhoria das retrospectivas anteriores foram concluídas?
+3. Existem bloqueios externos dependendo de outras equipes ou stakeholders?
 
-- Confirm that events have a clear purpose, participants, time boundary, and expected outcome.
-- Track impediments to ownership and resolution without hiding systemic causes.
-- Review improvement actions for a concrete owner, next step, and follow-up date.
-- Use flow measures as conversation prompts, not as isolated proof of individual performance.
-- Validate that working agreements and process changes are understood by the people affected.
+## Riscos específicos
+- Utilizar métricas de fluxo de processo de forma punitiva ou para ranquear pessoas.
+- Foco em dinâmicas sem acompanhamento concreto das ações de melhoria geradas.
 
-## Domain-specific risks
+## Validações específicas
+- Verificação de segurança psicológica e anonimato em feedbacks de retrospectiva.
+- Acompanhamento estrito da evolução de ações de melhoria pactuadas.
 
-Risks include ceremony without outcomes, hidden impediments, action items without ownership, misuse of metrics, process changes without consent, and confusing facilitation with line management.
-
-## Domain-specific security rules
-
-Protect personal feedback, conflict details, health information, and individual performance data. Prefer aggregated or anonymized observations. Do not publish retrospective content, assign blame, or make personnel decisions from automated summaries. Apply the general security rules in [`../../rules.md`](../../rules.md).
-
-## Additional questions
-
-- Which team, workflow, events, impediments, or improvement goal are in scope?
-- What working agreements, roles, metrics, and decision rights already exist?
-- Which information may be shared, anonymized, or kept private?
-- Is the requested output an agenda, synthesis, action plan, facilitation guide, or decision?
-
-## When not to use this blueprint
-
-Do not use it when the primary responsibility is product strategy, technical product ownership, QA execution, or people management. Use [`manager.md`](manager.md) when the work concerns personnel decisions or line-management accountability.
+## Critérios de aceite
+- Retrospectivas geram ações de melhoria com responsáveis e prazos claros.
+- Impedimentos mapeados e tratados sem exposição individual de membros da equipe.
