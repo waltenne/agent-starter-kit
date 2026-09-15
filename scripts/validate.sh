@@ -7,6 +7,8 @@ cd "$repo_root"
 expected_files=(
   LICENSE README.md README.en.md CONTRIBUTING.md CHANGELOG.md VERSION config.example.yml wizard.md rules.md compatibility.md
   scripts/validate.sh
+  scripts/validate.ps1
+  scripts/validate.cmd
   images/workspace-start-prompt.png
   images/worspace-llm-comunucation.png
   images/workspace-langague-files.png
@@ -71,7 +73,7 @@ while IFS= read -r file; do
     [[ "$file" == "$expected" ]] && found=true && break
   done
   $found || { echo "Unexpected file: $file" >&2; exit 1; }
-done < <(find . -path './.git' -prune -o -type f -printf '%P\n')
+done < <(find . -path './.git' -prune -o -type f -print | sed 's|^\./||')
 
 if command -v ruby >/dev/null 2>&1 && ruby -e 'require "kramdown"' >/dev/null 2>&1; then
   ruby -rkramdown -ryaml -e '

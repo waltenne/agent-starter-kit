@@ -178,11 +178,20 @@ Use [`templates/subagent-template.md`](templates/subagent-template.md) quando is
 
 ## ✅ Validação
 
-Execute:
+Execute o script correspondente ao seu sistema operacional:
 
-```sh
-bash scripts/validate.sh
-```
+- **Linux / macOS (Bash / Zsh)**:
+  ```sh
+  bash scripts/validate.sh
+  ```
+- **Windows (PowerShell)**:
+  ```powershell
+  .\scripts\validate.ps1
+  ```
+- **Windows (Prompt de Comando - CMD)**:
+  ```cmd
+  scripts\validate.cmd
+  ```
 
 ---
 

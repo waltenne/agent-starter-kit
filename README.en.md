@@ -178,11 +178,20 @@ Use [`templates/subagent-template.md`](templates/subagent-template.md) when isol
 
 ## ✅ Validation
 
-Run:
+Run the script corresponding to your operating system:
 
-```sh
-bash scripts/validate.sh
-```
+- **Linux / macOS (Bash / Zsh)**:
+  ```sh
+  bash scripts/validate.sh
+  ```
+- **Windows (PowerShell)**:
+  ```powershell
+  .\scripts\validate.ps1
+  ```
+- **Windows (Command Prompt - CMD)**:
+  ```cmd
+  scripts\validate.cmd
+  ```
 
 ---
 

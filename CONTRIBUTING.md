@@ -36,11 +36,11 @@ Generated skills and subagents must replace `<central-rules-file>` with the conf
 
 ## Validation
 
-Run:
+Run the validation script corresponding to your platform before requesting review:
 
-```sh
-bash scripts/validate.sh
-```
+- **Linux / macOS**: `bash scripts/validate.sh`
+- **Windows (PowerShell)**: `.\scripts\validate.ps1`
+- **Windows (CMD)**: `scripts\validate.cmd`
 
 The validation must pass before requesting review. Also manually inspect the complete diff, links, duplication, security boundaries, and whether the README and wizard indexes match the files on disk.
 
