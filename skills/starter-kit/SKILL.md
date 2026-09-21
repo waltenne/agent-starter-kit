@@ -17,11 +17,12 @@ Conduct the diagnostic asking one question per turn:
 3. **Target AI Agent**: Which agent will be used (Claude Code, Codex, Cursor, Windsurf, Copilot, Local Agent, Generic)?
 4. **Primary Objective**: What is the primary deliverable or goal of this workspace?
 5. **Minimum Viable Initial Scope**: What is the minimal functional result expected for the initial setup?
-6. **Summary & Confirmation**: Present proposed plan and request explicit user confirmation.
+6. **Persistent Memory & Handoffs**: Should long-term memory (Karpathy LLM Wiki in `memory/`) and multi-agent handoffs via `ai-memory` be included?
+7. **Summary & Confirmation**: Present proposed plan and request explicit user confirmation.
 
 ## Bootstrap Sequence
 
-1. **Workspace Layout**: Create `AGENTS.md`, `.agents/skills/`, `.agents/subagents/`, `.agents/memory/index.md`, `docs/`, `src/`.
+1. **Workspace Layout**: Create `AGENTS.md`, `.agents/skills/`, `.agents/subagents/`, `memory/` (with `log.md`, `sessions/`, `concepts/`, `decisions/`, `gotchas/`, `procedures/`, `_rules/`, `handoff.md`), `docs/`, `src/`.
 2. **Core Documents**: Generate `README.md`, `ARCHITECTURE.md`, `ADR.md`, and `docs/adr/0001-initial-stack.md`.
 3. **Shared & Domain Layout**: Generate `src/shared/` (`config.ts`, `logger.ts`, `errors.ts`) and initial domain from `templates/domain/`.
 4. **Initial Tests**: Create initial unit test `src/<domain>/service.test.ts`.
@@ -50,3 +51,4 @@ Conduct the diagnostic asking one question per turn:
 Workspace created: <workspace-name> with <primary-blueprint> for <target-agent>.
 Validation: run validation script corresponding to OS to confirm structural compliance.
 Next actions: 1. Review AGENTS.md, 2. Run initial domain test, 3. Begin first feature iteration.
+

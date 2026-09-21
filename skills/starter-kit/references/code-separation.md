@@ -10,3 +10,4 @@ Agrupe por domínio, não por camada técnica. Estrutura mínima por domínio:
 - `<dominio>.service.test.ts`
 
 Código compartilhado entre domínios vive em `shared/` e nunca importa domínio.
+

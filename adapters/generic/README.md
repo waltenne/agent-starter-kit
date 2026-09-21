@@ -18,9 +18,9 @@ Armazenadas em `.agents/skills/*.md` e referenciadas a partir de `AGENTS.md`.
 
 Armazenados em `.agents/subagents/*.md` e definidos por templates padronizados.
 
-## Memória
+## Memória e Handoffs
 
-Estrutura em `.agents/memory/` com índice central em `.agents/memory/index.md`.
+Estrutura em `memory/` ou `.ai-memory/` seguindo a taxonomia Karpathy LLM Wiki (`log.md`, `sessions/`, `concepts/`, `decisions/`, `gotchas/`, `procedures/`, `_rules/`). Integração agnóstica via CLI do `ai-memory` (`ai-memory query`, `ai-memory handoff claim`) ou servidor MCP.
 
 ## Ferramentas
 

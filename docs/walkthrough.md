@@ -78,3 +78,4 @@ my-web-workspace/
 node scripts/validate.mjs
 ```
 Saída: `[VALIDATION] All validation checks passed successfully!`
+

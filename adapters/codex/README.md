@@ -18,9 +18,9 @@ Compatibilidade não verificada. Consulte a documentação do agente antes de in
 
 Compatibilidade não verificada. Consulte a documentação do agente antes de instalar.
 
-## Memória
+## Memória e Handoffs
 
-Arquivo de índice em `.agents/memory/index.md` injetado como contexto adicional de prompt.
+Suporte aos hooks nativos do Codex (`SessionEnd`) e servidor MCP do `ai-memory`. Permite salvar o estado da sessão e emitir handoffs *claim-once* para transição direta com Claude Code, Antigravity e outros agentes.
 
 ## Ferramentas
 

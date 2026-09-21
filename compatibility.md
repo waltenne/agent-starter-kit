@@ -30,15 +30,16 @@ A compatibilidade é classificada em seis dimensões:
 
 ## Tabela de Compatibilidade de Agentes
 
-| Tipo de Agente | Arquivo Principal Possível | Skills | Subagentes | Status de Compatibilidade | Observação |
-| --- | --- | --- | --- | --- | --- |
-| **Agente Genérico (Markdown)** | `AGENTS.md` ou equivalente | Diretório configurável (`.agents/skills`) | Diretório configurável (`.agents/subagents`) | Verificado (Padrão) | Usa o formato genérico e agnóstico de plataforma. |
-| **Claude Code** | Arquivo de instruções do agente | Diretório de skills suportado | Formato suportado pelo agente | Parcial | Consulte o adaptador [`adapters/claude-code/README.md`](adapters/claude-code/README.md). |
-| **Codex** | `AGENTS.md` ou equivalente | Skills compatíveis | Subagentes compatíveis | Conceitual | Não presumir nomes fora da documentação oficial. |
-| **Cursor** | Arquivo de regras do editor (`.cursorrules` / `AGENTS.md`) | Conforme suporte | Conforme suporte | Parcial | Gerar apenas o formato compatível com o editor. |
-| **Windsurf** | Arquivo de regras do editor (`.windsurfrules` / `AGENTS.md`) | Conforme suporte | Conforme suporte | Parcial | Gerar apenas o formato compatível com o editor. |
-| **GitHub Copilot** | Arquivo de instruções de workspace (`.github/copilot-instructions.md`) | Conforme suporte | Conforme suporte | Parcial | Adaptar instruções para o escopo do Copilot Workspace/Chat. |
-| **Agente Local** | Configuração definida pelo usuário | Diretório configurável | Diretório configurável | Conceitual | Evitar dependências externas ou conectores proprietários. |
+| Tipo de Agente | Arquivo Principal | Skills | Subagentes | Suporte ai-memory | Status de Compatibilidade | Observação |
+| --- | --- | --- | --- | --- | --- | --- |
+| **Agente Genérico (Markdown)** | `AGENTS.md` | `.agents/skills` | `.agents/subagents` | CLI / MCP Server | Verificado (Padrão) | Usa o formato agnóstico e comandos de CLI/MCP do `ai-memory`. |
+| **Claude Code** | `CLAUDE.md` com `@AGENTS.md` | Diretório de skills | Subagentes nativos | Hooks (`.claude/hooks`) + MCP | Verificado | Captura automática de ciclo de vida via hooks locais ou MCP Server. |
+| **Codex** | `AGENTS.md` | Skills compatíveis | Subagentes compatíveis | Hooks nativos (`SessionEnd`) / MCP | Verificado | Suporte nativo a encerramento de sessão e handoff *claim-once*. |
+| **Antigravity CLI** | `AGENTS.md` / `GEMINI.md` | Skills nativas | Subagentes nativos | MCP Server / CLI | Verificado | Suporte total via servidor MCP e comando `ai-memory finalize-session`. |
+| **Cursor** | `.cursorrules` / `AGENTS.md` | Conforme suporte | Conforme suporte | MCP Server (`.cursor/mcp.json`) | Parcial | Integração via servidor MCP de busca e retenção de memória. |
+| **Windsurf** | `.windsurfrules` / `AGENTS.md` | Conforme suporte | Conforme suporte | MCP Server | Parcial | Integração via servidor MCP. |
+| **GitHub Copilot** | `.github/copilot-instructions.md` | Conforme suporte | Conforme suporte | MCP Server (Copilot) | Parcial | Adaptar instruções para o escopo do Copilot Workspace/Chat. |
+| **Agente Local** | Configuração do usuário | Diretório local | Diretório local | CLI / MCP local | Conceitual | Evitar dependências externas proprietárias. |
 
 > [!IMPORTANT]
 > **Aviso sobre integrações não verificadas:**
