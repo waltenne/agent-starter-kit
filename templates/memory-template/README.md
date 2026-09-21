@@ -26,3 +26,4 @@ memory/
 ## Integração Recomendada
 
 Recomenda-se utilizar a ferramenta [ai-memory](https://github.com/akitaonrails/ai-memory) (via CLI, MCP ou hooks) para automação deste diretório.
+

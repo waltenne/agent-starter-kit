@@ -24,3 +24,4 @@ created_at: "{{TIMESTAMP}}"
 ## 5. Arquivos e Comandos Afetados
 - Arquivos modificados: `{{MODIFIED_FILES}}`
 - Comandos de validação: `{{VALIDATION_COMMAND}}`
+
