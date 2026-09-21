@@ -41,3 +41,4 @@ test("detects planted secret pattern", () => {
   assert.equal(errors.length, 1);
   assert.match(errors[0], /Possible secret found/);
 });
+

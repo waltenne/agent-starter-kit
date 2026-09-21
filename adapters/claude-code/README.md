@@ -8,7 +8,7 @@
 
 ## Arquivo de instruções
 
-`CLAUDE.md` ou `AGENTS.md` na raiz do workspace.
+`CLAUDE.md` na raiz do workspace, contendo o import `@AGENTS.md` para garantir que as regras centrais sejam carregadas no início da sessão.
 
 ## Skills
 
@@ -18,9 +18,9 @@ Skills mapeadas em `.claude/skills/` ou referenciadas no arquivo de instruções
 
 Subagentes executados como tarefas paralelas ou invocados via CLI/ferramentas autorizadas.
 
-## Memória
+## Memória e Handoffs
 
-Estrutura de memória mantida em `.agents/memory/index.md` e referenciada nas instruções do repositório.
+Estrutura de memória mantida no formato Karpathy LLM Wiki (`memory/`). A integração utiliza hooks de ciclo de vida (`SessionStart`, `UserPromptSubmit`, `SessionEnd`) salvos em `.claude/hooks` ou via servidor MCP.
 
 ## Ferramentas
 

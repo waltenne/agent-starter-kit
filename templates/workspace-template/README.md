@@ -19,8 +19,8 @@
 ├── ADR.md                     # Registro de Decisões de Arquitetura (Índice)
 ├── .agents/
 │   ├── skills/                # Skills aprovadas
-│   ├── subagents/             # Subagentes aprovados
-│   └── memory/                # Memória e índice de contexto
+│   └── subagents/             # Subagentes aprovados
+├── memory/                    # Memória Karpathy LLM Wiki e handoffs (log.md, sessions/, handoff.md)
 ├── docs/                      # Documentação técnica e ADRs
 └── src/                       # Código fonte do projeto
 ```

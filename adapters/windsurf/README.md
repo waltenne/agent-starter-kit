@@ -18,9 +18,9 @@ Skills mantidas em `.agents/skills/` e anexadas como contexto de regras no Casca
 
 Definidos através de Workflows ou fluxos de sub-tarefas configurados no editor.
 
-## Memória
+## Memória e Handoffs
 
-Memória e índice localizados em `.agents/memory/index.md`.
+Estrutura mantida em `memory/`. Integração via servidor MCP de memória ou comandos CLI de consulta e handoff.
 
 ## Ferramentas
 

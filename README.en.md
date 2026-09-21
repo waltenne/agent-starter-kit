@@ -30,10 +30,10 @@ The kit workflow follows the sequence: `rules.md` → `wizard.md` → `blueprint
 
 | Component | Responsibility |
 | --- | --- |
-| `rules.md` | General rules and security |
-| `wizard.md` | Questions and context selection |
+| `rules.md` | General rules, security, and memory guidelines |
+| `wizard.md` | Questions and context/agent selection |
 | `blueprints/` | Domain-specific guidance |
-| `templates/` | Reusable templates |
+| `templates/` | Reusable templates (code, skills, subagents, memory) |
 | `examples/` | Reference workspaces |
 | `scripts/` | Kit validation |
 

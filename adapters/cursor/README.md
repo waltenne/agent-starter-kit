@@ -18,9 +18,9 @@ Skills organizadas em `.agents/skills/` e importadas/referenciadas dentro do arq
 
 Representados como modos de prompt específicos ou sub-instruções no editor.
 
-## Memória
+## Memória e Handoffs
 
-Arquivo de histórico e diretório `.agents/memory/` indexado no contexto do projeto.
+Estrutura mantida em `memory/`. Integração com provedor de memória via servidor MCP configurado em `.cursor/mcp.json`.
 
 ## Ferramentas
 

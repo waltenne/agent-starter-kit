@@ -31,3 +31,4 @@ Um subagente é uma instância especializada da IA delegada para resolver um pro
 ## O que é um Blueprint
 
 Um blueprint é um guia de decisões de arquitetura para um domínio específico, como desenvolvimento web ou dados. Ele sugere estruturas e verificações ideais para o projeto.
+

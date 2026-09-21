@@ -14,3 +14,4 @@
 - **Skill**: Procedimento modular reutilizável com entrada e saída padronizadas.
 - **Subagent**: Agente especializado com escopo e orçamento delimitados.
 - **Workspace**: Diretório de projeto configurado com regras, skills e código fonte.
+

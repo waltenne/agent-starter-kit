@@ -20,3 +20,4 @@ Sim. O controle de versão Git é recomendado para rastreabilidade, mas o kit fu
 
 ### Como atualizo um workspace existente?
 Compare a versão em `VERSION` e `CHANGELOG.md` com a do seu workspace e aplique as atualizações mantendo seu arquivo `AGENTS.md`.
+

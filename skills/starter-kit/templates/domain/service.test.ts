@@ -7,3 +7,4 @@ describe("DomainService", () => {
     expect(result.name).toBe("test");
   });
 });
+

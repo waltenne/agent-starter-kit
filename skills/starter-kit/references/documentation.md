@@ -9,3 +9,4 @@ Referência de regras gerais: [`../../../rules.md`](../../../rules.md).
 `docs/adr/NNNN-<slug>.md` registra decisões difíceis de reverter.
 
 Ciclo de vida do ADR: `proposed`, `accepted`, `superseded by NNNN`. Nunca delete um ADR.
+

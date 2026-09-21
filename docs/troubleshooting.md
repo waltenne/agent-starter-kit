@@ -23,3 +23,4 @@
 ### A skill criada não é reconhecida pelo agente
 - **Causa Provável**: Frontmatter YAML malformatado ou nome inválido.
 - **Correção**: Valide a sintaxe do frontmatter no arquivo `SKILL.md` da skill.
+

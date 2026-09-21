@@ -30,10 +30,10 @@ O fluxo de funcionamento do kit é orientado pelo encadeamento: `rules.md` → `
 
 | Componente | Responsabilidade |
 | --- | --- |
-| `rules.md` | Regras gerais e segurança |
-| `wizard.md` | Perguntas e seleção de contexto |
+| `rules.md` | Regras gerais, segurança e diretrizes de memória |
+| `wizard.md` | Perguntas e seleção de contexto/agente |
 | `blueprints/` | Orientações específicas por domínio |
-| `templates/` | Modelos reutilizáveis |
+| `templates/` | Modelos reutilizáveis (código, skills, subagentes, memória) |
 | `examples/` | Workspaces de referência |
 | `scripts/` | Validação do kit |
 
