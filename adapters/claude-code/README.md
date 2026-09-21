@@ -20,7 +20,7 @@ Subagentes executados como tarefas paralelas ou invocados via CLI/ferramentas au
 
 ## Memória e Handoffs
 
-Estrutura de memória mantida no formato Karpathy LLM Wiki (`memory/` ou `.ai-memory/`). A integração recomendada utiliza o `ai-memory` via hooks de ciclo de vida (`SessionStart`, `UserPromptSubmit`, `SessionEnd`) salvos em `.claude/hooks` ou via servidor MCP.
+Estrutura de memória mantida no formato Karpathy LLM Wiki (`memory/`). A integração utiliza hooks de ciclo de vida (`SessionStart`, `UserPromptSubmit`, `SessionEnd`) salvos em `.claude/hooks` ou via servidor MCP.
 
 ## Ferramentas
 

@@ -17,7 +17,7 @@ Conduct the diagnostic asking one question per turn:
 3. **Target AI Agent**: Which agent will be used (Claude Code, Codex, Cursor, Windsurf, Copilot, Local Agent, Generic)?
 4. **Primary Objective**: What is the primary deliverable or goal of this workspace?
 5. **Minimum Viable Initial Scope**: What is the minimal functional result expected for the initial setup?
-6. **Persistent Memory & Handoffs**: Should long-term memory (Karpathy LLM Wiki in `memory/`) and multi-agent handoffs via `ai-memory` be included?
+6. **Persistent Memory & Handoffs**: Should long-term memory (Karpathy LLM Wiki in `memory/`) and multi-agent handoffs be included?
 7. **Summary & Confirmation**: Present proposed plan and request explicit user confirmation.
 
 ## Bootstrap Sequence

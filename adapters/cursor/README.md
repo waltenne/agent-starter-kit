@@ -20,7 +20,7 @@ Representados como modos de prompt específicos ou sub-instruções no editor.
 
 ## Memória e Handoffs
 
-Estrutura mantida em `memory/` ou `.ai-memory/`. Integração via servidor MCP do `ai-memory` configurado em `.cursor/mcp.json`.
+Estrutura mantida em `memory/`. Integração com provedor de memória via servidor MCP configurado em `.cursor/mcp.json`.
 
 ## Ferramentas
 

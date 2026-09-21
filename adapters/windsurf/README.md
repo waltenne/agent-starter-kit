@@ -20,7 +20,7 @@ Definidos através de Workflows ou fluxos de sub-tarefas configurados no editor.
 
 ## Memória e Handoffs
 
-Estrutura mantida em `memory/` ou `.ai-memory/`. Integração via servidor MCP do `ai-memory` ou comandos CLI de consulta e handoff.
+Estrutura mantida em `memory/`. Integração via servidor MCP de memória ou comandos CLI de consulta e handoff.
 
 ## Ferramentas
 

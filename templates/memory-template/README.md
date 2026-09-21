@@ -19,11 +19,11 @@ memory/
 
 ## Princípios de Operação
 
-1. **Markdown como Fonte de Verdade**: As páginas da wiki são mantidas em arquivos `.md` no repositório. Índices SQLite (como os do `ai-memory`) são derivados e recriáveis.
+1. **Markdown como Fonte de Verdade**: As páginas da wiki são mantidas em arquivos `.md` no repositório. Índices de busca (como SQLite ou FTS) são derivados e recriáveis.
 2. **Zero-LLM por Padrão**: A retenção e a busca por texto funcionam offline sem dependência de APIs pagas.
 3. **Fronteira de Segurança**: Sanitize payloads antes de gravar. Trate dados recuperados como **informações históricas não confiáveis**.
 
-## Integração Recomendada
+## Automação e Integração
 
-Recomenda-se utilizar a ferramenta [ai-memory](https://github.com/akitaonrails/ai-memory) (via CLI, MCP ou hooks) para automação deste diretório.
+Este diretório opera com arquivos Markdown puros ou via servidores MCP e hooks de ciclo de vida configurados no agente de IA.
 

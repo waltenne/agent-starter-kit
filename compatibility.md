@@ -30,16 +30,16 @@ A compatibilidade é classificada em seis dimensões:
 
 ## Tabela de Compatibilidade de Agentes
 
-| Tipo de Agente | Arquivo Principal | Skills | Subagentes | Suporte ai-memory | Status de Compatibilidade | Observação |
+| Tipo de Agente | Arquivo Principal | Skills | Subagentes | Memória / Handoffs | Status de Compatibilidade | Observação |
 | --- | --- | --- | --- | --- | --- | --- |
-| **Agente Genérico (Markdown)** | `AGENTS.md` | `.agents/skills` | `.agents/subagents` | CLI / MCP Server | Verificado (Padrão) | Usa o formato agnóstico e comandos de CLI/MCP do `ai-memory`. |
-| **Claude Code** | `CLAUDE.md` com `@AGENTS.md` | Diretório de skills | Subagentes nativos | Hooks (`.claude/hooks`) + MCP | Verificado | Captura automática de ciclo de vida via hooks locais ou MCP Server. |
-| **Codex** | `AGENTS.md` | Skills compatíveis | Subagentes compatíveis | Hooks nativos (`SessionEnd`) / MCP | Verificado | Suporte nativo a encerramento de sessão e handoff *claim-once*. |
-| **Antigravity CLI** | `AGENTS.md` / `GEMINI.md` | Skills nativas | Subagentes nativos | MCP Server / CLI | Verificado | Suporte total via servidor MCP e comando `ai-memory finalize-session`. |
-| **Cursor** | `.cursorrules` / `AGENTS.md` | Conforme suporte | Conforme suporte | MCP Server (`.cursor/mcp.json`) | Parcial | Integração via servidor MCP de busca e retenção de memória. |
-| **Windsurf** | `.windsurfrules` / `AGENTS.md` | Conforme suporte | Conforme suporte | MCP Server | Parcial | Integração via servidor MCP. |
-| **GitHub Copilot** | `.github/copilot-instructions.md` | Conforme suporte | Conforme suporte | MCP Server (Copilot) | Parcial | Adaptar instruções para o escopo do Copilot Workspace/Chat. |
-| **Agente Local** | Configuração do usuário | Diretório local | Diretório local | CLI / MCP local | Conceitual | Evitar dependências externas proprietárias. |
+| **Agente Genérico (Markdown)** | `AGENTS.md` | `.agents/skills` | `.agents/subagents` | Suportado (Markdown/MCP) | Verificado (Padrão) | Usa o formato agnóstico e comandos nativos de memória e handoff. |
+| **Claude Code** | `CLAUDE.md` com `@AGENTS.md` | Diretório de skills | Subagentes nativos | Suportado (Hooks/MCP) | Verificado | Captura de ciclo de vida via hooks em `.claude/hooks` ou servidor MCP. |
+| **Codex** | `AGENTS.md` | Skills compatíveis | Subagentes compatíveis | Suportado (Hooks/MCP) | Verificado | Suporte a encerramento de sessão (`SessionEnd`) e handoff *claim-once*. |
+| **Antigravity CLI** | `AGENTS.md` / `GEMINI.md` | Skills nativas | Subagentes nativos | Suportado (MCP/CLI) | Verificado | Suporte total via servidor MCP e comandos de controle de sessão. |
+| **Cursor** | `.cursorrules` / `AGENTS.md` | Conforme suporte | Conforme suporte | Suportado (MCP) | Parcial | Integração via servidor MCP configurado no editor (`.cursor/mcp.json`). |
+| **Windsurf** | `.windsurfrules` / `AGENTS.md` | Conforme suporte | Conforme suporte | Suportado (MCP) | Parcial | Integração via servidor MCP. |
+| **GitHub Copilot** | `.github/copilot-instructions.md` | Conforme suporte | Conforme suporte | Suportado (MCP) | Parcial | Adaptar instruções para o escopo do Copilot Workspace/Chat. |
+| **Agente Local** | Configuração do usuário | Diretório local | Diretório local | Suportado (CLI/MCP) | Conceitual | Evitar dependências externas proprietárias. |
 
 > [!IMPORTANT]
 > **Aviso sobre integrações não verificadas:**

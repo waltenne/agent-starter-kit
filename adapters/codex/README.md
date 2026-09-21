@@ -20,7 +20,7 @@ Compatibilidade não verificada. Consulte a documentação do agente antes de in
 
 ## Memória e Handoffs
 
-Suporte aos hooks nativos do Codex (`SessionEnd`) e servidor MCP do `ai-memory`. Permite salvar o estado da sessão e emitir handoffs *claim-once* para transição direta com Claude Code, Antigravity e outros agentes.
+Suporte aos hooks nativos do Codex (`SessionEnd`) e servidor MCP de memória. Permite salvar o estado da sessão e emitir handoffs *claim-once* para transição direta entre agentes.
 
 ## Ferramentas
 

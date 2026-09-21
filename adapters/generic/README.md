@@ -20,7 +20,7 @@ Armazenados em `.agents/subagents/*.md` e definidos por templates padronizados.
 
 ## Memória e Handoffs
 
-Estrutura em `memory/` ou `.ai-memory/` seguindo a taxonomia Karpathy LLM Wiki (`log.md`, `sessions/`, `concepts/`, `decisions/`, `gotchas/`, `procedures/`, `_rules/`). Integração agnóstica via CLI do `ai-memory` (`ai-memory query`, `ai-memory handoff claim`) ou servidor MCP.
+Estrutura em `memory/` seguindo a taxonomia Karpathy LLM Wiki (`log.md`, `sessions/`, `concepts/`, `decisions/`, `gotchas/`, `procedures/`, `_rules/`). Integração agnóstica via comandos de consulta de memória e protocolo de handoff tipado.
 
 ## Ferramentas
 

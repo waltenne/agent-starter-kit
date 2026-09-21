@@ -90,7 +90,7 @@ Opções disponíveis:
 ---
 
 ### Rodada 6 (Sexta Pergunta - Opcional):
-> Deseja incluir a estrutura de memória persistente (Karpathy LLM Wiki em `memory/`) e suporte a handoffs multi-agente via `ai-memory`?
+> Deseja incluir a estrutura de memória persistente (Karpathy LLM Wiki em `memory/`) e suporte a handoffs multi-agente?
 
 Opções:
 - Sim (Incluir `memory/` com `log.md`, `sessions/`, `concepts/`, `decisions/`, `gotchas/`, `procedures/`, `_rules/` e `handoff.md`)
