@@ -90,11 +90,11 @@ Opções disponíveis:
 ---
 
 ### Rodada 6 (Sexta Pergunta - Opcional):
-> Deseja incluir a estrutura de memória persistente (Karpathy LLM Wiki em `memory/`) e suporte a handoffs multi-agente?
+> Deseja incluir memória persistente? Papéis delegados só serão propostos se o agente escolhido os suportar e houver benefício claro.
 
 Opções:
-- Sim (Incluir `memory/` com `log.md`, `sessions/`, `concepts/`, `decisions/`, `gotchas/`, `procedures/`, `_rules/` e `handoff.md`)
-- Não (Manter apenas o índice básico de memória)
+- Sim (Incluir `memory/` com as páginas e handoffs solicitados)
+- Não (Não criar memória persistente)
 
 ---
 
@@ -123,8 +123,9 @@ Após a resposta da Rodada 3, consulte o repositório em `adapters/` para carreg
 5. Carregue blueprints secundários apenas quando justificado.
 6. Use as skills candidatas do blueprint como sugestões.
 7. Não crie skills nem subagentes automaticamente.
-8. Peça confirmação antes de criar qualquer skill ou subagente.
-9. Informe por que cada artefato foi proposto.
+8. Proponha skills para procedimentos recorrentes. Proponha um worker somente se houver capacidade de delegação confirmada e trabalho delimitado que ganhe com isolamento ou paralelismo.
+9. Peça confirmação antes de criar qualquer skill ou subagente.
+10. Informe por que cada artefato foi proposto.
 
 O blueprint define possibilidades do domínio. Ele não obriga a criação de qualquer skill, subagente ou artefato. Proponha somente o que for justificado pelas respostas do usuário.
 
@@ -148,8 +149,8 @@ O blueprint define possibilidades do domínio. Ele não obriga a criação de qu
 2. **Pedir Confirmação Explícita**: Aguarde o aceite do usuário antes de criar ou modificar qualquer arquivo.
 3. **Gerar Workspace Agnóstico**:
    - `AGENTS.md` (utilizando [`templates/workspace-template/AGENTS.md`](templates/workspace-template/AGENTS.md))
-   - `.agents/skills/` e `.agents/subagents/` (conforme aprovados)
-   - `.agents/memory/index.md`
+   - `.agents/skills/` e, somente se aprovado e justificado, `.agents/subagents/` com um worker genérico
+   - `.agents/memory/index.md` only when persistent memory is approved
    - `docs/` e estrutura inicial de código em `src/` (conforme templates)
 4. **Aplicar Adaptador**: Ajustar convenções específicas do agente (ex.: `.cursorrules`, `CLAUDE.md`, `.windsurfrules` ou `.github/copilot-instructions.md`).
 5. **Validar**: Executar `bash scripts/validate.sh` e apresentar o relatório final.

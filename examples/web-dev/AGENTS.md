@@ -20,7 +20,6 @@ This file defines the operating instructions for the web-dev reference workspace
 
 1. Read `AGENTS.md` before acting.
 2. Follow `blueprints/technical/web-dev.md` for domain guidance.
-3. Validate API contract changes using `.agents/skills/review-api-contract.md`.
-4. Delegate complex API contract audits to `.agents/subagents/api-contract-reviewer.md`.
-5. Maintain durable decision records in `.agents/memory/index.md`.
-
+3. Review API contract changes with `.agents/skills/review-api-contract.md`.
+4. Resolve bounded work directly. Delegate only independent evidence collection when the active runtime supports it and the separation reduces effort.
+5. Maintain durable decision records in `.agents/memory/index.md` when a decision needs to persist.

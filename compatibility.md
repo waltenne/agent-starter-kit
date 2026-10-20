@@ -32,7 +32,7 @@ A compatibilidade é classificada em seis dimensões:
 
 | Tipo de Agente | Arquivo Principal | Skills | Subagentes | Memória / Handoffs | Status de Compatibilidade | Observação |
 | --- | --- | --- | --- | --- | --- | --- |
-| **Agente Genérico (Markdown)** | `AGENTS.md` | `.agents/skills` | `.agents/subagents` | Suportado (Markdown/MCP) | Verificado (Padrão) | Usa o formato agnóstico e comandos nativos de memória e handoff. |
+| **Agente Genérico (Markdown)** | `AGENTS.md` | `.agents/skills` | Opcional; depende do runtime | Conforme ferramenta | Conceitual | Não presume delegação, hooks ou MCP nativos. |
 | **Claude Code** | `CLAUDE.md` com `@AGENTS.md` | Diretório de skills | Subagentes nativos | Suportado (Hooks/MCP) | Verificado | Captura de ciclo de vida via hooks em `.claude/hooks` ou servidor MCP. |
 | **Codex** | `AGENTS.md` | Skills compatíveis | Subagentes compatíveis | Suportado (Hooks/MCP) | Verificado | Suporte a encerramento de sessão (`SessionEnd`) e handoff *claim-once*. |
 | **Antigravity CLI** | `AGENTS.md` / `GEMINI.md` | Skills nativas | Subagentes nativos | Suportado (MCP/CLI) | Verificado | Suporte total via servidor MCP e comandos de controle de sessão. |
@@ -53,9 +53,8 @@ A compatibilidade é classificada em seis dimensões:
 ## Procedimento Geral de Adaptação
 
 1. **Escolha o agente** durante a execução do [`wizard.md`](wizard.md).
-2. **Gere a camada agnóstica** contendo `AGENTS.md`, `.agents/skills/`, `.agents/subagents/` e `docs/`.
+2. **Gere a camada agnóstica** contendo `AGENTS.md`, as skills aprovadas e `docs/`. Inclua `.agents/subagents/` somente se a ferramenta suportar delegação e uma tarefa delimitada justificar o worker.
 3. **Selecione o adaptador apropriado** em `adapters/`.
 4. **Aplique as conversões** descritas no README do adaptador (como criação de `.cursorrules`, `.clauderc` ou `.github/copilot-instructions.md`).
 5. **Ajuste os caminhos relativos** e referências para apontar para os arquivos finais.
 6. **Execute a validação** através de `bash scripts/validate.sh`.
-

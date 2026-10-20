@@ -1,0 +1,239 @@
+{
+  "version": "1.4.0",
+  "skills": [
+    {
+      "id": "humanizer",
+      "name": "Humanizer",
+      "category": "documentation",
+      "type": "skill",
+      "source": "community",
+      "reviewStatus": "COMMUNITY_REVIEWED",
+      "repository": "https://github.com/blader/humanizer",
+      "revision": "e88383a",
+      "lastVerified": "2026-10-20",
+      "reviewNotes": "Auditado contra prompt injection. Estrutura de texto em Markdown puro baseada nas regras de escrita da Wikipédia. Sem scripts executáveis.",
+      "license": "MIT",
+      "author": "Siqi Chen (@blader)",
+      "maintainer": "blader",
+      "description": "Remove clichês, jargões artificiais e vícios de escrita típicos de modelos de IA, tornando o texto mais fluido e natural.",
+      "triggers": ["humanizar texto", "revisar documentacao", "remover cliches de IA", "escrita natural"],
+      "compatibility": ["generic", "claude-code", "codex", "cursor", "gemini-cli"],
+      "dependencies": [],
+      "conflicts": [
+        {
+          "id": "humanizer-aboudjem",
+          "type": "DUPLICATE",
+          "reason": "Implementação alternativa das diretrizes de escrita humana da Wikipedia."
+        }
+      ],
+      "tags": ["writing", "humanizer", "style", "documentation"],
+      "recommendedFor": ["DOCUMENTATION", "DEVELOPER"]
+    },
+    {
+      "id": "humanizer-aboudjem",
+      "name": "Humanizer (Aboudjem)",
+      "category": "documentation",
+      "type": "skill",
+      "source": "community",
+      "reviewStatus": "COMMUNITY_REVIEWED",
+      "repository": "https://github.com/Aboudjem/humanizer-skill",
+      "revision": "main",
+      "lastVerified": "2026-10-20",
+      "reviewNotes": "Implementação comunitária alternativa de humanização textual em Markdown puro.",
+      "license": "MIT",
+      "author": "Aboudjem",
+      "maintainer": "Aboudjem",
+      "description": "Abordagem alternativa de humanização textual para polimento e remoção de termos inflados de IA.",
+      "triggers": ["humanizar texto", "polimento textual", "escrita natural"],
+      "compatibility": ["generic", "claude-code", "codex", "cursor", "gemini-cli"],
+      "dependencies": [],
+      "conflicts": [
+        {
+          "id": "humanizer",
+          "type": "DUPLICATE",
+          "reason": "Implementação alternativa com o mesmo objetivo de humanização."
+        }
+      ],
+      "tags": ["writing", "humanizer", "style"],
+      "recommendedFor": ["DOCUMENTATION"]
+    },
+    {
+      "id": "archify",
+      "name": "Archify Technical Diagrams",
+      "category": "architecture",
+      "type": "skill",
+      "source": "community",
+      "reviewStatus": "COMMUNITY_REVIEWED",
+      "repository": "https://github.com/tt-a1i/archify",
+      "revision": "main",
+      "lastVerified": "2026-10-20",
+      "reviewNotes": "Skill auditada para visualização técnica e diagramas interativos auto-contidos em HTML.",
+      "license": "MIT",
+      "author": "tt-a1i",
+      "maintainer": "tt-a1i",
+      "description": "Converte estruturas de código e especificações em diagramas técnicos interativos em HTML (arquitetura, fluxo, sequência).",
+      "triggers": ["diagrama de arquitetura", "desenhar fluxo", "visualizar sistema", "archify"],
+      "compatibility": ["generic", "claude-code", "codex", "cursor", "gemini-cli"],
+      "dependencies": [],
+      "conflicts": [],
+      "tags": ["architecture", "diagrams", "html", "visualization"],
+      "recommendedFor": ["DEVELOPER", "DOCUMENTATION"]
+    },
+    {
+      "id": "superpowers",
+      "name": "Superpowers Software Toolkit",
+      "category": "development",
+      "type": "toolkit",
+      "source": "community",
+      "reviewStatus": "COMMUNITY_REVIEWED",
+      "repository": "https://github.com/obra/superpowers",
+      "revision": "main",
+      "lastVerified": "2026-10-20",
+      "reviewNotes": "Toolkit consolidado de engenharia sênior para agentes de código: especificação prévia, TDD e subagentes coordenados.",
+      "license": "MIT",
+      "author": "Jesse Vincent (@obra)",
+      "maintainer": "obra",
+      "description": "Toolkit completo de engenharia de software disciplinada para agentes (especificação, TDD e subagentes).",
+      "triggers": ["tdd workflow", "especificacao de feature", "superpowers"],
+      "compatibility": ["generic", "claude-code", "codex", "cursor", "gemini-cli"],
+      "dependencies": [],
+      "conflicts": [
+        {
+          "id": "upstack",
+          "type": "OVERLAP",
+          "reason": "Ambos os toolkits fornecem fluxos estruturados de TDD Red-Green-Refactor."
+        }
+      ],
+      "tags": ["toolkit", "tdd", "engineering", "workflow"],
+      "recommendedFor": ["DEVELOPER"]
+    },
+    {
+      "id": "upstack",
+      "name": "Upstack TDD Suite",
+      "category": "development",
+      "type": "toolkit",
+      "source": "community",
+      "reviewStatus": "COMMUNITY_REVIEWED",
+      "repository": "https://github.com/Upsolve-Labs/upstack",
+      "revision": "main",
+      "lastVerified": "2026-10-20",
+      "reviewNotes": "Suite leve de TDD (Test-Driven Development) rigoroso em Red-Green-Refactor.",
+      "license": "Apache-2.0",
+      "author": "Upsolve-Labs",
+      "maintainer": "Upsolve-Labs",
+      "description": "Suite leve de Test-Driven Development (TDD Red-Green-Refactor) para coding agents.",
+      "triggers": ["tdd", "test driven development", "red green refactor"],
+      "compatibility": ["generic", "claude-code", "codex", "cursor", "gemini-cli"],
+      "dependencies": [],
+      "conflicts": [
+        {
+          "id": "superpowers",
+          "type": "OVERLAP",
+          "reason": "Ambos os toolkits implementam desenvolvimento guiado por testes (TDD)."
+        }
+      ],
+      "tags": ["toolkit", "tdd", "testing"],
+      "recommendedFor": ["DEVELOPER"]
+    },
+    {
+      "id": "docker-essentials",
+      "name": "Docker Essentials",
+      "category": "devops",
+      "type": "skill",
+      "source": "community",
+      "reviewStatus": "COMMUNITY_REVIEWED",
+      "repository": "https://github.com/agentskills/agentskills",
+      "revision": "main",
+      "lastVerified": "2026-10-20",
+      "reviewNotes": "Procedimento padronizado de inspeção de Dockerfiles e boas práticas de conteinerização.",
+      "license": "Apache-2.0",
+      "author": "agentskills",
+      "maintainer": "agentskills",
+      "description": "Procedimentos seguros de inspeção de Dockerfiles, otimização de imagens multicamadas e verificação de contêineres.",
+      "triggers": ["dockerfile", "build container", "inspecionar docker"],
+      "compatibility": ["generic", "claude-code", "codex", "cursor", "gemini-cli"],
+      "dependencies": [],
+      "conflicts": [],
+      "tags": ["docker", "containers", "devops"],
+      "recommendedFor": ["DEVOPS_SRE"]
+    },
+    {
+      "id": "ai-memory",
+      "name": "AI Memory Integration",
+      "category": "memory",
+      "type": "integration",
+      "source": "community",
+      "reviewStatus": "COMMUNITY_REVIEWED",
+      "repository": "https://github.com/akitaonrails/ai-memory",
+      "revision": "main",
+      "lastVerified": "2026-10-20",
+      "reviewNotes": "Ferramenta externa em Rust com hooks de ciclo de vida e busca SQLite FTS5. Requer binário local via cargo. Não é skill Markdown pura.",
+      "license": "MIT",
+      "author": "Fabio Akita (@akitaonrails)",
+      "maintainer": "akitaonrails",
+      "description": "Integração opcional com ferramenta externa em Rust para memória persistente entre sessões e múltiplos agentes via Markdown Git Wiki e SQLite FTS5.",
+      "triggers": ["memoria de longo prazo", "handoff entre sessoes", "wiki de contexto"],
+      "compatibility": ["generic", "claude-code", "codex", "cursor"],
+      "dependencies": ["cargo", "sqlite3"],
+      "conflicts": [
+        {
+          "id": "prism-coder",
+          "type": "OVERLAP",
+          "reason": "Ambos atuam como sistemas locais persistentes de memória entre sessões de agentes."
+        }
+      ],
+      "tags": ["memory", "rust", "persistence", "integration"],
+      "recommendedFor": ["AI_ENGINEERING"]
+    },
+    {
+      "id": "prism-coder",
+      "name": "Prism Coder Memory MCP",
+      "category": "memory",
+      "type": "integration",
+      "source": "community",
+      "reviewStatus": "COMMUNITY_REVIEWED",
+      "repository": "https://github.com/dcostenco/prism-mcp",
+      "revision": "main",
+      "lastVerified": "2026-10-20",
+      "reviewNotes": "Servidor MCP em TypeScript para arquitetura cognitiva e memória persistente local com TurboQuant.",
+      "license": "MIT",
+      "author": "Denis Costenco (@dcostenco)",
+      "maintainer": "dcostenco",
+      "description": "Integração local-first via MCP para memória persistente, compressão TurboQuant e Hebbian recall.",
+      "triggers": ["prism mcp", "memoria local-first", "turboquant recall"],
+      "compatibility": ["generic", "claude-code", "codex", "cursor"],
+      "dependencies": ["node", "npm"],
+      "conflicts": [
+        {
+          "id": "ai-memory",
+          "type": "OVERLAP",
+          "reason": "Ambos atuam como infraestruturas de memória persistente para sessões."
+        }
+      ],
+      "tags": ["memory", "mcp", "typescript", "integration"],
+      "recommendedFor": ["AI_ENGINEERING"]
+    },
+    {
+      "id": "frankxai-skills",
+      "name": "FrankX AI Systems Toolkit",
+      "category": "ai-engineering",
+      "type": "toolkit",
+      "source": "community",
+      "reviewStatus": "COMMUNITY_REVIEWED",
+      "repository": "https://github.com/frankxai/skills",
+      "revision": "main",
+      "lastVerified": "2026-10-20",
+      "reviewNotes": "Coleção curada de skills e diretrizes para sistemas de IA e fluxos de criação.",
+      "license": "MIT",
+      "author": "FrankX (@frankxai)",
+      "maintainer": "frankxai",
+      "description": "Práticas de arquitetura para sistemas de IA, observabilidade e fluxos de criação.",
+      "triggers": ["ai engineering", "multi-model architecture", "agent patterns"],
+      "compatibility": ["generic", "claude-code", "codex", "cursor", "gemini-cli"],
+      "dependencies": [],
+      "conflicts": [],
+      "tags": ["ai-systems", "architecture", "toolkit"],
+      "recommendedFor": ["AI_ENGINEERING"]
+    }
+  ]
+}

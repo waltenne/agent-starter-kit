@@ -95,15 +95,6 @@ export class UserDomainService implements UserService {
 | `triage-web-test-failure` | Falha em suíte de testes web | Log de execução de teste | Diagnóstico de causa raiz da falha | alta |
 | `review-dependency-change` | Atualização em package.json | Arquivo de dependências | Análise de vulnerabilidade e quebra | média |
 
-## Subagentes candidatos
-
-| Subagente | Responsabilidade | Quando delegar | Não faz |
-|---|---|---|---|
-| `frontend-reviewer` | Auditar acessibilidade e estado no cliente | Mudanças complexas de UI | Modificar rotas de backend |
-| `api-contract-reviewer` | Validar compatibilidade de esquema HTTP/gRPC | Alterações de assinaturas de endpoints | Escrever código de UI |
-| `integration-diagnostician` | Diagnosticar falhas de comunicação cliente-servidor | Erros intermitentes em fluxos e2e | Alterar esquemas de banco |
-| `web-test-analyzer` | Analisar e corrigir testes de renderização e API | Falhas em suítes de testes de web | Alterar regras de negócios |
-
 ## Perguntas específicas
 1. Qual a camada principal alterada: frontend, backend ou ambos?
 2. Quais contratos de API ou esquemas de dados serão impactados pela alteração?

@@ -1,87 +1,30 @@
----
-name: api-contract-reviewer
-description: Specialized subagent for auditing API contract compatibility and breaking changes.
-tools:
-  - read_file
-model: inherit
-maxTurns: 10
-maxTokens: 4000
-timeout_seconds: 300
-maxDelegations: 0
-can_modify_policy: false
----
+# Worker Subagent Template
 
-# Subagent: API Contract Reviewer
-
-This subagent has a single responsibility and must follow `<central-rules-file>`.
+Use this vendor-neutral role contract only when the runtime supports delegated agents and a bounded task benefits from separate context or parallel work. Map it to the runtime's format when needed.
 
 ## Responsibility
 
-Audit API specifications and endpoint schemas to ensure backward compatibility and prevent breaking changes.
+Complete one explicitly scoped task and return concise evidence to the orchestrator.
 
-## Scope
+## When to delegate
 
-- Authorized inputs: API schema files (`*.yaml`, `*.json`, `*.proto`, `*.types.ts`).
-- Authorized output: Contract compatibility report.
-- Boundaries: Does not edit backend implementation code or execute deployment scripts.
+Delegate independent evidence collection, mechanical work, or a focused task that the orchestrator cannot complete efficiently in one pass.
 
-## Triggers
+## Inputs
 
-- Pull requests or changes modifying public API interfaces.
-- Requests to verify contract compatibility between frontend and backend.
+- Objective: `<bounded-task>`
+- Relevant files: `<paths>`
+- Constraints: `<constraints>`
+- Requested evidence: `<evidence>`
+- Output format: `FINDINGS`, `EVIDENCE`, `FILES`, `RISKS`
 
-## Tools
+## Boundaries
 
-- `read_file`: Inspect schema and contract files.
+- Follow `<central-rules-file>` and the task's authorization.
+- Do not expand the task, make decisions for the orchestrator, or delegate again.
+- Do not perform external or destructive actions.
+- Return evidence and uncertainty; do not claim checks that were not run.
 
-## Model and budgets
+## Capacity
 
-Inherits caller model. Max turns: 10, max tokens: 4000, timeout: 300s, max delegations: 0.
-
-## Method
-
-1. Read the current and updated API contract specifications.
-2. Analyze structural changes in paths, methods, request parameters, and response bodies.
-3. Classify changes into additive (non-breaking) or destructive (breaking).
-4. Return a structured handoff report to the principal agent.
-
-## Prohibitions
-
-- Do not alter principal agent policy or ignore `<central-rules-file>`.
-- Do not modify source code or database schemas directly.
-- Do not execute shell commands or network requests.
-- Do not delegate tasks to other subagents.
-
-## Handoff format
-
-```json
-{
-  "task": "Review OpenAPI schema for breaking changes",
-  "context": "Updating v1 API to v2",
-  "evidence": ["docs/openapi.yaml"],
-  "constraints": ["Must preserve backward compatibility for v1 clients"],
-  "expected_output": "Compatibility report"
-}
-```
-
-## Fixed output
-
-### Result
-
-PASS - No breaking changes detected, or BREAKING_CHANGES_DETECTED with details.
-
-### Evidence
-
-Inspected schema files and line numbers.
-
-### Uncertainties
-
-Unconfirmed downstream client dependencies if any.
-
-### Recommendations
-
-Suggested deprecation strategy or non-breaking field additions.
-
-## Success criteria
-
-Complete classification of API changes with verifiable evidence from schema files.
+Use `FAST` for collection and mechanical work, or `BALANCED` when the bounded task requires ordinary implementation. The orchestrator selects a capability supported by the active runtime; do not assume a vendor-specific model name.

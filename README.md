@@ -2,13 +2,13 @@
 
 [English version: `README.en.md`](README.en.md)
 
-![Licença](https://img.shields.io/badge/Licen%C3%A7a-MIT-yellow.svg) ![Versão](https://img.shields.io/badge/Vers%C3%A3o-1.1.0-blue.svg) ![Arquitetura](https://img.shields.io/badge/Arquitetura-Modular%20Multi--Agente-green.svg) ![Autonomia](https://img.shields.io/badge/Autonomia-N2%20Default-orange.svg)
+![Licença](https://img.shields.io/badge/Licen%C3%A7a-MIT-yellow.svg) ![Versão](https://img.shields.io/badge/Vers%C3%A3o-1.4.0-blue.svg) ![Arquitetura](https://img.shields.io/badge/Arquitetura-Modular%20Multi--Agente-green.svg) ![Autonomia](https://img.shields.io/badge/Autonomia-N2%20Default-orange.svg)
 
 ---
 
 ## 📌 O que é
 
-O `agent-starter-kit` é um kit modular agnóstico e portátil em Markdown para estruturar workspaces de agentes de IA. Ele reúne regras centrais, um wizard conversacional, matriz de compatibilidade ([`compatibility.md`](compatibility.md)), adaptadores por agente ([`adapters/`](adapters/)), blueprints por domínio, templates de skills, subagentes e código fonte inicial.
+O `agent-starter-kit` é um kit modular agnóstico e portátil em Markdown para estruturar workspaces de agentes de IA. Ele reúne regras centrais, um wizard conversacional, matriz de compatibilidade ([`compatibility.md`](compatibility.md)), adaptadores por agente ([`adapters/`](adapters/)), blueprints por domínio, catálogo curado de skills ([`catalog/`](catalog/)), templates de skills e subagentes, e uma CLI determinística (`agent-tool`).
 
 O kit utiliza uma **arquitetura de duas camadas**:
 1. **Camada Agnóstica (Núcleo)**: Conteúdo e regras neutras reutilizáveis por qualquer agente de IA.
@@ -21,28 +21,74 @@ O kit utiliza uma **arquitetura de duas camadas**:
 
 ## ⚙️ Fluxo e Responsabilidades dos Componentes
 
-O fluxo de funcionamento do kit é orientado pelo encadeamento: `rules.md` → `wizard.md` → `blueprints/` → `templates/`.
+O fluxo de funcionamento do kit é orientado pelo encadeamento: `rules.md` → `wizard.md` → `blueprints/` → `catalog/` → `templates/`.
 
 - [`rules.md`](rules.md): Regras gerais e segurança centralizadas. Fonte única de verdade.
 - [`wizard.md`](wizard.md): Conduz o diagnóstico, idioma, escolha do agente e seleção de blueprint.
-- [`blueprints/`](blueprints/): Decisões de arquitetura específicas por domínio. Não duplicam regras centrais. Apenas um blueprint primário é escolhido; secundários são opcionais.
-- [`templates/`](templates/): Modelos de código, skills e subagentes. Skills e subagentes são propostos conforme a necessidade do projeto, nunca criados automaticamente.
+- [`catalog/`](catalog/): Catálogo versionado e curado de skills internas (`BUILTIN`) e comunitárias auditadas (`COMMUNITY_REVIEWED`).
+- [`blueprints/`](blueprints/): Decisões de arquitetura específicas por domínio. Não duplicam regras centrais.
+- [`templates/`](templates/): Modelos reutilizáveis de subagentes (Worker, Implementer, Advisor), skills e layouts.
+- [`tools/`](tools/): CLI determinística (`agent-tool`) para análise, automação, busca e economia de tokens.
 
 | Componente | Responsabilidade |
 | --- | --- |
 | `rules.md` | Regras gerais, segurança e diretrizes de memória |
 | `wizard.md` | Perguntas e seleção de contexto/agente |
+| `catalog/` | Catálogo curado de skills internas e comunitárias |
 | `blueprints/` | Orientações específicas por domínio |
-| `templates/` | Modelos reutilizáveis (código, skills, subagentes, memória) |
+| `templates/` | Modelos reutilizáveis (código, skills, workers, advisor e memória) |
+| `tools/` | CLI determinística (`agent-tool`) para análise de fluxo e economia de tokens |
 | `examples/` | Workspaces de referência |
 | `scripts/` | Validação do kit |
 
 ---
 
-## 🚫 O que ele não é
+## 🛠️ CLI Determinística e Gestão de Skills (`agent-tool`)
 
-> [!IMPORTANT]
-> Este projeto **não é uma CLI executável**, aplicação proprietária ou plataforma presa a um único fornecedor de IA. O `wizard.md` é um guia conversacional em Markdown executável por qualquer agente de código ou LLM.
+O kit inclui a CLI determinística [`tools/agent-tool`](tools/agent-tool) para acelerar operações e poupar tokens de LLM:
+
+### Comandos de Workflow:
+```bash
+# Diagnóstico e setup com suporte a simulação sem escrita (--dry-run)
+./tools/agent-tool setup /caminho/do/projeto --dry-run
+./tools/agent-tool setup /caminho/do/projeto --json
+
+# Inspeções determinísticas rápidas:
+./tools/agent-tool project info --json
+./tools/agent-tool project status --json
+./tools/agent-tool check all --json
+./tools/agent-tool find symbol <nome> --json
+./tools/agent-tool context <arquivo> --json
+```
+
+### Catálogo e Gerenciamento de Skills da Comunidade:
+```bash
+# Explorar interativamente o catálogo por categorias e perfis
+./tools/agent-tool skills browse
+
+# Listar todas as capacidades (skills, toolkits e integrações)
+./tools/agent-tool skills list
+
+# Inspecionar detalhes, autor, tipo e notas de segurança
+./tools/agent-tool skills info superpowers
+
+# Recomendações contextuais (stack detectada ou por perfil)
+./tools/agent-tool skills recommend
+./tools/agent-tool skills recommend --profile DEVELOPER
+
+# Instalar capacidades (escopo de projeto padrão ou global)
+./tools/agent-tool skills install humanizer
+./tools/agent-tool skills install superpowers --global
+
+# Health check completo (lockfile, arquivos ausentes e conflitos)
+./tools/agent-tool skills doctor
+
+# Listar capacidades instaladas e gerenciadas
+./tools/agent-tool skills installed
+
+# Remover capacidade com segurança e atualização de lockfile
+./tools/agent-tool skills remove humanizer
+```
 
 ---
 
@@ -156,8 +202,8 @@ my-workspace/                   # workspace configurado
 ├── ADR.md
 ├── .agents/
 │   ├── skills/                 # somente skills aprovadas
-│   ├── subagents/              # somente subagentes aprovados
-│   └── memory/                 # memória e índice aprovados
+│   ├── subagents/              # worker genérico opcional
+│   └── memory/                 # opcional, quando solicitado
 ├── docs/
 └── src/                        # código fonte inicial do projeto
 ```
@@ -194,9 +240,9 @@ Use [`templates/skill-template.md`](templates/skill-template.md) para tarefas re
 
 ---
 
-## 🤖 Como criar um subagente
+## 🤖 Como criar um worker ou advisor
 
-Use [`templates/subagent-template.md`](templates/subagent-template.md) quando isolamento ou especialização trouxer benefício comprovado.
+Use [`templates/subagent-template.md`](templates/subagent-template.md) para um worker com tarefa delimitada. Use [`templates/advisor-template.md`](templates/advisor-template.md) somente quando houver risco alto, incerteza ou trade-off relevante. Prefira especialização por skill a um agente por domínio ou framework.
 
 ---
 

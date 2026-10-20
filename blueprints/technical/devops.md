@@ -93,15 +93,6 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 | `review-infrastructure-plan` | Mudança em arquivos IaC | Diff de código IaC | Análise de impacto e riscos | média |
 | `verify-rollback-plan` | Planejamento de implantação | Procedimento de reversão | Validação do plano de rollback | média |
 
-## Subagentes candidatos
-
-| Subagente | Responsabilidade | Quando delegar | Não faz |
-|---|---|---|---|
-| `pipeline-reviewer` | Auditar segurança e eficiência de CI/CD | Alterações em scripts de integração | Modificar código de aplicação |
-| `incident-evidence-collector` | Coletar logs e evidências de falhas | Incidentes em automações de deploy | Alterar permissões em nuvem |
-| `observability-reviewer` | Validar alertas e telemetria de ambiente | Configuração de novos serviços | Executar migração de banco |
-| `infrastructure-plan-reviewer` | Auditar planos de infraestrutura como código | Alterações de recursos em IaC | Executar comandos destrutivos |
-
 ## Perguntas específicas
 1. Qual é o mecanismo de rollback confirmado em caso de falha de deploy?
 2. Quais segredos ou variáveis sensíveis estão presentes nas etapas de build?

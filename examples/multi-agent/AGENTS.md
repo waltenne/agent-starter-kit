@@ -1,6 +1,6 @@
 # Multi-Agent Workspace Instructions
 
-This workspace demonstrates a multi-agent orchestration setup with delegated subagents.
+This workspace demonstrates a single orchestrator delegating one bounded task to a generic worker.
 
 ## Format and sources
 
@@ -13,7 +13,7 @@ This workspace demonstrates a multi-agent orchestration setup with delegated sub
 ## Operating procedure
 
 1. Read `AGENTS.md` before acting.
-2. Delegate backend tasks to `backend-agent.md`.
-3. Delegate verification tasks to `qa-agent.md`.
-4. Maintain decision log in `.agents/memory/index.md`.
-
+2. Resolve simple tasks directly and load a domain skill only when its procedure applies.
+3. Delegate a bounded, independent task to `.agents/subagents/worker.md` only when the runtime supports it and delegation saves effort.
+4. Do not delegate the same task to multiple workers or allow nested delegation.
+5. The orchestrator decides, implements, validates, and maintains durable decisions in `.agents/memory/index.md` when needed.

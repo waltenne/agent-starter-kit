@@ -19,8 +19,8 @@
 ├── ADR.md                     # Registro de Decisões de Arquitetura (Índice)
 ├── .agents/
 │   ├── skills/                # Skills aprovadas
-│   └── subagents/             # Subagentes aprovados
-├── memory/                    # Memória Karpathy LLM Wiki e handoffs (log.md, sessions/, handoff.md)
+│   └── subagents/             # Worker genérico, somente quando necessário
+├── memory/                    # Opcional, se memória persistente for solicitada
 ├── docs/                      # Documentação técnica e ADRs
 └── src/                       # Código fonte do projeto
 ```
@@ -29,4 +29,3 @@
 
 1. Consulte [`AGENTS.md`](AGENTS.md) para as instruções do agente de IA.
 2. Execute a validação do workspace periodicamente.
-

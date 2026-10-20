@@ -90,15 +90,6 @@ Erro 500 ao tentar aplicar cupom de desconto expirado durante o checkout.
 | `review-accessibility` | Avaliação de conformidade UI | Telas e componentes | Diagnóstico de falhas de acessibilidade | média |
 | `assess-release-readiness` | Preparação para publicação | Resultados da suíte de teste | Parecer de prontidão de release | média |
 
-## Subagentes candidatos
-
-| Subagente | Responsabilidade | Quando delegar | Não faz |
-|---|---|---|---|
-| `test-strategy-reviewer` | Validar cobertura e matriz de testes | Planejamento de suítes de teste | Escrever código de produto |
-| `defect-reproducer` | Isolar e reproduzir falhas reportadas | Triagem de relatórios de bugs | Corrigir defeitos no fonte |
-| `regression-scope-reviewer` | Mapear escopo afetado por refatorações | Mudanças estruturais de código | Aprovar deploys em produção |
-| `release-readiness-reviewer` | Auditar critérios de aceite e bloqueadores | Avaliação de término de sprint | Alterar prioridade do backlog |
-
 ## Perguntas específicas
 1. Quais são os cenários críticos e caminhos de exceção que precisam de testes automatizados?
 2. Como os dados de teste sintéticos serão gerados sem expor informações sensíveis?

@@ -24,7 +24,7 @@ confirmation_required:
   - network
 
 memory:
-  enabled: true
+  enabled: false
   path: ".agents/memory"
   index_file: ".agents/memory/index.md"
 

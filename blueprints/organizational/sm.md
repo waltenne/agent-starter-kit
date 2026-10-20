@@ -84,14 +84,6 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 | `prepare-facilitation-plan` | Necessidade de alinhamento | Objetivo da reunião | Roteiro de facilitação | média |
 | `track-improvement-actions` | Ações definidas em retro | Lista de ações | Relatório de acompanhamento | média |
 
-## Subagentes candidatos
-
-| Subagente | Responsabilidade | Quando delegar | Não faz |
-|---|---|---|---|
-| `impediment-tracker` | Mapear e categorizar causa raiz de bloqueios | Identificação de impedimentos | Avaliar desempenho individual |
-| `flow-reviewer` | Analisar gargalos no fluxo de entrega do time | Revisão de métricas de fluxo | Usar métricas para ranquear pessoas |
-| `action-tracker` | Acompanhar a evolução das ações de melhoria | Pós-retrospectiva | Definir prioridades de produto |
-
 ## Perguntas específicas
 1. Quais são os principais gargalos no fluxo de entrega atual da equipe?
 2. Quais ações de melhoria das retrospectivas anteriores foram concluídas?

@@ -2,13 +2,13 @@
 
 [Versão em português: `README.md`](README.md)
 
-![License](https://img.shields.io/badge/License-MIT-yellow.svg) ![Version](https://img.shields.io/badge/Version-1.1.0-blue.svg) ![Architecture](https://img.shields.io/badge/Architecture-Modular%20Multi--Agent-green.svg) ![Autonomy](https://img.shields.io/badge/Autonomy-N2%20Default-orange.svg)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg) ![Version](https://img.shields.io/badge/Version-1.4.0-blue.svg) ![Architecture](https://img.shields.io/badge/Architecture-Modular%20Multi--Agent-green.svg) ![Autonomy](https://img.shields.io/badge/Autonomy-N2%20Default-orange.svg)
 
 ---
 
 ## 📌 What it is
 
-`agent-starter-kit` is an agnostic, portable Markdown-based starter kit for structuring AI agent workspaces. It provides central rules, a conversational wizard, a compatibility matrix ([`compatibility.md`](compatibility.md)), agent adapters ([`adapters/`](adapters/)), domain blueprints, skill/subagent templates, and initial project code layouts.
+`agent-starter-kit` is an agnostic, portable Markdown-based starter kit for structuring AI agent workspaces. It provides central rules, a conversational wizard, a compatibility matrix ([`compatibility.md`](compatibility.md)), agent adapters ([`adapters/`](adapters/)), domain blueprints, a curated skill catalog ([`catalog/`](catalog/)), skill/subagent templates, and a deterministic CLI (`agent-tool`).
 
 The kit uses a **two-layer architecture**:
 1. **Agnostic Layer (Core)**: Neutral content and rules reusable by any AI agent.
@@ -21,28 +21,74 @@ The kit uses a **two-layer architecture**:
 
 ## ⚙️ Component Flow and Responsibilities
 
-The kit workflow follows the sequence: `rules.md` → `wizard.md` → `blueprints/` → `templates/`.
+The kit workflow follows the sequence: `rules.md` → `wizard.md` → `blueprints/` → `catalog/` → `templates/`.
 
 - [`rules.md`](rules.md): Centralized general and security rules. Single source of truth.
 - [`wizard.md`](wizard.md): Guides diagnostic questions, language, agent choice, and blueprint selection.
-- [`blueprints/`](blueprints/): Domain-specific architectural guidance. Does not duplicate central rules. Only one primary blueprint is chosen; secondary blueprints are optional.
-- [`templates/`](templates/): Reusable templates for code, skills, and subagents. Skills and subagents are proposed as needed, never created automatically.
+- [`catalog/`](catalog/): Versioned and curated catalog of internal (`BUILTIN`) and community skills (`COMMUNITY_REVIEWED`).
+- [`blueprints/`](blueprints/): Domain-specific architectural guidance. Does not duplicate central rules.
+- [`templates/`](templates/): Reusable templates for subagents (Worker, Implementer, Advisor), skills, and layouts.
+- [`tools/`](tools/): Deterministic CLI (`agent-tool`) for analysis, workflow automation, and token savings.
 
 | Component | Responsibility |
 | --- | --- |
 | `rules.md` | General rules, security, and memory guidelines |
 | `wizard.md` | Questions and context/agent selection |
+| `catalog/` | Curated catalog of internal and community skills |
 | `blueprints/` | Domain-specific guidance |
-| `templates/` | Reusable templates (code, skills, subagents, memory) |
+| `templates/` | Reusable templates (code, skills, workers, advisor, memory) |
+| `tools/` | Deterministic CLI (`agent-tool`) for workflow detection and token savings |
 | `examples/` | Reference workspaces |
 | `scripts/` | Kit validation |
 
 ---
 
-## 🚫 What it is not
+## 🛠️ Deterministic CLI & Skills Management (`agent-tool`)
 
-> [!IMPORTANT]
-> This project is **not a functional CLI**, proprietary application, or vendor-locked AI platform. `wizard.md` is a conversational Markdown guide executable by any coding agent or LLM.
+The kit includes a deterministic Node.js CLI [`tools/agent-tool`](tools/agent-tool) to accelerate operations and save LLM tokens:
+
+### Workflow Commands:
+```bash
+# Setup with dry-run support (guaranteed no writes)
+./tools/agent-tool setup /path/to/project --dry-run
+./tools/agent-tool setup /path/to/project --json
+
+# Fast deterministic inspections:
+./tools/agent-tool project info --json
+./tools/agent-tool project status --json
+./tools/agent-tool check all --json
+./tools/agent-tool find symbol <name> --json
+./tools/agent-tool context <file> --json
+```
+
+### Community Skills Catalog & Management:
+```bash
+# Interactively browse catalog by categories and profiles
+./tools/agent-tool skills browse
+
+# List all capabilities (skills, toolkits, and integrations)
+./tools/agent-tool skills list
+
+# Inspect details, author, type, and security audit notes
+./tools/agent-tool skills info superpowers
+
+# Contextual recommendations (detected stack or specific profile)
+./tools/agent-tool skills recommend
+./tools/agent-tool skills recommend --profile DEVELOPER
+
+# Install capabilities (default project scope or global scope)
+./tools/agent-tool skills install humanizer
+./tools/agent-tool skills install superpowers --global
+
+# Full workspace health check (lockfile, missing files, and overlaps)
+./tools/agent-tool skills doctor
+
+# List active managed capabilities
+./tools/agent-tool skills installed
+
+# Safely remove a managed capability
+./tools/agent-tool skills remove humanizer
+```
 
 ---
 
@@ -156,8 +202,8 @@ my-workspace/                   # configured workspace
 ├── ADR.md
 ├── .agents/
 │   ├── skills/                 # approved skills only
-│   ├── subagents/              # approved subagents only
-│   └── memory/                 # approved memory and index
+│   ├── subagents/              # optional generic worker
+│   └── memory/                 # optional, when requested
 ├── docs/
 └── src/                        # initial project source code
 ```
@@ -194,9 +240,9 @@ Use [`templates/skill-template.md`](templates/skill-template.md) for recurring t
 
 ---
 
-## 🤖 Creating a subagent
+## 🤖 Creating a worker or advisor
 
-Use [`templates/subagent-template.md`](templates/subagent-template.md) when isolation or specialization provides proven benefit.
+Use [`templates/subagent-template.md`](templates/subagent-template.md) for a bounded worker task. Use [`templates/advisor-template.md`](templates/advisor-template.md) only for high risk, uncertainty, or material trade-offs. Prefer specialization by skill over one agent per domain or framework.
 
 ---
 
