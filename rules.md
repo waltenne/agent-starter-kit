@@ -10,6 +10,14 @@ Aplicação: leia este arquivo antes de qualquer outra coisa. Se algo aqui confl
 
 Simplicidade acima de complexidade. Concisão acima de extensão. Pragmatismo acima de pureza. Performance acima de conveniência.
 
+Hierarquia de execução:
+- SCRIPT: executa tarefas determinísticas (via CLI `tools/agent-tool`).
+- SKILL: ensina procedimentos reutilizáveis (`.agents/skills/`).
+- AGENT: decide, coordena e implementa (T0 direto, T1 worker, T2 implementer).
+- ADVISOR: resolve decisões complexas e trade-offs críticos (T3 deep).
+
+Regra de ouro: se uma tarefa pode ser executada de forma confiável sem raciocínio, ela não deve consumir tokens de LLM. Scripts determinísticos devem ser acionados antes de agentes sempre que possível.
+
 Corrija erros antes de avançar. Nunca ignore falhas. Se não tiver certeza, diga que não tem. Nunca adivinhe.
 
 Não use aberturas bajuladoras nem fechamentos vazios. Não use em dash nem smart quotes. Minimize tokens de raciocínio, de ferramenta e de saída. Não explique passos óbvios. Não repita o pedido do usuário a menos que seja necessário. Não faça exploração ampla antes de tentar a menor ação útil. Não continue investigando depois de achar resposta ou patch suficiente. Evite loops especulativos de reflexão a menos que exista evidência contraditória concreta.
@@ -277,15 +285,21 @@ Se a ferramenta exigir credencial, pare e pergunte.
 
 ---
 
-## 18. Fluxo padrão de trabalho
+## 18. Fluxo padrão de trabalho e escalonamento
 
 1. Ler este arquivo.
-2. Ler o wizard quando a tarefa for iniciar workspace novo.
-3. Selecionar blueprint primário quando a tarefa for de domínio.
-4. Carregar adaptador quando a tarefa for específica de ferramenta.
-5. Executar a menor ação útil primeiro.
-6. Validar antes de declarar concluído.
-7. Reportar em formato curto: o que foi feito, evidência, pendências.
+2. Inspecionar o workspace deterministicamente com `tools/agent-tool project info --json` ou `tools/agent-tool project status --json` antes de explorar arquivos manualmente.
+3. Ler o wizard ou executar `tools/agent-tool setup` quando a tarefa for iniciar ou atualizar o workspace.
+4. Selecionar blueprint primário quando a tarefa for de domínio.
+5. Carregar adaptador quando a tarefa for específica de ferramenta.
+6. T0: resolver diretamente tarefas simples. T1: usar worker para busca determinística (`agent-tool find`), testes (`agent-tool check`) ou tarefas mecânicas delimitadas. T2: orquestrador executa com a skill recorrente relevante.
+7. Paralelizar somente tarefas independentes. Workers não delegam a outros workers.
+8. T3: escalar ao advisor apenas por alto impacto, incerteza, trade-offs, decisão arquitetural, risco de segurança, regressão difícil ou falhas repetidas. O advisor recomenda; o orquestrador decide e executa.
+9. Revisão final: usar uma skill de revisão quando o risco ou o pedido justificar.
+10. Após duas tentativas iguais sem progresso, reavaliar evidências; na terceira, escalar quando o problema persistir.
+11. Encerrar quando a solicitação estiver atendida e as evidências e validações pertinentes estiverem completas. Reportar em formato curto.
+
+Use capacidade `FAST` para busca, leitura e trabalho mecânico, `BALANCED` para coordenação e execução comum, e `DEEP` para decisões e revisões críticas. Os nomes são independentes de fornecedor e modelo.
 
 Não faça exploração ampla antes do passo 5. Não pule o passo 6.
 

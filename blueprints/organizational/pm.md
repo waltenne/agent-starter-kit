@@ -89,14 +89,6 @@ Autocompletar endereco via CEP para reduzir o tempo de finalizacao da compra em 
 | `review-experiment` | Conclusão de teste A/B | Dados de experimento | Diagnóstico de resultado do teste | média |
 | `summarize-user-evidence` | Acúmulo de feedbacks de usuários | Pesquisas e entrevistas | Síntese executiva de evidências | média |
 
-## Subagentes candidatos
-
-| Subagente | Responsabilidade | Quando delegar | Não faz |
-|---|---|---|---|
-| `evidence-synthesizer` | Compilar e sintetizar pesquisas de usuários | Análise de grande volume de feedback | Automatizar decisão de prioridade |
-| `metric-reviewer` | Auditar consistência e viabilidade de KPIs | Planejamento de métricas | Alterar definições de código |
-| `experiment-reviewer` | Avaliar significância e hipóteses de testes | Conclusão de experimentos A/B | Modificar pipelines de analytics |
-
 ## Perguntas específicas
 1. Qual é o problema principal do usuário que estamos tentando resolver?
 2. Quais evidências qualitativas e quantitativas sustentam esta oportunidade?

@@ -1,6 +1,5 @@
 # Multi-Agent Memory Index
 
-## Subagent Handoff Logs
+## Worker Handoff Logs
 
-- 2026-09-15: Delegated API verification to QA subagent.
-
+- Record a handoff only when work is delegated. Do not store routine task history here.

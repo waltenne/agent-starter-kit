@@ -1,6 +1,6 @@
 # Exemplo: Workspace Multi-Agente
 
-Este exemplo demonstra a coordenação de múltiplos subagentes especializados em um único workspace.
+Este exemplo mostra um orquestrador que delega uma tarefa delimitada a um worker genérico quando a separação de contexto ou o paralelismo compensa.
 
 ## Estrutura do Exemplo
 
@@ -13,11 +13,9 @@ examples/multi-agent/
 │   ├── skills/
 │   │   └── coordinate-agents.md
 │   ├── subagents/
-│   │   ├── backend-agent.md
-│   │   └── qa-agent.md
+│   │   └── worker.md
 │   └── memory/
 │       └── index.md
 └── docs/
     └── multi-agent-setup.md
 ```
-

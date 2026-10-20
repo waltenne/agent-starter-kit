@@ -83,14 +83,6 @@ Referência de regras gerais: [`../../rules.md`](../../rules.md).
 | `track-team-actions` | Acordos em reuniões de liderança | Decisões registradas | Relatório de acompanhamento | média |
 | `draft-stakeholder-update` | Marco relevante atingido | Resultados do projeto | Rascunho de comunicação formal | média |
 
-## Subagentes candidatos
-
-| Subagente | Responsabilidade | Quando delegar | Não faz |
-|---|---|---|---|
-| `team-status-summarizer` | Sintetizar relatórios operacionais agregados | Preparação de reportes | Automatizar avaliação de desempenho |
-| `risk-reviewer` | Mapear dependências externas e gargalos | Início de projetos complexos | Tomar decisões de demissão/promoção |
-| `stakeholder-update-drafter` | Redigir comunicações executivas claras | Lançamentos relevantes | Expor dados pessoais de membros do time |
-
 ## Perguntas específicas
 1. Quais são as principais dependências externas que podem impactar os prazos da equipe?
 2. Quais riscos operacionais foram identificados e quais os planos de mitigação propostos?

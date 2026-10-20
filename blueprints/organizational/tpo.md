@@ -83,14 +83,6 @@ Implementacao de Rate Limiting na API Publica.
 | `check-backlog-quality` | Prévia de refinamento | Itens do backlog | Relatório de qualidade do backlog | média |
 | `summarize-technical-tradeoffs` | Impasse em escolha técnica | Propostas concorrentes | Matriz comparativa de trade-offs | média |
 
-## Subagentes candidatos
-
-| Subagente | Responsabilidade | Quando delegar | Não faz |
-|---|---|---|---|
-| `acceptance-criteria-reviewer` | Verificar completude e clareza de critérios | Refinamento de histórias | Escrever testes automatizados |
-| `dependency-analyzer` | Mapear acoplamento e riscos entre APIs | Planejamento de alterações de código | Modificar código fonte |
-| `tradeoff-summarizer` | Estruturar matrizes comparativas de opções | Impasses de decisão de arquitetura | Decidir pelo time de liderança |
-
 ## Perguntas específicas
 1. Quais são as restrições não funcionais (desempenho, segurança, escalabilidade) da história?
 2. Quais APIs, contratos ou dependências técnicas precisam ser modificados?

@@ -8,6 +8,13 @@ version: 1.1.0
 
 Use this skill to bootstrap or refactor an AI agent workspace following the generic two-layer architecture.
 
+## Workflow Analysis & Auto-Setup
+
+Before or alongside the interview, analyze the user's workspace deterministically to infer the stack, test runners, linters, and recommended workflow:
+
+1. **Deterministic Inspection**: Run `node tools/src/cli.mjs detect <target-workspace> --json` (or `agent-tool detect`).
+2. **Workflow Preparation**: Run `node tools/src/cli.mjs setup <target-workspace>` to automatically configure the `.agents/` structure, install the recommended subagents (Worker FAST, Implementer BALANCED, Advisor DEEP) and domain skills (`code-search`, `triage-test-failure`, `git-workflow`, etc.).
+
 ## Interactive Diagnostic Interview
 
 Conduct the diagnostic asking one question per turn:
@@ -22,12 +29,12 @@ Conduct the diagnostic asking one question per turn:
 
 ## Bootstrap Sequence
 
-1. **Workspace Layout**: Create `AGENTS.md`, `.agents/skills/`, `.agents/subagents/`, `memory/` (with `log.md`, `sessions/`, `concepts/`, `decisions/`, `gotchas/`, `procedures/`, `_rules/`, `handoff.md`), `docs/`, `src/`.
+1. **Workspace Layout**: Create `AGENTS.md`, `.agents/skills/`, and only the approved paths needed. Add `.agents/subagents/` only when a bounded worker role is justified. Add `memory/` only when requested, plus `docs/` and `src/` when the project needs them.
 2. **Core Documents**: Generate `README.md`, `ARCHITECTURE.md`, `ADR.md`, and `docs/adr/0001-initial-stack.md`.
 3. **Shared & Domain Layout**: Generate `src/shared/` (`config.ts`, `logger.ts`, `errors.ts`) and initial domain from `templates/domain/`.
 4. **Initial Tests**: Create initial unit test `src/<domain>/service.test.ts`.
 5. **Agent Adapter**: Apply specific adapter instructions from `adapters/` if target agent is specified.
-6. **Validation & Commit**: Run validation script and perform semantic git commit.
+6. **Validation**: Run the validation script. Do not create a commit unless the user explicitly asks.
 
 ## Guardrails
 
@@ -51,4 +58,3 @@ Conduct the diagnostic asking one question per turn:
 Workspace created: <workspace-name> with <primary-blueprint> for <target-agent>.
 Validation: run validation script corresponding to OS to confirm structural compliance.
 Next actions: 1. Review AGENTS.md, 2. Run initial domain test, 3. Begin first feature iteration.
-

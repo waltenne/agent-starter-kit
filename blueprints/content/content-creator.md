@@ -91,15 +91,6 @@ Explicar a diferenca entre arquiteturas mono-agente e multi-agente com exemplos 
 | `check-content-accessibility` | Preparação para publicação | Artigo ou documento | Diagnóstico de acessibilidade de leitura | média |
 | `verify-content-sources` | Inclusão de fatos ou citação | Links e afirmações no texto | Relatório de checagem de fontes | média |
 
-## Subagentes candidatos
-
-| Subagente | Responsabilidade | Quando delegar | Não faz |
-|---|---|---|---|
-| `source-verifier` | Checar procedência e validade de citações | Artigos que citam fontes externas | Redigir opiniões do autor |
-| `copy-editor` | Revisar gramática, tom de voz e fluidez | Rascunhos concluídos | Alterar fatos técnicos |
-| `accessibility-reviewer` | Avaliar legibilidade e contraste de mídia | Publicações finais | Publicar conteúdo diretamente |
-| `content-structure-reviewer` | Auditar hierarquia de tópicos e cabeçalhos | Documentação extensa | Alterar o idioma original |
-
 ## Perguntas específicas
 1. Qual é o público-alvo principal e o tom de voz desejado?
 2. Quais são as fontes primárias autorizadas para fundamentar as afirmações do texto?

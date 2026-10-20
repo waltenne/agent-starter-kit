@@ -97,15 +97,6 @@ O modelo supera a baseline de regras em +12% de F1-Score sem evidencias de overf
 | `generate-analysis-report` | Finalização de estudo exploratório | Resultados analíticos | Documentação executiva clara | média |
 | `validate-data-quality` | Alteração no esquema de dados | Esquema e regras de validação | Diagnóstico de inconsistências | média |
 
-## Subagentes candidatos
-
-| Subagente | Responsabilidade | Quando delegar | Não faz |
-|---|---|---|---|
-| `data-quality-reviewer` | Verificar vazamento de dados e nulos | Ingestão ou preparação de dados | Decidir modelo de produção |
-| `experiment-reviewer` | Auditar baselines e métricas estatísticas | Conclusão de validação de modelos | Alterar infraestrutura |
-| `reproducibility-reviewer` | Validar sementes aleatórias e pipelines | Revisão de scripts de análise | Modificar datasets brutos |
-| `statistical-method-reviewer` | Avaliar rigor de testes estatísticos | Hipóteses complexas ou amostragem | Escrever código de produção web |
-
 ## Perguntas específicas
 1. Quais métricas e baselines definem o sucesso da análise ou modelo?
 2. Como a reprodutibilidade dos experimentos é garantida (sementes, dados de teste)?

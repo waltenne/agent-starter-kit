@@ -4,6 +4,7 @@ import {
   checkRelativeLinks,
   checkBlueprintPlaceholders,
   checkBlueprintSkills,
+  checkBlueprintSubagents,
   checkSecrets
 } from "./validate.mjs";
 
@@ -35,10 +36,31 @@ test("detects blueprint with fewer than 3 skills", () => {
   assert.match(errors[0], /fewer than 3 named skills/);
 });
 
+test("allows blueprints without domain-specific subagent candidates", () => {
+  const content = `## Skills candidatas
+
+| Skill | Gatilho |
+|---|---|
+| \`skill-one\` | Trigger 1 |
+
+## Perguntas específicas`;
+  assert.deepEqual(checkBlueprintSubagents(content, "test-bp.md"), []);
+});
+
+test("detects domain-specific subagent candidate lists", () => {
+  const content = `## Subagentes candidatos
+
+| Subagente | Responsabilidade |
+|---|---|
+| \`framework-agent\` | Handle one framework |`;
+  const errors = checkBlueprintSubagents(content, "test-bp.md");
+  assert.equal(errors.length, 1);
+  assert.match(errors[0], /must not define domain-specific subagent candidates/);
+});
+
 test("detects planted secret pattern", () => {
   const content = "const token = 'ghp_123456789012345678901234567890123456';";
   const errors = checkSecrets(content, "test.md", "/fake");
   assert.equal(errors.length, 1);
   assert.match(errors[0], /Possible secret found/);
 });
-

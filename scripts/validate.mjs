@@ -25,7 +25,7 @@ export const expectedFiles = [
   "blueprints/organizational/tpo.md", "blueprints/organizational/sm.md", "blueprints/organizational/manager.md",
   "adapters/generic/README.md", "adapters/claude-code/README.md", "adapters/codex/README.md", "adapters/cursor/README.md",
   "adapters/windsurf/README.md", "adapters/github-copilot/README.md", "adapters/local-agent/README.md",
-  "templates/skill-template.md", "templates/subagent-template.md", "templates/workspace-template/AGENTS.md",
+  "templates/skill-template.md", "templates/subagent-template.md", "templates/advisor-template.md", "templates/workspace-template/AGENTS.md",
   "templates/workspace-template/README.md", "templates/workspace-template/ARCHITECTURE.md", "templates/workspace-template/ADR.md",
   "templates/workspace-template/docs/adr/0001-initial-stack.md",
   "templates/workspace-template/src/shared/config.ts", "templates/workspace-template/src/shared/logger.ts", "templates/workspace-template/src/shared/errors.ts",
@@ -33,18 +33,29 @@ export const expectedFiles = [
   "templates/workspace-template/src/domain/domain.types.ts", "templates/workspace-template/src/domain/domain.service.test.ts",
   "examples/web-dev/AGENTS.md", "examples/web-dev/README.md", "examples/web-dev/ARCHITECTURE.md",
   "examples/web-dev/docs/adr/0001-initial-stack.md", "examples/web-dev/.agents/skills/review-api-contract.md",
-  "examples/web-dev/.agents/subagents/api-contract-reviewer.md", "examples/web-dev/.agents/memory/index.md",
+  "examples/web-dev/.agents/memory/index.md",
   "examples/generic-agent/AGENTS.md", "examples/generic-agent/README.md", "examples/generic-agent/config.yml",
   "examples/generic-agent/.agents/skills/generic-task.md", "examples/generic-agent/.agents/subagents/generic-worker.md",
   "examples/generic-agent/.agents/memory/index.md", "examples/generic-agent/docs/architecture.md",
   "examples/multi-agent/AGENTS.md", "examples/multi-agent/README.md", "examples/multi-agent/config.yml",
-  "examples/multi-agent/.agents/skills/coordinate-agents.md", "examples/multi-agent/.agents/subagents/backend-agent.md",
-  "examples/multi-agent/.agents/subagents/qa-agent.md", "examples/multi-agent/.agents/memory/index.md", "examples/multi-agent/docs/multi-agent-setup.md",
+  "examples/multi-agent/.agents/skills/coordinate-agents.md", "examples/multi-agent/.agents/subagents/worker.md",
+  "examples/multi-agent/.agents/memory/index.md", "examples/multi-agent/docs/multi-agent-setup.md",
   "skills/starter-kit/SKILL.md", "skills/starter-kit/references/principles.md", "skills/starter-kit/references/commit-policy.md",
   "skills/starter-kit/references/security.md", "skills/starter-kit/references/code-separation.md", "skills/starter-kit/references/documentation.md",
   "skills/starter-kit/templates/domain/index.ts", "skills/starter-kit/templates/domain/service.ts",
   "skills/starter-kit/templates/domain/types.ts", "skills/starter-kit/templates/domain/service.test.ts",
-  "docs/getting-started.md", "docs/glossary.md", "docs/faq.md", "docs/troubleshooting.md", "docs/walkthrough.md"
+  "docs/getting-started.md", "docs/glossary.md", "docs/faq.md", "docs/troubleshooting.md", "docs/walkthrough.md",
+  "tools/agent-tool", "tools/agent-tool.cmd", "tools/src/cli.mjs", "tools/src/detector.mjs", "tools/src/installer.mjs",
+  "tools/src/project.mjs", "tools/src/find.mjs", "tools/src/check.mjs", "tools/src/context.mjs", "tools/src/logs.mjs",
+  "tools/src/db.mjs", "tools/test/agent-tool.test.mjs", "tools/test/installer.test.mjs", "tools/test/skills.test.mjs", "tools/test/v140.test.mjs",
+  "tools/src/skills/catalog.mjs", "tools/src/skills/manager.mjs", "tools/src/skills/recommend.mjs", "tools/src/skills/conflicts.mjs", "tools/src/skills/doctor.mjs", "tools/src/skills/browse.mjs",
+  "catalog/schema.json", "catalog/internal.json", "catalog/community.json",
+  "catalog/community-cache/humanizer/SKILL.md", "catalog/community-cache/docker-essentials/SKILL.md", "catalog/community-cache/ai-memory/README.md",
+  "catalog/community-cache/archify/SKILL.md", "catalog/community-cache/superpowers/SKILL.md", "catalog/community-cache/upstack/SKILL.md",
+  "catalog/community-cache/prism-coder/README.md", "catalog/community-cache/frankxai-skills/SKILL.md", "catalog/community-cache/humanizer-aboudjem/SKILL.md",
+  "templates/skills/code-search.md", "templates/skills/triage-test-failure.md", "templates/skills/db-health.md",
+  "templates/skills/git-workflow.md", "templates/skills/performance-benchmark.md", "templates/skills/review-api-contract.md",
+  "templates/subagents/worker.md", "templates/subagents/implementer.md", "templates/subagents/advisor.md"
 ];
 
 export function getAllMarkdownFiles(dir) {
@@ -92,7 +103,7 @@ export function checkBlueprintPlaceholders(content, bpName = "blueprint.md") {
 
 export function checkBlueprintSkills(content, bpName = "blueprint.md") {
   const errors = [];
-  const skillsTableMatch = content.match(/## Skills candidatas[\s\S]*?(?=## Subagentes candidatos|$)/);
+  const skillsTableMatch = content.match(/## Skills candidatas[\s\S]*?(?=\n## |$)/);
   if (!skillsTableMatch) {
     errors.push(`Missing Skills candidatas section in blueprint: ${bpName}`);
   } else {
@@ -100,6 +111,14 @@ export function checkBlueprintSkills(content, bpName = "blueprint.md") {
     if (lines.length < 3) {
       errors.push(`Blueprint ${bpName} has fewer than 3 named skills (found ${lines.length})`);
     }
+  }
+  return errors;
+}
+
+export function checkBlueprintSubagents(content, bpName = "blueprint.md") {
+  const errors = [];
+  if (/^## Subagentes candidatos\s*$/m.test(content)) {
+    errors.push(`Blueprint ${bpName} must not define domain-specific subagent candidates`);
   }
   return errors;
 }
@@ -162,14 +181,9 @@ export function runValidation() {
       error(skillErrors[0]);
     }
 
-    const subagentsTableMatch = bpContent.match(/## Subagentes candidatos[\s\S]*?(?=## Perguntas específicas|$)/);
-    if (!subagentsTableMatch) {
-      error(`Missing Subagentes candidatos section in blueprint: ${bp}`);
-    } else {
-      const lines = subagentsTableMatch[0].split("\n").filter(l => l.trim().startsWith("|") && !l.includes("---") && !l.includes("Subagente"));
-      if (lines.length < 2) {
-        error(`Blueprint ${bp} has fewer than 2 named subagents (found ${lines.length})`);
-      }
+    const subagentErrors = checkBlueprintSubagents(bpContent, bp);
+    if (subagentErrors.length > 0) {
+      error(subagentErrors[0]);
     }
 
     if (!bpContent.includes("## Riscos específicos") || !bpContent.includes("## Validações específicas")) {
